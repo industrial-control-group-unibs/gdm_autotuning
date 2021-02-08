@@ -1,0 +1,11 @@
+J=0.012;
+Fc=0.6;
+Fs=Fc;
+vs=0.1;
+Bm=0.1;
+st=1e-3;
+Fc_stim=Fc*0.95;
+
+noise=1e-5;
+
+sim('lugre');

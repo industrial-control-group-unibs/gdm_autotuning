@@ -1,0 +1,318 @@
+(*
+ *
+ * MDPlc source file: G:\Il mio Drive\DOTTORATO\Simoni_Giacomelli_Share\AUTOTUNING\Autotuning HIL - Marco LF\AUTOTUNING_LF.pll
+ * for project:       
+ *
+ *)
+
+
+	(***************************)
+	(*                         *)
+	(*     FUNCTION BLOCKS     *)
+	(*                         *)
+	(***************************)
+
+FUNCTION_BLOCK RLS_senzaKf
+
+	VAR_INPUT
+	S : REAL; { DE:"Parametro tuning per la convergenza" } 
+	y : REAL; 
+	vel : REAL; { DE:"velocità" } 
+	Ts : REAL; 
+	END_VAR
+
+	VAR_OUTPUT
+	Jm : REAL; { DE:"Inerzia" } 
+	Bm : REAL; { DE:"Attrito viscoso" } 
+	END_VAR
+
+	VAR
+	innovation : REAL; 
+	acc : REAL; { DE:"accelerazione" } 
+	ssMethodType : SINT; 
+	i : SINT; 
+	Q_old : ARRAY[ 0..3 ] OF REAL; 
+	PARAM : ARRAY[ 0..1 ] OF REAL; { DE:"Parametri (Jm, Bm)" } 
+	Q : ARRAY[ 0..3 ] OF REAL; 
+	vel_prec : REAL; 
+	END_VAR
+
+	{ CODE:ST }CASE ssMethodType OF
+    SS_INITIALIZE:
+    	(* inizializzo Q a matrice identità *)
+    	
+    	 FOR i:=0 TO 3 DO 
+    		Q[i]	:=0.0;
+    	END_FOR;
+    	
+    	Q[0]:=1.0;
+    	Q[2]:=1.0;
+    
+    	
+    	FOR i:=0 TO 3 DO 
+    	Q_old[i]:=Q[i];
+    	END_FOR;
+    	
+   
+    	(* A=[acc vel];*)
+    	
+    	(* inizializzo PARAM a zero *)
+    	FOR i:=0 TO 1 DO 
+    	PARAM[i]:=0.0;
+    	END_FOR;
+    	
+    	
+    	
+    	
+    	(*   *)
+    	acc:=0.0;
+    	vel_prec:=0.0;
+    
+	SS_STEP:
+		
+		IF S=0.0 THEN
+			S:=30.0;
+		END_IF;
+	
+		(* segno della velocità *)
+		IF vel>0.0 THEN
+			vel_sign:=1.0;
+		ELSE
+			vel_sign:=-1.0;
+		END_IF;
+		
+		acc:= (vel-vel_prec)/Ts;
+		
+		
+        Q[0] := S*POW(acc,2) + Q_old[0];
+     	Q[1] := Q_old[1] + S*acc*vel;
+     	Q[2] := Q_old[2] + S*acc*vel;
+     	Q[3] := S*POW(vel,2.0) + 	Q_old[3];
+     	
+     	
+
+     	
+     	
+     	innovation := y- (PARAM[0]* acc + PARAM[1]* vel );
+     	
+    	
+		PARAM[0]:= PARAM[0] + (S*(acc*Q[3] - Q[1]*vel))/(- POW(Q[1],2) + Q[0]*Q[3])  * innovation;
+		
+		PARAM[1]:= PARAM[1] - (S*(acc*Q[1] - Q[0]*vel))/(- POW(Q[1],2) + Q[0]*Q[3])  * innovation;
+			
+			
+
+     	FOR i:=0 TO 3 DO 
+    	Q_old[i]:=Q[i];
+    	END_FOR;
+    	
+    	vel_prec:=vel;
+    	
+    	Jm:=PARAM[0];
+    	Bm:=PARAM[1];
+     
+END_CASE; 
+
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK RLS_conKf
+
+	VAR_INPUT
+	S : REAL; { DE:"Parametro tuning per la convergenza" } 
+	y : REAL; 
+	vel : REAL; { DE:"velocità" } 
+	Ts : REAL; 
+	END_VAR
+
+	VAR
+	PARAM : ARRAY[ 0..2 ] OF REAL; { DE:"Parametri (Jm, Bm, Kf)" } 
+	innovation : REAL; 
+	Q : ARRAY[ 0..8 ] OF REAL; 
+	acc : REAL; { DE:"accelerazione" } 
+	vel_sign : REAL; { DE:"segno velocità" } 
+	ssMethodType : SINT; 
+	i : SINT; 
+	vel_prec : REAL; 
+	Q_old : ARRAY[ 0..8 ] OF REAL; 
+	Jm : REAL; { DE:"Inerzia" } 
+	Bm : REAL; { DE:"Attrito viscoso" } 
+	Kf : REAL; { DE:"Attrito statico" } 
+	END_VAR
+
+	{ CODE:ST }CASE ssMethodType OF
+    SS_INITIALIZE:
+    	(* inizializzo Q a matrice identità *)
+    	
+    	 FOR i:=0 TO 8 DO 
+    		Q[i]	:=0.0;
+    	END_FOR;
+    	
+    	Q[0]:=1.0;
+    	Q[3]:=1.0;
+    	Q[6]:=1.0;
+    	
+    	FOR i:=0 TO 8 DO 
+    	Q_old[i]:=Q[i];
+    	END_FOR;
+    	
+   
+    	(* A=[acc vel vel_sign];*)
+    	
+    	(* inizializzo PARAM a zero *)
+    	FOR i:=0 TO 2 DO 
+    	PARAM[i]:=0.0;
+    	END_FOR;
+    	
+    	
+    	(*   *)
+    	acc:=0.0;
+    	vel_prec:=0.0;
+    
+	SS_STEP:
+		
+		IF S=0.0 THEN
+			S:=30.0;
+		END_IF;
+	
+		(* segno della velocità *)
+		IF vel>0.0 THEN
+			vel_sign:=1.0;
+		ELSE
+			vel_sign:=-1.0;
+		END_IF;
+		
+		acc:= (vel-vel_prec)/Ts;
+		
+		
+        Q[0] := S*POW(acc,2.0) + Q_old[0];
+     	Q[1] := Q_old[1] + S*acc*vel;
+     	Q[2] := Q_old[2] + S*acc*vel_sign;
+     	Q[3] := Q_old[1] + S*acc*vel;
+     	Q[4] := S*POW(vel,2.0) + Q_old[4];
+     	Q[5] := Q_old[5] + S*vel*vel_sign;
+     	Q[6] := Q_old[2] + S*acc*vel_sign;
+     	Q[7] := Q_old[5] + S*vel*vel_sign;
+     	Q[8] := S*POW(vel_sign,2.0) + Q_old[8];
+     	
+     	innovation := y- (PARAM[0]* acc + PARAM[1]* vel + PARAM[2]* vel_sign);
+     	
+    	
+		PARAM[0]:= PARAM[0] + (S*(acc*POW(Q_old[5],2.0) - acc*Q_old[4]*Q_old[8] - Q_old[2]*Q_old[5]*vel + Q_old[1]*Q_old[8]*vel - Q_old[1]*Q_old[5]*vel_sign + Q_old[2]*Q_old[4]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
+		
+		PARAM[1]:= PARAM[1] + (S*(POW(Q_old[2],2.0)*vel - acc*Q_old[2]*Q_old[5] + acc*Q_old[1]*Q_old[8] - Q_old[0]*Q_old[8]*vel - Q_old[1]*Q_old[2]*vel_sign + Q_old[0]*Q_old[5]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
+		
+		PARAM[2]:= PARAM[2] + (S*(POW(Q_old[1],2.0)*vel_sign - acc*Q_old[1]*Q_old[5] + acc*Q_old[2]*Q_old[4] - Q_old[1]*Q_old[2]*vel + Q_old[0]*Q_old[5]*vel - Q_old[0]*Q_old[4]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
+			
+
+     	FOR i:=0 TO 8 DO 
+    	Q_old[i]:=Q[i];
+    	END_FOR;
+    	
+    	vel_prec:=vel;
+    	
+    	Jm:=PARAM[0];
+    	Bm:=PARAM[1];
+    	Kf:=PARAM[2];
+     
+END_CASE; 
+
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK Tune_PID
+
+	VAR_INPUT
+	phi_m_v : REAL; 
+	phi_m_p : REAL; 
+	Wc_pos : REAL; 
+	Wc_vel : REAL; { DE:"Omega c velocità" } 
+	END_VAR
+
+	VAR_OUTPUT
+	ti_v : REAL; 
+	kp_v : REAL; 
+	ti_p : REAL; 
+	kp_p : REAL; 
+	END_VAR
+
+	VAR
+	ssMethodType : SINT; 
+	kk : REAL; 
+	beta : REAL; 
+	Jm : REAL; { DE:"Inerzia" } 
+	Bm : REAL; { DE:"Attrito statico" } 
+	END_VAR
+
+	{ CODE:ST }
+IF Wc_pos<0.01 THEN
+	Wc_pos:=Wc_vel/5.0;
+END_IF;
+
+
+K_proc := dcGain;
+
+(* PIDv *)
+P := 	(1.0/Jm);
+K := 	Bm/Jm;
+ti_v := TAN(phi_m_v-PI/2.0+ATAN2(Wc_vel,P))/Wc_vel;
+kp_v := ti_v/(K*SQRT((1.0+POW(ti_v,2.0)*POW(Wc_vel,2.0))/(POW(Wc_vel,4.0)+POW(Wc_vel,2.0)*POW(P,2.0))));
+
+
+
+kk:=K*kp_v/ti_v;
+
+beta := ATAN2(ti_v*Wc_pos,1.0)-ATAN2(kk*ti_v*Wc_pos+P*Wc_pos,kk-POW(Wc_pos,2.0));
+
+
+(* %condizione che ho per la tangente. abbassa wc per ottenere ugualmente il phim desiderato*)
+WHILE phi_m_p-beta>=pi/2.0 DO
+    Wc_pos := 0.95 * Wc_pos;
+    beta := ATAN2(ti_v*Wc_pos,1.0)-ATAN2(kk*ti_v*Wc_pos+P*Wc_pos,kk-POW(Wc_pos,2.0));	        
+END_WHILE;
+
+ti_p := TAN(phi_m_p-beta)/Wc_pos;
+kp_p := ti_p*POW(Wc_pos,2.0)*SQRT( POW((kk-POW(Wc_pos,2.0)),2.0)+POW((kk*ti_v*Wc_pos+P*Wc_pos),2.0) )/ 	(kk*SQRT(POW(ti_p,2.0)*POW(Wc_pos,2.0)+1.0)*SQRT(POW(ti_v,2.0)*POW(Wc_pos,2.0)+1.0));
+
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK VARIANCE
+
+	VAR_INPUT
+	INPUT : REAL; 
+	END_VAR
+
+	VAR_OUTPUT
+	SIGMA : REAL; 
+	END_VAR
+
+	VAR
+	SUM_X : REAL; 
+	SUM_X_sqr : REAL; 
+	N : REAL; 
+	SIGMA_SQRD : REAL; 
+	END_VAR
+
+	{ CODE:ST }CASE ssMethodType OF
+    SS_INITIALIZE:
+	    N			:=0.0;
+	    SUM_X		:=0.0;
+	    SUM_X_sqr	:=0.0;
+	    SIGMA_SQRD	:=0.0;
+	    
+    
+   	SS_STEP:
+   		N:=N+1.0;
+   		
+   		SUM_X  		:= SUM_X+INPUT;
+   		SUM_X_sqr 	:= SUM_X_sqr+ POW(INPUT,2.0);
+   		
+   		IF N>20.0 THEN
+   			SIGMA_SQRD	:= ((SUM_X_sqr-POW(SUM_X,2.0))/N)/(N-2.0);
+   		END_IF;
+   		
+   		SIGMA:=SQRT(SIGMA_SQRD);
+
+    
+END_CASE;
+
+END_FUNCTION_BLOCK
+

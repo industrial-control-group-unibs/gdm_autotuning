@@ -1,0 +1,177 @@
+;
+;	Version record
+;
+;
+;	Parameters record
+;
+PAR	11000	1	"MaxTorque"	5	3	5	0	0	"Nm"	"Max Torque"	""	""	0	1000	2	"%MD1.0"	"Max Torque"	""	
+PAR	11002	1	"MaxSpeed"	5	3000	5	0	0	"Rpm"	"Max Speed"	""	""	0	5000	2	"%MD1.4"	"Max Speed"	""	
+PAR	11004	1	"MaxPos"	5	0.5	5	0	0	"Turns"	"Max Turns"	""	""	0	100	2	"%MD1.8"	"Max Turns"	""	
+PAR	11006	1	"MotJ"	5	0.00028	5	0	0	"Kgm2"	"Nominal Motor Inertia"	""	""	1e-006	10	2	"%MD1.12"	"Nom Mot Inertia"	""	
+PAR	11008	1	"StartAuto"	6	1	6	0	0	""	"Start Autotuning"	""	""	1.79769313486e+308	1.79769313486e+308	2	"%MX1.16"	"Start Autotuning"	""	
+PAR	11010	1	"MinWc"	5	10	5	0	0	""	"Min Wc"	""	""	0	1000	2	"%MD1.20"	"Min Wc"	""	
+PAR	11012	1	"MaxWc"	5	140	5	0	0	""	"Max Wc"	""	""	0	1000	2	"%MD1.24"	"Max Wc"	""	
+PAR	11014	1	"Low_Vel_Thr"	5	5	5	0	0	""	"Low Vel Thr"	""	""	0	100	2	"%MD1.28"	"Low vel threshold"	""	
+PAR	11016	1	"OscillationTollerance"	5	1	5	0	0	""	"Oscillation Tollerance"	""	""	0	1000	2	"%MD1.32"	"Oscill Tollerance"	""	
+;
+;	Variables record
+;
+VAR	12000	10	"_Position"	5	0	5	0	0	""	"Position"	""	""	"%MD2.0"	"Position"	0	
+VAR	12002	10	"_Speed"	5	0	5	0	0	""	"Speed"	""	""	"%MD2.4"	"Speed"	0	
+VAR	12004	10	"_Torque"	5	0	5	0	0	""	"Torque"	""	""	"%MD2.8"	"Torque"	0	
+VAR	12006	10	"_LoadPosition"	5	0	5	0	0	""	"Load Position"	""	""	"%MD2.12"	"Load Position"	0	
+VAR	12008	10	"_LoadSpeed"	5	0	5	0	0	""	"Load Speed"	""	""	"%MD2.16"	"Load Speed"	0	
+VAR	12010	10	"StateMachine"	3	0	3	0	0	""	"State Machine"	""	""	"%MW2.20"	"State Machine"	0	
+VAR	12012	20	"EstInertia"	5	0	5	0	0	"kgm2"	"Estimated Inertia"	""	""	"%MD2.24"	"Estimated Inertia"	0	
+VAR	12014	20	"EstStatFrict"	5	0	5	0	0	"Nm"	"Estimated Static Friction"	""	""	"%MD2.28"	"Est Static Friction"	0	
+VAR	12016	20	"EstDynFrict"	5	0	5	0	0	"Nms/rad"	"Estimated Dynamic Friction"	""	""	"%MD2.32"	"Est Dyn Friction"	0	
+VAR	12018	20	"CalcKpSp"	5	0	5	0	0	"Nm/rpm"	"Tuned Kp Speed"	""	""	"%MD2.36"	"Tuned Kp Speed"	0	
+VAR	12020	20	"CalcTiSp"	5	0	5	0	0	"ms"	"Tuned Ki Speed"	""	""	"%MD2.40"	"Tuned Ti Speed"	0	
+VAR	12022	20	"EstBandwidth"	5	0	5	0	0	"rad/s"	"Estimated Bandwidth Speed"	""	""	"%MD2.44"	"Est Bandwidth Speed"	0	
+;
+;	System parameters record
+;
+SYSPAR	3700	-2	"Pad 1"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3702	-2	"Pad 2"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3704	-2	"Pad 3"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3706	-2	"Pad 4"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3708	-2	"Pad 5"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3710	-2	"Pad 6"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3712	-2	"Pad 7"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3714	-2	"Pad 8"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3716	-2	"Pad 9"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3718	-2	"Pad 10"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3720	-2	"Pad 11"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3722	-2	"Pad 12"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3724	-2	"Pad 13"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3726	-2	"Pad 14"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3728	-2	"Pad 15"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+SYSPAR	3730	-2	"Pad 16"	2	0	2	1	0	""	""	""	"%d"	0	0	0	""	"access=30"	
+;
+;	System variables record
+;
+SYSVAR	4454	-2	"Bit0 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4456	-2	"Bit1 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4458	-2	"Bit2 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4460	-2	"Bit3 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4462	-2	"Bit4 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4464	-2	"Bit5 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4466	-2	"Bit6 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4468	-2	"Bit7 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4470	-2	"Bit8 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4472	-2	"Bit9 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4474	-2	"Bit10 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4476	-2	"Bit11 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4478	-2	"Bit12 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4480	-2	"Bit13 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4482	-2	"Bit14 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+SYSVAR	4484	-2	"Bit15 decomp mon"	3	0	3	1	0	""	""	""	"%u"	""	"access=30"	
+;
+;	Equations
+;
+;
+;	Events
+;
+;
+;	Enumeratives list
+;
+ENUMDEF	100	"MPC"	
+;
+;	Enumeratives
+;
+ENUM	100	3	"q_mpc"	
+ENUM	100	30	"Np_mpc"	
+ENUM	100	5	"Nc_mpc"	
+ENUM	100	4	"n_mpc"	
+ENUM	100	1	"m_mpc"	
+;
+;	Menu definition
+;
+MENU	0	"APPLICATION"	0	0	
+MENU	1	"CONFIGURATION"	0	0	
+MENU	10	"MONITOR"	0	0	
+MENU	20	"IDENTIFICATION"	0	0	
+;
+;	Current menu
+;
+;
+;	Alarms description
+;
+ALA	33	"Plc1 fault"	"Plc1 fault"	
+ALA	34	"Plc2 fault"	"Plc2 fault"	
+ALA	35	"Plc3 fault"	"Plc3 fault"	
+ALA	36	"Plc4 fault"	"Plc4 fault"	
+ALA	37	"Plc5 fault"	"Plc5 fault"	
+ALA	38	"Plc6 fault"	"Plc6 fault"	
+ALA	39	"Plc7 fault"	"Plc7 fault"	
+ALA	40	"Plc8 fault"	"Plc8 fault"	
+ALA	53	"Plc9 fault"	"Plc9 fault"	
+ALA	54	"Plc10 fault"	"Plc10 fault"	
+ALA	55	"Plc11 fault"	"Plc11 fault"	
+ALA	56	"Plc12 fault"	"Plc12 fault"	
+ALA	57	"Plc13 fault"	"Plc13 fault"	
+ALA	58	"Plc14 fault"	"Plc14 fault"	
+ALA	59	"Plc15 fault"	"Plc15 fault"	
+ALA	60	"Plc16 fault"	"Plc16 fault"	
+;
+;	Passwords
+;
+;
+;	Help refs
+;
+;
+;	Firmware file
+;
+;
+;	Control panel definition
+;
+;
+;	System commands record
+;
+;
+;	Datablock records
+;
+;
+;	Supervisor page
+;
+;
+;	Drive address
+;
+DRIVEADDR	1	
+;
+;	Project path
+;
+;
+;	User version define
+;
+;
+;	Include files
+;
+INCLUDE	"adv200syn_7_7_19_gb.ppc"	
+;
+;	Append files
+;
+;
+;	Options
+;
+OPT	"USERMENUROOT"	"1690"	"0"	"0"	""	""	
+OPT	"COMMCONF"	"Modbus:1,1000,M#COM:3,38400,N,8,1"	""	""	""	""	
+OPT	"SHORTLEN"	"20"	"1"	"14"	"15"	"8"	
+OPT	"DBTYPE"	"ADFAM"	""	""	""	""	
+OPT	"LEVEL_EN"	"1"	""	""	""	""	
+;
+;	String variables
+;
+;
+;	Menu order definition
+;
+;
+; Languages translation definitions
+;
+LANGUAGE	1	"IT"	"Italiano"	"app_ita.dic"	0	
+LANGUAGE	2	"FR"	"Francais"	"app_fra.dic"	0	
+LANGUAGE	3	"DE"	"Deutsch"	"app_deu.dic"	0	
+LANGUAGE	4	"ES"	"Español"	"app_esp.dic"	0	
+;
+;	Measure unit codes
+;

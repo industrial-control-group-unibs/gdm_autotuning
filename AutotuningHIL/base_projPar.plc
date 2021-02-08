@@ -1,0 +1,32 @@
+(*						*)
+(*	Variable definition	*)
+(*						*)
+
+VAR_GLOBAL
+
+		{G:"CONFIGURATION"}
+	pMaxTorque			 AT %MD1.0 	:REAL;	(* IPA 11000 *)
+	pMaxSpeed			 AT %MD1.4 	:REAL;	(* IPA 11002 *)
+	pMaxPos			 AT %MD1.8 	:REAL;	(* IPA 11004 *)
+	pMotJ			 AT %MD1.12 	:REAL;	(* IPA 11006 *)
+	pStartAuto			 AT %MX1.16 	:BOOL;	(* IPA 11008 *)
+	pMinWc			 AT %MD1.20 	:REAL;	(* IPA 11010 *)
+	pMaxWc			 AT %MD1.24 	:REAL;	(* IPA 11012 *)
+	pLow_Vel_Thr			 AT %MD1.28 	:REAL;	(* IPA 11014 *)
+	pOscillationTollerance			 AT %MD1.32 	:REAL;	(* IPA 11016 *)
+		{G:"MONITOR"}
+	v_Position			 AT %MD2.0 	:REAL;	(* IPA 12000 *)
+	v_Speed			 AT %MD2.4 	:REAL;	(* IPA 12002 *)
+	v_Torque			 AT %MD2.8 	:REAL;	(* IPA 12004 *)
+	v_LoadPosition			 AT %MD2.12 	:REAL;	(* IPA 12006 *)
+	v_LoadSpeed			 AT %MD2.16 	:REAL;	(* IPA 12008 *)
+	vStateMachine			 AT %MW2.20 	:UINT;	(* IPA 12010 *)
+		{G:"IDENTIFICATION"}
+	vEstInertia			 AT %MD2.24 	:REAL;	(* IPA 12012 *)
+	vEstStatFrict			 AT %MD2.28 	:REAL;	(* IPA 12014 *)
+	vEstDynFrict			 AT %MD2.32 	:REAL;	(* IPA 12016 *)
+	vCalcKpSp			 AT %MD2.36 	:REAL;	(* IPA 12018 *)
+	vCalcTiSp			 AT %MD2.40 	:REAL;	(* IPA 12020 *)
+	vEstBandwidth			 AT %MD2.44 	:REAL;	(* IPA 12022 *)
+
+END_VAR

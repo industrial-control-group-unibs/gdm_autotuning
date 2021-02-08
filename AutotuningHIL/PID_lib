@@ -1,0 +1,109 @@
+(*
+ *
+ * MDPlc source file: PID_lib
+ * for project:       
+ *
+ *)
+
+
+	(***************************)
+	(*                         *)
+	(*     FUNCTION BLOCKS     *)
+	(*                         *)
+	(***************************)
+
+FUNCTION_BLOCK PIDcontrol
+
+	VAR_INPUT
+	ssMethodType : SINT; 
+	y_ref : REAL; 
+	y : REAL; 
+	END_VAR
+
+	VAR_OUTPUT
+	u : REAL; 
+	END_VAR
+
+	VAR
+	SS_INITIALIZE : SINT; 
+	SS_STEP : SINT := 1; 
+	Vmax : REAL := 10.0; 
+	Vmin : REAL; 
+	Ti : REAL := 2.0; 
+	Td : REAL; 
+	N : REAL := 10.0; 
+	Tt : REAL := 2.0; 
+	Kp : REAL := 0.1; 
+	st : REAL := 0.001; 
+	e : REAL; 
+	uns : REAL; 
+	uk : REAL; 
+	ui : REAL; 
+	ud : REAL; 
+	e_prec : REAL; 
+	ui_prec : REAL; 
+	ud_prec : REAL; 
+	tr_prec : REAL; 
+	END_VAR
+
+	{ CODE:ST }
+CASE ssMethodType OF
+    SS_INITIALIZE: 
+        
+        (* InitializeConditions for DiscreteIntegrator: '<S1>/Discrete-Time Integrator' *)
+        
+        e_prec := 0.0;
+        ui_prec := 0.0;
+        ud_prec := 0.0;
+        tr_prec := 0.0;
+        st := 0.001;
+        Kp := 0.1;
+        Ti := 2.0;
+        Td := 0.0;
+        N := 10.0;
+        Tt := 2.0;
+        Vmax := 10.0;
+        Vmin := 0.0;
+        
+    SS_STEP: 
+        
+        
+        e := y_ref - y;
+        
+        uk := Kp * e;
+        ui := ui_prec + (Kp/Ti*e_prec - (1/Tt)*tr_prec)*st;
+        ud := (Kp*Td*2*N*e - Kp*Td*2*N*e_prec - (st*N - 2*Td)*ud_prec)/(st*N + 2*Td);
+        
+        uns := uk + ui + ud;
+        
+        IF uns > Vmax  THEN
+   
+            u := Vmax;
+            tr := (uns - Vmax);
+        
+                
+        ELSIF uns < Vmin THEN
+   
+            u := Vmin;
+            tr := (uns - Vmax);
+   
+        ELSE
+   
+            u := uns;
+            tr := 0; 
+   
+        END_IF;
+
+        e_prec := e;
+        ui_prec := ui;
+        tr_prec := tr;
+        ud_prec := ud;
+        
+        
+END_CASE;
+
+
+
+
+END_FUNCTION_BLOCK
+

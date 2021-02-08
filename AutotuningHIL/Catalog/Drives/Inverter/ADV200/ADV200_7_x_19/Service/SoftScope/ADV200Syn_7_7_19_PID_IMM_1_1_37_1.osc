@@ -1,0 +1,1016 @@
+;
+;	Version record
+;
+VER "ADVS"  7  19
+;
+; Drive Ver.Rel.Typ : 7.7.19
+; Build             : 1591696201 => 9/June/2020 -- 11.50.1
+
+
+;
+;	Parameters records
+;
+PAR 70   -1  "CNTS_2_VDC"  		5   0   5   1   0   "(V)/cnts" "Voltage conversion factor for dc link" ""  ""  
+PAR 50   -1  "CNTS_2_IPK"  		5   0   5   1   0   "(A*sqrt(2))/cnts" "Current conversion factor" ""  ""  
+PAR 52   -1  "CNTS_2_V"  		5   0   5   1   0   "(V*sqrt(2)/sqrt(3))/cnts" "Voltage conversion factor" ""  ""  
+PAR 54   -1  "CNTS_2_SPEED"  	5   0   5   1   0   "rpm/cnts" "Speed conversion factor" ""  ""  
+PAR 56   -1  "CNTS_2_HZ"  	    5   0   5   1   0   "(Hz*2*pi)/cnts" "Frequency conversion factor" ""  ""  
+PAR 58   -1  "CNTS_2_NM"  	    5   0   5   1   0   "Nm/cnts" "Torque conversion factor" ""  ""  
+PAR 72   -1  "CNTS_2_KW"  	    5   0   5   1   0   "kW/cnts" "Power conversion factor" ""  ""  
+
+
+;
+;	System parameters ( Oscilloscope )
+;
+SYS	478		"FWNAME"				4	
+SYS	492		"FWVER1"				1	
+SYS	496		"FWVER2"				1	
+SYS	9090	"OSC_SAMPLE"			3	
+SYS	9086	"OSC_SESSION"			4	
+SYS	9096	"OSC_MINSAMPLESTIME"	4	
+SYS	9088	"OSC_NUMCH"				3
+SYS	9080	"OSC_ACQSTATE"			6
+SYS	9030	"OSC_DIMD_CH1"			3
+SYS	9040	"OSC_TYPED_CH1"			1
+SYS	9060	"OSC_ADDRM_CH1"			4
+SYS	9050	"OSC_ADDRD_CH1"			4
+SYS	9032	"OSC_DIMD_CH2"			3
+SYS	9042	"OSC_TYPED_CH2"			1
+SYS	9062	"OSC_ADDRM_CH2"			4
+SYS	9052	"OSC_ADDRD_CH2"			4
+SYS	9034	"OSC_DIMD_CH3"			3
+SYS	9044	"OSC_TYPED_CH3"			1
+SYS	9064	"OSC_ADDRM_CH3"			4
+SYS	9054	"OSC_ADDRD_CH3"			4
+SYS	9036	"OSC_DIMD_CH4"			3
+SYS	9046	"OSC_TYPED_CH4"			1
+SYS	9066	"OSC_ADDRM_CH4"			4
+SYS	9056	"OSC_ADDRD_CH4"			4
+SYS	9038	"OSC_DIMD_TRG"			3
+SYS	9048	"OSC_TYPED_TRG"			3
+SYS	9058	"OSC_ADDRD_TRG"			4
+SYS	9082	"OSC_STARTIDX_TRG"		1
+SYS	9084	"OSC_ENDIDX_TRG"		1
+SYS	9000	"OSC_SCOPE1"			3	
+SYS	9002	"OSC_SCOPE2"			3	
+SYS	9004	"OSC_SCOPE3"			3	
+SYS	9006	"OSC_SCOPE4"			3	
+SYS	9094	"OSC_RATE"				3	
+SYS	9076	"OSC_TRG"				6	
+SYS	9008	"OSC_SCOPE_TRG_SRC"		3	
+SYS	9068	"OSC_SCOPE_TRG_LEV"		2	
+SYS	9070	"OSC_SCOPE_TRG_SLOPE"	3	
+SYS	9072	"OSC_SCOPE_TRG_OFFS"	1	
+SYS	9078	"OSC_SCOPE_TRG_ARM"		6
+SYS	9010	"OSC_DATAPARAM1"		4	
+SYS	9012	"OSC_DATAPARAM2"		4	
+SYS	9014	"OSC_DATAPARAM3"		4	
+SYS	9016	"OSC_DATAPARAM4"		4	
+SYS	9018	"OSC_TRGPARAM"			4	
+SYS	9074	"OSC_TRGBIT"			3	
+SYS	9020	"OSC_TYPEPARAM1"		3	
+SYS	9022	"OSC_TYPEPARAM2"		3	
+SYS	9024	"OSC_TYPEPARAM3"		3	
+SYS	9026	"OSC_TYPEPARAM4"		3	
+SYS	9028	"OSC_TYPETRG"			3
+SYS 9092	"OSC_DIMBUFFERMAX"		3
+;
+;	Signal
+;
+; index ( >= 0: predef. signal, < 0: address )
+; type
+; name
+; um
+; descr
+; scale
+; offset
+; sig.type (0=only sig., 1=sign.+trig., 2=only trig.)
+; bitpos (for bits)
+; address
+;
+
+SIGN   80    2 "Phase current U      " "Apeak" "Par: 80   " 1000 0 1 0
+SIGN   82    2 "Phase current V      " "Apeak" "Par: 82   " 1000 0 1 0
+SIGN   84    2 "Phase current W      " "Apeak" "Par: 84   " 1000 0 1 0
+SIGN   90    2 "Phase current RMS U  " "A    " "Par: 90   " I50 0 1 0
+SIGN   92    2 "Phase current RMS V  " "A    " "Par: 92   " I50 0 1 0
+SIGN   94    2 "Phase current RMS W  " "A    " "Par: 94   " I50 0 1 0
+SIGN   250   2 "Output current       " "Apeak" "Par: 250  " I50 0 1 0
+SIGN   252   2 "Output voltage       " "V    " "Par: 252  " I52 0 1 0
+SIGN   254   2 "Output frequency     " "Hz   " "Par: 254  " 1073741.82 0 1 0
+SIGN   256   2 "Output power         " "cnt  " "Par: 256  " 1 0 1 0
+SIGN   260   2 "Motor speed          " "rpm  " "Par: 260  " I54 0 1 0
+SIGN   262   2 "Motor speed nofilter " "rpm  " "Par: 262  " I54 0 1 0
+SIGN   270   2 "DC link voltage      " "V    " "Par: 270  " I70 0 1 0
+SIGN   272   2 "Heatsink temperature " "cnt  " "Par: 272  " 1 0 1 0
+SIGN   280   2 "Torque current ref   " "Apeak" "Par: 280  " I50 0 1 0
+SIGN   282   2 "Magnet current ref   " "Apeak" "Par: 282  " I50 0 1 0
+SIGN   284   2 "Torque current       " "Apeak" "Par: 284  " I50 0 1 0
+SIGN   286   2 "Magnet current       " "Apeak" "Par: 286  " I50 0 1 0
+SIGN   290   2 "Motor temperature    " "°C   " "Par: 290  " 10 0 1 0
+SIGN   292   2 "Sensor inp X mon     " "cnt  " "Par: 292  " 1 0 1 0
+SIGN   362   4 "Drive overload trip  " "cnt  " "Par: 362  " 1 0 1 0
+SIGN   366   4 "Drive overload 80%   " "perc " "Par: 366  " 21474836.48 0 1 0
+SIGN   368   2 "Drive overload accum " "perc " "Par: 368  " 21474836.48 0 1 0
+SIGN   626   2 "Ramp ref out mon     " "rpm  " "Par: 626  " I54 0 1 0
+SIGN   628   2 "Ramp setpoint        " "rpm  " "Par: 628  " I54 0 1 0
+SIGN   664   2 "Speed setpoint       " "rpm  " "Par: 664  " I54 0 1 0
+SIGN   726   4 "Multi ramp sel mon   " "cnt  " "Par: 726  " 1 0 1 0
+SIGN   760   2 "Ramp out mon         " "rpm  " "Par: 760  " I54 0 1 0
+SIGN   764   4 "Ramp acc state       " "cnt  " "Par: 764  " 1 0 1 0
+SIGN   766   4 "Ramp dec state       " "cnt  " "Par: 766  " 1 0 1 0
+SIGN   852   2 "Multi ref out mon    " "rpm  " "Par: 852  " I54 0 1 0
+SIGN   894   2 "Mpot output mon      " "rpm  " "Par: 894  " I54 0 1 0
+SIGN   920   2 "Jog output mon       " "rpm  " "Par: 920  " I54 0 1 0
+SIGN   934   4 "Ref is 0             " "cnt  " "Par: 934  " 1 0 1 0
+SIGN   936   4 "Ref is 0 delay       " "cnt  " "Par: 936  " 1 0 1 0
+SIGN   944   4 "Speed is 0           " "cnt  " "Par: 944  " 1 0 1 0
+SIGN   946   4 "Speed is 0 delay     " "cnt  " "Par: 946  " 1 0 1 0
+SIGN   956   4 "Speed thr 1_2 mon    " "cnt  " "Par: 956  " 1 0 1 0
+SIGN   966   4 "Set speed            " "cnt  " "Par: 966  " 1 0 1 0
+SIGN   976   4 "Speed thr 3 mon      " "cnt  " "Par: 976  " 1 0 1 0
+SIGN   986   4 "Current thr mon      " "cnt  " "Par: 986  " 1 0 1 0
+SIGN   1024  4 "Enable cmd mon       " "cnt  " "Par: 1024 " 1 0 1 0
+SIGN   1026  4 "Start cmd mon        " "cnt  " "Par: 1026 " 1 0 1 0
+SIGN   1028  4 "FastStop cmd mon     " "cnt  " "Par: 1028 " 1 0 1 0
+SIGN   1030  4 "Local/remote mon     " "cnt  " "Par: 1030 " 1 0 1 0
+SIGN   1034  4 "Drv interlock mon    " "cnt  " "Par: 1034 " 1 0 1 0
+SIGN   1048  4 "FR start mon         " "cnt  " "Par: 1048 " 1 0 1 0
+SIGN   1050  4 "FR reverse mon       " "cnt  " "Par: 1050 " 1 0 1 0
+SIGN   1054  4 "Safe start mon       " "cnt  " "Par: 1054 " 1 0 1 0
+SIGN   1060  4 "Sequencer status     " "cnt  " "Par: 1060 " 1 0 1 0
+SIGN   1062  4 "Drive OK             " "cnt  " "Par: 1062 " 1 0 1 0
+SIGN   1064  4 "Drive ready          " "cnt  " "Par: 1064 " 1 0 1 0
+SIGN   1066  4 "Enable state mon     " "cnt  " "Par: 1066 " 1 0 1 0
+SIGN   1068  4 "Start state mon      " "cnt  " "Par: 1068 " 1 0 1 0
+SIGN   1070  4 "FastStop state mon   " "cnt  " "Par: 1070 " 1 0 1 0
+SIGN   1100  4 "Digital input mon    " "cnt  " "Par: 1100 " 1 0 1 0
+SIGN   1110  4 "Digital input E mon  " "cnt  " "Par: 1110 " 1 0 1 0
+SIGN   1112  4 "Digital input 1 mon  " "cnt  " "Par: 1112 " 1 0 1 0
+SIGN   1114  4 "Digital input 2 mon  " "cnt  " "Par: 1114 " 1 0 1 0
+SIGN   1116  4 "Digital input 3 mon  " "cnt  " "Par: 1116 " 1 0 1 0
+SIGN   1118  4 "Digital input 4 mon  " "cnt  " "Par: 1118 " 1 0 1 0
+SIGN   1120  4 "Digital input 5 mon  " "cnt  " "Par: 1120 " 1 0 1 0
+SIGN   1200  4 "Digital input X mon  " "cnt  " "Par: 1200 " 1 0 1 0
+SIGN   1210  4 "Digital input 1X mon " "cnt  " "Par: 1210 " 1 0 1 0
+SIGN   1212  4 "Digital input 2X mon " "cnt  " "Par: 1212 " 1 0 1 0
+SIGN   1214  4 "Digital input 3X mon " "cnt  " "Par: 1214 " 1 0 1 0
+SIGN   1216  4 "Digital input 4X mon " "cnt  " "Par: 1216 " 1 0 1 0
+SIGN   1218  4 "Digital input 5X mon " "cnt  " "Par: 1218 " 1 0 1 0
+SIGN   1220  4 "Digital input 6X mon " "cnt  " "Par: 1220 " 1 0 1 0
+SIGN   1222  4 "Digital input 7X mon " "cnt  " "Par: 1222 " 1 0 1 0
+SIGN   1224  4 "Digital input 8X mon " "cnt  " "Par: 1224 " 1 0 1 0
+SIGN   1500  2 "Analog input 1 mon   " "cnt  " "Par: 1500 " 1 0 1 0
+SIGN   1530  4 "Analog inp1<thr      " "cnt  " "Par: 1530 " 1 0 1 0
+SIGN   1540  4 "An inp 1 err mon     " "cnt  " "Par: 1540 " 1 0 1 0
+SIGN   1542  4 "Analog inp1>thr      " "cnt  " "Par: 1542 " 1 0 1 0
+SIGN   1544  2 "An inp 1 temp mon    " "°C   " "Par: 1544 " 10 0 1 0
+SIGN   1550  2 "Analog input 2 mon   " "cnt  " "Par: 1550 " 1 0 1 0
+SIGN   1580  4 "Analog inp2<thr      " "cnt  " "Par: 1580 " 1 0 1 0
+SIGN   1590  4 "An inp 2 err mon     " "cnt  " "Par: 1590 " 1 0 1 0
+SIGN   1592  4 "Analog inp2>thr      " "cnt  " "Par: 1592 " 1 0 1 0
+SIGN   1594  2 "An inp 2 temp mon    " "°C   " "Par: 1594 " 10 0 1 0
+SIGN   1600  2 "Analog input 1X mon  " "cnt  " "Par: 1600 " 1 0 1 0
+SIGN   1610  2 "An inp 1X temp mon   " "°C   " "Par: 1610 " 10 0 1 0
+SIGN   1640  4 "An inp 1X err mon    " "cnt  " "Par: 1640 " 1 0 1 0
+SIGN   1650  2 "Analog input 2X mon  " "cnt  " "Par: 1650 " 1 0 1 0
+SIGN   1660  2 "An inp 2X temp mon   " "°C   " "Par: 1660 " 10 0 1 0
+SIGN   1690  4 "An inp 2X err mon    " "cnt  " "Par: 1690 " 1 0 1 0
+SIGN   2040  4 "Autophase OK         " "cnt  " "Par: 2040 " 1 0 1 0
+SIGN   2150  2 "Encoder 1 speed      " "rpm  " "Par: 2150 " I54 0 1 0
+SIGN   2154  2 "E1 Virtual position  " "cnt  " "Par: 2154 " 1 0 1 0
+SIGN   2156  2 "E1 Revolutions       " "cnt  " "Par: 2156 " 1 0 1 0
+SIGN   2162  3 "Encoder 1 position   " "cnt  " "Par: 2162 " 1 0 1 0
+SIGN   2164  4 "E1 Abs position      " "cnt  " "Par: 2164 " 1 0 1 0
+SIGN   2166  4 "E1 Abs revolutions   " "cnt  " "Par: 2166 " 1 0 1 0
+SIGN   2232  2 "Spd reg P gain Inuse " "perc " "Par: 2232 " 2147483.647 0 1 0
+SIGN   2234  2 "Spd reg I gain Inuse " "perc " "Par: 2234 " 2147483.647 0 1 0
+SIGN   2246  2 "Speed reg P factor   " "perc " "Par: 2246 " 5368709.12 0 1 0
+SIGN   2248  2 "Speed reg I factor   " "perc " "Par: 2248 " 5368709.12 0 1 0
+SIGN   2338  2 "Torque limit adapt   " "cnt  " "Par: 2338 " 1 0 1 0
+SIGN   2342  2 "Working load         " "perc " "Par: 2342 " 5368709.12 0 1 0
+SIGN   2344  2 "Torque ref nolimit   " "cnt  " "Par: 2344 " 1 0 1 0
+SIGN   2346  2 "Torque current ref 1 " "Apeak" "Par: 2346 " I50 0 1 0
+SIGN   2348  2 "Torque ref 1 mon     " "Nm   " "Par: 2348 " I58 0 1 0
+SIGN   2360  2 "Torque lim Pos Inuse " "Apeak" "Par: 2360 " I50 0 1 0
+SIGN   2362  2 "Torque lim Neg Inuse " "Apeak" "Par: 2362 " I50 0 1 0
+SIGN   2386  2 "Torque ref %         " "perc " "Par: 2386 " 5368709.12 0 1 0
+SIGN   2388  2 "Torque ref nofilter  " "perc " "Par: 2388 " 5368709.12 0 1 0
+SIGN   2390  2 "Torque ref           " "Nm   " "Par: 2390 " I58 0 1 0
+SIGN   2392  2 "Torque ref 1 mon %   " "perc " "Par: 2392 " 5368709.12 0 1 0
+SIGN   2394  2 "Torque %             " "perc " "Par: 2394 " 5368709.12 0 1 0
+SIGN   2396  2 "Torque nofilter      " "perc " "Par: 2396 " 5368709.12 0 1 0
+SIGN   2398  2 "Torque               " "Nm   " "Par: 2398 " I58 0 1 0
+SIGN   3006  2 "Speed ratio out mon  " "cnt  " "Par: 3006 " 1 0 1 0
+SIGN   3070  2 "Droop out mon        " "rpm  " "Par: 3070 " I54 0 1 0
+SIGN   3104  2 "Inertia comp mon     " "perc " "Par: 3104 " 5368709.12 0 1 0
+SIGN   3180  4 "Brake control mon    " "cnt  " "Par: 3180 " 1 0 1 0
+SIGN   3192  2 "Brake open thr mon   " "cnt  " "Par: 3192 " 1 0 1 0
+SIGN   3212  2 "Motor overload accum " "perc " "Par: 3212 " 21474836.48 0 1 0
+SIGN   3214  4 "Motor overload trip  " "cnt  " "Par: 3214 " 1 0 1 0
+SIGN   3260  2 "Bres overload accum  " "perc " "Par: 3260 " 21474836.48 0 1 0
+SIGN   3262  4 "Bres overload trip   " "cnt  " "Par: 3262 " 1 0 1 0
+SIGN   3304  4 "Par set select mon   " "cnt  " "Par: 3304 " 1 0 1 0
+SIGN   3442  4 "Powerloss rampdown   " "cnt  " "Par: 3442 " 1 0 1 0
+SIGN   3446  2 "Powerloss nextratio  " "cnt  " "Par: 3446 " 1 0 1 0
+SIGN   3448  4 "Powerloss nextactive " "cnt  " "Par: 3448 " 1 0 1 0
+SIGN   3480  4 "Vdc ctrl ramp freeze " "cnt  " "Par: 3480 " 1 0 1 0
+SIGN   3512  4 "Drv thr overtemp mon " "cnt  " "Par: 3512 " 1 0 1 0
+SIGN   3514  4 "Mot thr overtemp mon " "cnt  " "Par: 3514 " 1 0 1 0
+SIGN   3556  2 "Timer1 mon           " "cnt  " "Par: 3556 " 1 0 1 0
+SIGN   3566  2 "Timer2 mon           " "cnt  " "Par: 3566 " 1 0 1 0
+SIGN   3676  4 "Compare output       " "cnt  " "Par: 3676 " 1 0 1 0
+SIGN   3700  2 "Pad 1                " "cnt  " "Par: 3700 " 1 0 1 0
+SIGN   3702  2 "Pad 2                " "cnt  " "Par: 3702 " 1 0 1 0
+SIGN   3704  2 "Pad 3                " "cnt  " "Par: 3704 " 1 0 1 0
+SIGN   3706  2 "Pad 4                " "cnt  " "Par: 3706 " 1 0 1 0
+SIGN   3708  2 "Pad 5                " "cnt  " "Par: 3708 " 1 0 1 0
+SIGN   3710  2 "Pad 6                " "cnt  " "Par: 3710 " 1 0 1 0
+SIGN   3712  2 "Pad 7                " "cnt  " "Par: 3712 " 1 0 1 0
+SIGN   3714  2 "Pad 8                " "cnt  " "Par: 3714 " 1 0 1 0
+SIGN   3716  2 "Pad 9                " "cnt  " "Par: 3716 " 1 0 1 0
+SIGN   3718  2 "Pad 10               " "cnt  " "Par: 3718 " 1 0 1 0
+SIGN   3720  2 "Pad 11               " "cnt  " "Par: 3720 " 1 0 1 0
+SIGN   3722  2 "Pad 12               " "cnt  " "Par: 3722 " 1 0 1 0
+SIGN   3724  2 "Pad 13               " "cnt  " "Par: 3724 " 1 0 1 0
+SIGN   3726  2 "Pad 14               " "cnt  " "Par: 3726 " 1 0 1 0
+SIGN   3728  2 "Pad 15               " "cnt  " "Par: 3728 " 1 0 1 0
+SIGN   3730  2 "Pad 16               " "cnt  " "Par: 3730 " 1 0 1 0
+SIGN   3958  4 "PlcReqDwCode_        " "cnt  " "Par: 3958 " 1 0 1 0
+SIGN   4024  2 "Fieldbus M->S1 mon   " "cnt  " "Par: 4024 " 1 0 1 0
+SIGN   4034  2 "Fieldbus M->S2 mon   " "cnt  " "Par: 4034 " 1 0 1 0
+SIGN   4044  2 "Fieldbus M->S3 mon   " "cnt  " "Par: 4044 " 1 0 1 0
+SIGN   4054  2 "Fieldbus M->S4 mon   " "cnt  " "Par: 4054 " 1 0 1 0
+SIGN   4064  2 "Fieldbus M->S5 mon   " "cnt  " "Par: 4064 " 1 0 1 0
+SIGN   4074  2 "Fieldbus M->S6 mon   " "cnt  " "Par: 4074 " 1 0 1 0
+SIGN   4084  2 "Fieldbus M->S7 mon   " "cnt  " "Par: 4084 " 1 0 1 0
+SIGN   4094  2 "Fieldbus M->S8 mon   " "cnt  " "Par: 4094 " 1 0 1 0
+SIGN   4104  2 "Fieldbus M->S9 mon   " "cnt  " "Par: 4104 " 1 0 1 0
+SIGN   4114  2 "Fieldbus M->S10 mon  " "cnt  " "Par: 4114 " 1 0 1 0
+SIGN   4124  2 "Fieldbus M->S11 mon  " "cnt  " "Par: 4124 " 1 0 1 0
+SIGN   4134  2 "Fieldbus M->S12 mon  " "cnt  " "Par: 4134 " 1 0 1 0
+SIGN   4144  2 "Fieldbus M->S13 mon  " "cnt  " "Par: 4144 " 1 0 1 0
+SIGN   4154  2 "Fieldbus M->S14 mon  " "cnt  " "Par: 4154 " 1 0 1 0
+SIGN   4164  2 "Fieldbus M->S15 mon  " "cnt  " "Par: 4164 " 1 0 1 0
+SIGN   4174  2 "Fieldbus M->S16 mon  " "cnt  " "Par: 4174 " 1 0 1 0
+SIGN   4352  3 "DS402 enable         " "cnt  " "Par: 4352 " 1 0 1 0
+SIGN   4354  3 "DS402 start          " "cnt  " "Par: 4354 " 1 0 1 0
+SIGN   4356  3 "DS402 fast stop      " "cnt  " "Par: 4356 " 1 0 1 0
+SIGN   4358  4 "DS402 rfg enable     " "cnt  " "Par: 4358 " 1 0 1 0
+SIGN   4360  4 "DS402 rfg unlock     " "cnt  " "Par: 4360 " 1 0 1 0
+SIGN   4362  4 "DS402 rfg useref     " "cnt  " "Par: 4362 " 1 0 1 0
+SIGN   4364  4 "DS402 halt           " "cnt  " "Par: 4364 " 1 0 1 0
+SIGN   4366  4 "DS402 jog cmd        " "cnt  " "Par: 4366 " 1 0 1 0
+SIGN   4368  4 "DS402 jog invert     " "cnt  " "Par: 4368 " 1 0 1 0
+SIGN   4370  3 "DS402 alarm reset    " "cnt  " "Par: 4370 " 1 0 1 0
+SIGN   4372  3 "DS402 status word    " "cnt  " "Par: 4372 " 1 0 1 0
+SIGN   4376  3 "PFdrv enable         " "cnt  " "Par: 4376 " 1 0 1 0
+SIGN   4378  3 "PFdrv start          " "cnt  " "Par: 4378 " 1 0 1 0
+SIGN   4380  3 "PFdrv fast stop      " "cnt  " "Par: 4380 " 1 0 1 0
+SIGN   4382  4 "PFdrv rfg enable     " "cnt  " "Par: 4382 " 1 0 1 0
+SIGN   4384  4 "PFdrv rfg unlock     " "cnt  " "Par: 4384 " 1 0 1 0
+SIGN   4386  4 "PFdrv rfg useref     " "cnt  " "Par: 4386 " 1 0 1 0
+SIGN   4388  4 "PFdrv jog cmd        " "cnt  " "Par: 4388 " 1 0 1 0
+SIGN   4390  4 "PFdrv jog invert     " "cnt  " "Par: 4390 " 1 0 1 0
+SIGN   4392  3 "PFdrv alarm reset    " "cnt  " "Par: 4392 " 1 0 1 0
+SIGN   4394  3 "PFdrv status word 1  " "cnt  " "Par: 4394 " 1 0 1 0
+SIGN   4396  3 "PFdrv status word 2  " "cnt  " "Par: 4396 " 1 0 1 0
+SIGN   4432  2 "Word comp mon        " "cnt  " "Par: 4432 " 1 0 1 0
+SIGN   4454  4 "Bit0 decomp mon      " "cnt  " "Par: 4454 " 1 0 1 0
+SIGN   4456  4 "Bit1 decomp mon      " "cnt  " "Par: 4456 " 1 0 1 0
+SIGN   4458  4 "Bit2 decomp mon      " "cnt  " "Par: 4458 " 1 0 1 0
+SIGN   4460  4 "Bit3 decomp mon      " "cnt  " "Par: 4460 " 1 0 1 0
+SIGN   4462  4 "Bit4 decomp mon      " "cnt  " "Par: 4462 " 1 0 1 0
+SIGN   4464  4 "Bit5 decomp mon      " "cnt  " "Par: 4464 " 1 0 1 0
+SIGN   4466  4 "Bit6 decomp mon      " "cnt  " "Par: 4466 " 1 0 1 0
+SIGN   4468  4 "Bit7 decomp mon      " "cnt  " "Par: 4468 " 1 0 1 0
+SIGN   4470  4 "Bit8 decomp mon      " "cnt  " "Par: 4470 " 1 0 1 0
+SIGN   4472  4 "Bit9 decomp mon      " "cnt  " "Par: 4472 " 1 0 1 0
+SIGN   4474  4 "Bit10 decomp mon     " "cnt  " "Par: 4474 " 1 0 1 0
+SIGN   4476  4 "Bit11 decomp mon     " "cnt  " "Par: 4476 " 1 0 1 0
+SIGN   4478  4 "Bit12 decomp mon     " "cnt  " "Par: 4478 " 1 0 1 0
+SIGN   4480  4 "Bit13 decomp mon     " "cnt  " "Par: 4480 " 1 0 1 0
+SIGN   4482  4 "Bit14 decomp mon     " "cnt  " "Par: 4482 " 1 0 1 0
+SIGN   4484  4 "Bit15 decomp mon     " "cnt  " "Par: 4484 " 1 0 1 0
+SIGN   4536  4 "MotorOT mon          " "cnt  " "Par: 4536 " 1 0 1 0
+SIGN   4568  4 "An inpLoss code      " "cnt  " "Par: 4568 " 1 0 1 0
+SIGN   4598  4 "HumTSensErr code     " "cnt  " "Par: 4598 " 1 0 1 0
+SIGN   4678  4 "Mot PhLoss code      " "cnt  " "Par: 4678 " 1 0 1 0
+SIGN   4708  4 "Alm dig out mon 1    " "cnt  " "Par: 4708 " 1 0 1 0
+SIGN   4710  4 "Alm dig out mon 2    " "cnt  " "Par: 4710 " 1 0 1 0
+SIGN   4712  4 "Alm dig out mon 3    " "cnt  " "Par: 4712 " 1 0 1 0
+SIGN   4714  4 "Alm dig out mon 4    " "cnt  " "Par: 4714 " 1 0 1 0
+SIGN   4770  4 "First alarm          " "cnt  " "Par: 4770 " 1 0 1 0
+SIGN   5008  2 "Test gen out         " "perc " "Par: 5008 " 10737418.235 0 1 0
+SIGN   5080  2 "Var 1 mon            " "cnt  " "Par: 5080 " 1 0 1 0
+SIGN   5082  2 "Var 2 mon            " "cnt  " "Par: 5082 " 1 0 1 0
+SIGN   5150  2 "Encoder 2 speed      " "rpm  " "Par: 5150 " I54 0 1 0
+SIGN   5154  2 "E2 Virtual position  " "cnt  " "Par: 5154 " 1 0 1 0
+SIGN   5156  2 "E2 Revolutions       " "cnt  " "Par: 5156 " 1 0 1 0
+SIGN   5162  3 "Encoder 2 position   " "cnt  " "Par: 5162 " 1 0 1 0
+SIGN   5164  4 "E2 Abs position      " "cnt  " "Par: 5164 " 1 0 1 0
+SIGN   5166  4 "E2 Abs revolutions   " "cnt  " "Par: 5166 " 1 0 1 0
+SIGN   5254  2 "E3 Virtual position  " "cnt  " "Par: 5254 " 1 0 1 0
+SIGN   5256  2 "E3 Revolutions       " "cnt  " "Par: 5256 " 1 0 1 0
+SIGN   5262  3 "Encoder 3 position   " "cnt  " "Par: 5262 " 1 0 1 0
+SIGN   5312  4 "Encoder fbk mon      " "cnt  " "Par: 5312 " 1 0 1 0
+SIGN   5484  4 "External IO state    " "cnt  " "Par: 5484 " 1 0 1 0
+SIGN   5510  4 "Digital input 9X mon " "cnt  " "Par: 5510 " 1 0 1 0
+SIGN   5512  4 "Digital input10X mon " "cnt  " "Par: 5512 " 1 0 1 0
+SIGN   5514  4 "Digital input11X mon " "cnt  " "Par: 5514 " 1 0 1 0
+SIGN   5516  4 "Digital input12X mon " "cnt  " "Par: 5516 " 1 0 1 0
+SIGN   5518  4 "Digital input13X mon " "cnt  " "Par: 5518 " 1 0 1 0
+SIGN   5520  4 "Digital input14X mon " "cnt  " "Par: 5520 " 1 0 1 0
+SIGN   5522  4 "Digital input15X mon " "cnt  " "Par: 5522 " 1 0 1 0
+SIGN   5524  4 "Digital input16X mon " "cnt  " "Par: 5524 " 1 0 1 0
+SIGN   5620  2 "Fieldbus M->S17 mon  " "cnt  " "Par: 5620 " 1 0 1 0
+SIGN   5622  2 "Fieldbus M->S18 mon  " "cnt  " "Par: 5622 " 1 0 1 0
+SIGN   5624  2 "Fieldbus M->S19 mon  " "cnt  " "Par: 5624 " 1 0 1 0
+SIGN   5626  2 "Fieldbus M->S20 mon  " "cnt  " "Par: 5626 " 1 0 1 0
+SIGN   5628  2 "Fieldbus M->S21 mon  " "cnt  " "Par: 5628 " 1 0 1 0
+SIGN   5630  2 "Fieldbus M->S22 mon  " "cnt  " "Par: 5630 " 1 0 1 0
+SIGN   5632  2 "Fieldbus M->S23 mon  " "cnt  " "Par: 5632 " 1 0 1 0
+SIGN   5634  2 "Fieldbus M->S24 mon  " "cnt  " "Par: 5634 " 1 0 1 0
+SIGN   5720  4 "Sync slave mon       " "cnt  " "Par: 5720 " 1 0 1 0
+SIGN   5750  2 "FL Fwd 1 mon         " "cnt  " "Par: 5750 " 1 0 1 0
+SIGN   5752  2 "FL Fwd 2 mon         " "cnt  " "Par: 5752 " 1 0 1 0
+SIGN   5754  2 "FL Fwd 3 mon         " "cnt  " "Par: 5754 " 1 0 1 0
+SIGN   5756  2 "FL Fwd 4 mon         " "cnt  " "Par: 5756 " 1 0 1 0
+SIGN   5758  2 "FL Fwd 5 mon         " "cnt  " "Par: 5758 " 1 0 1 0
+SIGN   5760  2 "FL Fwd 6 mon         " "cnt  " "Par: 5760 " 1 0 1 0
+SIGN   5762  2 "FL Fwd 7 mon         " "cnt  " "Par: 5762 " 1 0 1 0
+SIGN   5764  2 "FL Fwd 8 mon         " "cnt  " "Par: 5764 " 1 0 1 0
+SIGN   5800  2 "FL Fwd 1 inv mon     " "cnt  " "Par: 5800 " 1 0 1 0
+SIGN   5802  2 "FL Fwd 2 inv mon     " "cnt  " "Par: 5802 " 1 0 1 0
+SIGN   5804  2 "FL Fwd 3 inv mon     " "cnt  " "Par: 5804 " 1 0 1 0
+SIGN   5806  2 "FL Fwd 4 inv mon     " "cnt  " "Par: 5806 " 1 0 1 0
+SIGN   5808  2 "FL Fwd 5 inv mon     " "cnt  " "Par: 5808 " 1 0 1 0
+SIGN   5810  2 "FL Fwd 6 inv mon     " "cnt  " "Par: 5810 " 1 0 1 0
+SIGN   5812  2 "FL Fwd 7 inv mon     " "cnt  " "Par: 5812 " 1 0 1 0
+SIGN   5814  2 "FL Fwd 8 inv mon     " "cnt  " "Par: 5814 " 1 0 1 0
+SIGN   5850  2 "FL Rev 1 mon         " "cnt  " "Par: 5850 " 1 0 1 0
+SIGN   5852  2 "FL Rev 2 mon         " "cnt  " "Par: 5852 " 1 0 1 0
+SIGN   5854  2 "FL Rev 3 mon         " "cnt  " "Par: 5854 " 1 0 1 0
+SIGN   5856  2 "FL Rev 4 mon         " "cnt  " "Par: 5856 " 1 0 1 0
+SIGN   6004  4 "Speed limit state    " "cnt  " "Par: 6004 " 1 0 1 0
+SIGN   6006  4 "Current limit state  " "cnt  " "Par: 6006 " 1 0 1 0
+SIGN   6036  2 "Liquid temp setpoint " "cnt  " "Par: 6036 " 1 0 1 0
+SIGN   6038  2 "Intake liquid temp   " "cnt  " "Par: 6038 " 1 0 1 0
+SIGN   6042  2 "Liquid temp mon      " "cnt  " "Par: 6042 " 1 0 1 0
+SIGN   6044  4 "Condensation state   " "cnt  " "Par: 6044 " 1 0 1 0
+SIGN   6046  4 "Overhumidity state   " "cnt  " "Par: 6046 " 1 0 1 0
+SIGN   6064  2 "PI state mon         " "cnt  " "Par: 6064 " 1 0 1 0
+SIGN   6074  2 "PI Setpoint          " "cnt  " "Par: 6074 " 1 0 1 0
+SIGN   6078  2 "Valve opening ctrl   " "cnt  " "Par: 6078 " 1 0 1 0
+SIGN   6080  2 "Pump command         " "cnt  " "Par: 6080 " 1 0 1 0
+SIGN   6206  4 "Ctrl mode sel mon    " "cnt  " "Par: 6206 " 1 0 1 0
+SIGN   6208  2 "Ctrl mode mon        " "cnt  " "Par: 6208 " 1 0 1 0
+;
+;
+;	Option
+;
+OPT	"MEMRDCMD"	"1"	""	""	""	""
+OPT "TRANFORM"  "1" "" "" "" ""
+;
+SIGN -1000 1 "sysDbIpa" "" "sys Ipa" 1 0 1 0 "0xC0003574"
+SIGN -1001 1 "sysDbWrRd" "" "sys Wr Rd" 1 0 1 0 "0xC0003576"
+SIGN -1002 2 "sysDbValueI" "" "sys Value interger" 1 0 1 0 "0xC0003578"
+SIGN -1003 5 "sysDbValueF" "" "sys Value float" 1 0 1 0 "0xC0003578"
+SIGN -1004 2 "sysAlmPlc" "" "sys Alarm from Plc" 1 0 1 0 "0xD0002A70"
+SIGN -1005 1 "sysAlmPlcXAct" "" "sys Alarm from Plc X activity" 1 0 1 0 "0xC000446E"
+SIGN -1006 1 "sysAlmPlc1Act" "" "sys Alarm from Plc 1 activity" 1 0 1 0 "0xC000446E"
+SIGN -1007 1 "sysAlmPlc2Act" "" "sys Alarm from Plc 2 activity" 1 0 1 0 "0xC0004470"
+SIGN -1008 1 "sysAlmPlc3Act" "" "sys Alarm from Plc 3 activity" 1 0 1 0 "0xC0004472"
+SIGN -1009 1 "sysAlmPlc4Act" "" "sys Alarm from Plc 4 activity" 1 0 1 0 "0xC0004474"
+SIGN -1010 1 "sysAlmPlc5Act" "" "sys Alarm from Plc 5 activity" 1 0 1 0 "0xC0004476"
+SIGN -1011 1 "sysAlmPlc6Act" "" "sys Alarm from Plc 6 activity" 1 0 1 0 "0xC0004478"
+SIGN -1012 1 "sysAlmPlc7Act" "" "sys Alarm from Plc 7 activity" 1 0 1 0 "0xC000447A"
+SIGN -1013 1 "sysAlmPlc8Act" "" "sys Alarm from Plc 8 activity" 1 0 1 0 "0xC000447C"
+SIGN -1014 1 "sysAlmPlc9Act" "" "sys Alarm from Plc 9 activity" 1 0 1 0 "0xC000447E"
+SIGN -1015 1 "sysAlmPlc10Act" "" "sys Alarm from Plc 10 activity" 1 0 1 0 "0xC0004480"
+SIGN -1016 1 "sysAlmPlc11Act" "" "sys Alarm from Plc 11 activity" 1 0 1 0 "0xC0004482"
+SIGN -1017 1 "sysAlmPlc12Act" "" "sys Alarm from Plc 12 activity" 1 0 1 0 "0xC0004484"
+SIGN -1018 1 "sysAlmPlc13Act" "" "sys Alarm from Plc 13 activity" 1 0 1 0 "0xC0004486"
+SIGN -1019 1 "sysAlmPlc14Act" "" "sys Alarm from Plc 14 activity" 1 0 1 0 "0xC0004488"
+SIGN -1020 1 "sysAlmPlc15Act" "" "sys Alarm from Plc 15 activity" 1 0 1 0 "0xC000448A"
+SIGN -1021 1 "sysAlmPlc16Act" "" "sys Alarm from Plc 16 activity" 1 0 1 0 "0xC000448C"
+SIGN -1022 2 "sys1kHzTimer" "" "Timer task 1kHz, fast" 1 0 1 0 "0xD0003624"
+SIGN -1023 2 "sys128HzTimer" "" "Timer task 128Hz, slow" 1 0 1 0 "0xD0003D3C"
+SIGN -1024 0 "sysMsgPlc1" "" "Message from Plc 1" 1 0 1 0 "0x803F0264"
+SIGN -1025 0 "sysMsgPlc2" "" "Message from Plc 2" 1 0 1 0 "0x803F0278"
+SIGN -1026 0 "sysMsgPlc3" "" "Message from Plc 3" 1 0 1 0 "0x803F028C"
+SIGN -1027 0 "sysMsgPlc4" "" "Message from Plc 4" 1 0 1 0 "0x803F02A0"
+SIGN -1028 1 "sysPar1Ipa" "" "Parameter 1 ipa" 1 0 1 0 "0x803F00E4"
+SIGN -1029 0 "sysPar1Descr" "" "Parameter 1 description" 1 0 1 0 "0x803F00E6"
+SIGN -1030 1 "sysPar2Ipa" "" "Parameter 2 ipa" 1 0 1 0 "0x803F00FC"
+SIGN -1031 0 "sysPar2Descr" "" "Parameter 2 description" 1 0 1 0 "0x803F00FE"
+SIGN -1032 1 "sysPar3Ipa" "" "Parameter 3 ipa" 1 0 1 0 "0x803F0114"
+SIGN -1033 0 "sysPar3Descr" "" "Parameter 3 description" 1 0 1 0 "0x803F0116"
+SIGN -1034 1 "sysPar4Ipa" "" "Parameter 4 ipa" 1 0 1 0 "0x803F012C"
+SIGN -1035 0 "sysPar4Descr" "" "Parameter 4 description" 1 0 1 0 "0x803F012E"
+SIGN -1036 1 "sysPar5Ipa" "" "Parameter 5 ipa" 1 0 1 0 "0x803F0144"
+SIGN -1037 0 "sysPar5Descr" "" "Parameter 5 description" 1 0 1 0 "0x803F0146"
+SIGN -1038 1 "sysPar6Ipa" "" "Parameter 6 ipa" 1 0 1 0 "0x803F015C"
+SIGN -1039 0 "sysPar6Descr" "" "Parameter 6 description" 1 0 1 0 "0x803F015E"
+SIGN -1040 1 "sysPar7Ipa" "" "Parameter 7 ipa" 1 0 1 0 "0x803F0174"
+SIGN -1041 0 "sysPar7Descr" "" "Parameter 7 description" 1 0 1 0 "0x803F0176"
+SIGN -1042 1 "sysPar8Ipa" "" "Parameter 8 ipa" 1 0 1 0 "0x803F018C"
+SIGN -1043 0 "sysPar8Descr" "" "Parameter 8 description" 1 0 1 0 "0x803F018E"
+SIGN -1044 1 "sysPar9Ipa" "" "Parameter 9 ipa" 1 0 1 0 "0x803F01A4"
+SIGN -1045 0 "sysPar9Descr" "" "Parameter 9 description" 1 0 1 0 "0x803F01A6"
+SIGN -1046 1 "sysPar10Ipa" "" "Parameter 10 ipa" 1 0 1 0 "0x803F01BC"
+SIGN -1047 0 "sysPar10Descr" "" "Parameter 10 description" 1 0 1 0 "0x803F01BE"
+SIGN -1048 1 "sysPar11Ipa" "" "Parameter 11 ipa" 1 0 1 0 "0x803F01D4"
+SIGN -1049 0 "sysPar11Descr" "" "Parameter 11 description" 1 0 1 0 "0x803F01D6"
+SIGN -1050 1 "sysPar12Ipa" "" "Parameter 12 ipa" 1 0 1 0 "0x803F01EC"
+SIGN -1051 0 "sysPar12Descr" "" "Parameter 12 description" 1 0 1 0 "0x803F01EE"
+SIGN -1052 1 "sysPar13Ipa" "" "Parameter 13 ipa" 1 0 1 0 "0x803F0204"
+SIGN -1053 0 "sysPar13Descr" "" "Parameter 13 description" 1 0 1 0 "0x803F0206"
+SIGN -1054 1 "sysPar14Ipa" "" "Parameter 14 ipa" 1 0 1 0 "0x803F021C"
+SIGN -1055 0 "sysPar14Descr" "" "Parameter 14 description" 1 0 1 0 "0x803F021E"
+SIGN -1056 1 "sysPar15Ipa" "" "Parameter 15 ipa" 1 0 1 0 "0x803F0234"
+SIGN -1057 0 "sysPar15Descr" "" "Parameter 15 description" 1 0 1 0 "0x803F0236"
+SIGN -1058 1 "sysPar16Ipa" "" "Parameter 16 ipa" 1 0 1 0 "0x803F024C"
+SIGN -1059 0 "sysPar16Descr" "" "Parameter 16 description" 1 0 1 0 "0x803F024E"
+SIGN -1060 1 "sysTaskParIpa" "" "Task parameters Ipa" 1 0 1 0 "0xC000357C"
+SIGN -1061 1 "sysTaskParWrRd" "" "Task parameters Wr Rd" 1 0 1 0 "0xC000357E"
+SIGN -1062 2 "sysTaskParValueI" "" "Task parameters Value integer" 1 0 1 0 "0xC0003580"
+SIGN -1063 5 "sysTaskParValueF" "" "Task parameters Value float" 1 0 1 0 "0xC0003580"
+SIGN -1064 2 "sysF0_Poscnt" "" "Encoder Capture 0 pos" 1 0 1 0 "0xD0002A04"
+SIGN -1065 2 "sysF0_Rev" "" "Encoder Capture 0 rev" 1 0 1 0 "0xD0002A08"
+SIGN -1066 2 "sysF1_Poscnt" "" "Encoder Capture 1 pos" 1 0 1 0 "0xD0002A0C"
+SIGN -1067 2 "sysF1_Rev" "" "Encoder Capture 1 rev" 1 0 1 0 "0xD0002A10"
+SIGN -1068 2 "sysCHC_Poscnt" "" "Encoder Channel C pos" 1 0 1 0 "0xD0002A14"
+SIGN -1069 2 "sysCHC_Rev" "" "Encoder Channel C rev" 1 0 1 0 "0xD0002A18"
+SIGN -1070 3 "sysStatus_Word_F10" "" "Status Word Capture Encoder" 1 0 1 0 "0xD0002A80"
+SIGN -1071 3 "sysCtrl_Word_F10" "" "Control Word Capture Encoder" 1 0 1 0 "0xD0002A82"
+SIGN -1072 2 "sysF0_PoscntEnc2" "" "Encoder 2 Capture 0 pos" 1 0 1 0 "0xD0002A1C"
+SIGN -1073 2 "sysF0_RevEnc2" "" "Encoder 2 Capture 0 rev" 1 0 1 0 "0xD0002A20"
+SIGN -1074 2 "sysF1_PoscntEnc2" "" "Encoder 2 Capture 1 pos" 1 0 1 0 "0xD0002A24"
+SIGN -1075 2 "sysF1_RevEnc2" "" "Encoder 2 Capture 1 rev" 1 0 1 0 "0xD0002A28"
+SIGN -1076 2 "sysCHC_PoscntEnc2" "" "Encoder 2 Channel C pos" 1 0 1 0 "0xD0002A2C"
+SIGN -1077 2 "sysCHC_RevEnc2" "" "Encoder 2 Channel C rev" 1 0 1 0 "0xD0002A30"
+SIGN -1078 3 "sysStatus_Word_F10Enc2" "" "Status Word Capture Encoder 2" 1 0 1 0 "0xD0002A84"
+SIGN -1079 3 "sysCtrl_Word_F10Enc2" "" "Control Word Capture Encoder 2" 1 0 1 0 "0xD0002A86"
+SIGN -1080 2 "sysInterlock" "" "sys Interlock from Plc" 1 0 1 0 "0xD0002A74"
+SIGN -1081 2 "sysExeTimeTask1" "" "Exe Time Task 1kHz, fast [clk=75MHz]" 1 0 1 0 "0xD0002A38"
+SIGN -1082 2 "sysExeTimeTask2" "" "Exe Time Task 128Hz, slow [clk=75MHz]" 1 0 1 0 "0xD0002A3C"
+SIGN -1083 2 "sysExeTimeBackGround" "" "Exe Time BackGround [clk=75MHz]" 1 0 1 0 "0xD0002A40"
+SIGN -1084 1 "sysExeTimeType" "" "Exe Time Type" 1 0 1 0 "0xD0002A44"
+SIGN -1085 1 "sysFwApplVerRel" "" "Fw application Ver.Rel (Ver-HByte Rel-LByte)" 1 0 1 0 "0xC0003AB4"
+SIGN -1086 1 "sysFwApplTyp" "" "Fw application Typ                          " 1 0 1 0 "0xC0003AB6"
+SIGN -1087 1 "sysFwApplSubVer" "" "Fw application SubVer                       " 1 0 1 0 "0xC0003AB8"
+SIGN -1088 3 "sysUsrVarwX" "" "User variable wX                               " 1 0 1 0 "0xC0001B10"
+SIGN -1089 3 "sysUsrVarw0" "" "User variable w0                               " 1 0 1 0 "0xC0001B10"
+SIGN -1090 3 "sysUsrVarw1" "" "User variable w1                               " 1 0 1 0 "0xC0001B12"
+SIGN -1091 3 "sysUsrVarw2" "" "User variable w2                               " 1 0 1 0 "0xC0001B14"
+SIGN -1092 3 "sysUsrVarw3" "" "User variable w3                               " 1 0 1 0 "0xC0001B16"
+SIGN -1093 3 "sysUsrVarw4" "" "User variable w4                               " 1 0 1 0 "0xC0001B18"
+SIGN -1094 3 "sysUsrVarw5" "" "User variable w5                               " 1 0 1 0 "0xC0001B1A"
+SIGN -1095 3 "sysUsrVarw6" "" "User variable w6                               " 1 0 1 0 "0xC0001B1C"
+SIGN -1096 3 "sysUsrVarw7" "" "User variable w7                               " 1 0 1 0 "0xC0001B1E"
+SIGN -1097 3 "sysUsrVarw8" "" "User variable w8                               " 1 0 1 0 "0xC0001B20"
+SIGN -1098 3 "sysUsrVarw9" "" "User variable w9                               " 1 0 1 0 "0xC0001B22"
+SIGN -1099 3 "sysUsrVarw10" "" "User variable w10                              " 1 0 1 0 "0xC0001B24"
+SIGN -1100 3 "sysUsrVarw11" "" "User variable w11                              " 1 0 1 0 "0xC0001B26"
+SIGN -1101 3 "sysUsrVarw12" "" "User variable w12                              " 1 0 1 0 "0xC0001B28"
+SIGN -1102 3 "sysUsrVarw13" "" "User variable w13                              " 1 0 1 0 "0xC0001B2A"
+SIGN -1103 3 "sysUsrVarw14" "" "User variable w14                              " 1 0 1 0 "0xC0001B2C"
+SIGN -1104 3 "sysUsrVarw15" "" "User variable w15                              " 1 0 1 0 "0xC0001B2E"
+SIGN -1105 4 "sysUsrVardwX" "" "User variable dwX                              " 1 0 1 0 "0xC0001B10"
+SIGN -1106 4 "sysUsrVardw0" "" "User variable dw0                              " 1 0 1 0 "0xC0001B10"
+SIGN -1107 4 "sysUsrVardw1" "" "User variable dw1                              " 1 0 1 0 "0xC0001B14"
+SIGN -1108 4 "sysUsrVardw2" "" "User variable dw2                              " 1 0 1 0 "0xC0001B18"
+SIGN -1109 4 "sysUsrVardw3" "" "User variable dw3                              " 1 0 1 0 "0xC0001B1C"
+SIGN -1110 4 "sysUsrVardw4" "" "User variable dw4                              " 1 0 1 0 "0xC0001B20"
+SIGN -1111 4 "sysUsrVardw5" "" "User variable dw5                              " 1 0 1 0 "0xC0001B24"
+SIGN -1112 4 "sysUsrVardw6" "" "User variable dw6                              " 1 0 1 0 "0xC0001B28"
+SIGN -1113 4 "sysUsrVardw7" "" "User variable dw7                              " 1 0 1 0 "0xC0001B2C"
+SIGN -1114 3 "sysUsrVarwX_NoImg" "" "User variable wX NoImg                         " 1 0 1 0 "0xC0001B10"
+SIGN -1115 4 "sysUsrVardwX_NoImg" "" "User variable dwX NoImg                        " 1 0 1 0 "0xC0001B10"
+SIGN -1116 4 "sysRampAccState" "" "Ramp acceleration state                     " 1 0 1 0 "0xD0003BBA"
+SIGN -1117 4 "sysRampDecState" "" "Ramp deceleration state                     " 1 0 1 0 "0xD0003BBE"
+SIGN -1118 1 "sysDispListIpa" "" "Display list ipa                                " 1 0 1 0 "0x803F49E0"
+SIGN -1119 0 "sysDispListDescr" "" "Display list short description                  " 1 0 1 0 "0x803F49E2"
+SIGN -1120 2 "sysFL_Rv1_Slave1_mon" "" "FastLink Reverse 1 Slave 1                     " 1 0 1 0 "0x803F2A64"
+SIGN -1121 2 "sysFL_Rv1_Slave2_mon" "" "FastLink Reverse 1 Slave 2                     " 1 0 1 0 "0x803F2A6C"
+SIGN -1122 2 "sysFL_Rv1_Slave3_mon" "" "FastLink Reverse 1 Slave 3                     " 1 0 1 0 "0x803F2A74"
+SIGN -1123 2 "sysFL_Rv1_Slave4_mon" "" "FastLink Reverse 1 Slave 4                     " 1 0 1 0 "0x803F2A7C"
+SIGN -1124 2 "sysFL_Rv1_Slave5_mon" "" "FastLink Reverse 1 Slave 5                     " 1 0 1 0 "0x803F2A84"
+SIGN -1125 2 "sysFL_Rv1_Slave6_mon" "" "FastLink Reverse 1 Slave 6                     " 1 0 1 0 "0x803F2A8C"
+SIGN -1126 2 "sysFL_Rv1_Slave7_mon" "" "FastLink Reverse 1 Slave 7                     " 1 0 1 0 "0x803F2A94"
+SIGN -1127 2 "sysFL_Rv1_Slave8_mon" "" "FastLink Reverse 1 Slave 8                     " 1 0 1 0 "0x803F2A9C"
+SIGN -1128 2 "sysFL_Rv1_Slave9_mon" "" "FastLink Reverse 1 Slave 9                     " 1 0 1 0 "0x803F2AA4"
+SIGN -1129 2 "sysFL_Rv1_Slave10_mon" "" "FastLink Reverse 1 Slave 10                    " 1 0 1 0 "0x803F2AAC"
+SIGN -1130 2 "sysFL_Rv1_Slave11_mon" "" "FastLink Reverse 1 Slave 11                    " 1 0 1 0 "0x803F2AB4"
+SIGN -1131 2 "sysFL_Rv1_Slave12_mon" "" "FastLink Reverse 1 Slave 12                    " 1 0 1 0 "0x803F2ABC"
+SIGN -1132 2 "sysFL_Rv1_Slave13_mon" "" "FastLink Reverse 1 Slave 13                    " 1 0 1 0 "0x803F2AC4"
+SIGN -1133 2 "sysFL_Rv1_Slave14_mon" "" "FastLink Reverse 1 Slave 14                    " 1 0 1 0 "0x803F2ACC"
+SIGN -1134 2 "sysFL_Rv1_Slave15_mon" "" "FastLink Reverse 1 Slave 15                    " 1 0 1 0 "0x803F2AD4"
+SIGN -1135 2 "sysFL_Rv2_Slave1_mon" "" "FastLink Reverse 2 Slave 1                     " 1 0 1 0 "0x803F2A68"
+SIGN -1136 2 "sysFL_Rv2_Slave2_mon" "" "FastLink Reverse 2 Slave 2                     " 1 0 1 0 "0x803F2A70"
+SIGN -1137 2 "sysFL_Rv2_Slave3_mon" "" "FastLink Reverse 2 Slave 3                     " 1 0 1 0 "0x803F2A78"
+SIGN -1138 2 "sysFL_Rv2_Slave4_mon" "" "FastLink Reverse 2 Slave 4                     " 1 0 1 0 "0x803F2A80"
+SIGN -1139 2 "sysFL_Rv2_Slave5_mon" "" "FastLink Reverse 2 Slave 5                     " 1 0 1 0 "0x803F2A88"
+SIGN -1140 2 "sysFL_Rv2_Slave6_mon" "" "FastLink Reverse 2 Slave 6                     " 1 0 1 0 "0x803F2A90"
+SIGN -1141 2 "sysFL_Rv2_Slave7_mon" "" "FastLink Reverse 2 Slave 7                     " 1 0 1 0 "0x803F2A98"
+SIGN -1142 2 "sysFL_Rv2_Slave8_mon" "" "FastLink Reverse 2 Slave 8                     " 1 0 1 0 "0x803F2AA0"
+SIGN -1143 2 "sysFL_Rv2_Slave9_mon" "" "FastLink Reverse 2 Slave 9                     " 1 0 1 0 "0x803F2AA8"
+SIGN -1144 2 "sysFL_Rv2_Slave10_mon" "" "FastLink Reverse 2 Slave 10                    " 1 0 1 0 "0x803F2AB0"
+SIGN -1145 2 "sysFL_Rv2_Slave11_mon" "" "FastLink Reverse 2 Slave 11                    " 1 0 1 0 "0x803F2AB8"
+SIGN -1146 2 "sysFL_Rv2_Slave12_mon" "" "FastLink Reverse 2 Slave 12                    " 1 0 1 0 "0x803F2AC0"
+SIGN -1147 2 "sysFL_Rv2_Slave13_mon" "" "FastLink Reverse 2 Slave 13                    " 1 0 1 0 "0x803F2AC8"
+SIGN -1148 2 "sysFL_Rv2_Slave14_mon" "" "FastLink Reverse 2 Slave 14                    " 1 0 1 0 "0x803F2AD0"
+SIGN -1149 2 "sysFL_Rv2_Slave15_mon" "" "FastLink Reverse 2 Slave 15                    " 1 0 1 0 "0x803F2AD8"
+SIGN -1150 2 "sysPadX_YesImg" "" "General Purpose Pad Variable X YesImg          " 1 0 1 0 "0xD00029C4"
+SIGN -1151 2 "sysPad1_YesImg" "" "General Purpose Pad Variable 1 YesImg          " 1 0 1 0 "0xD00029C4"
+SIGN -1152 2 "sysPad2_YesImg" "" "General Purpose Pad Variable 2 YesImg          " 1 0 1 0 "0xD00029C8"
+SIGN -1153 2 "sysPad3_YesImg" "" "General Purpose Pad Variable 3 YesImg          " 1 0 1 0 "0xD00029CC"
+SIGN -1154 2 "sysPad4_YesImg" "" "General Purpose Pad Variable 4 YesImg          " 1 0 1 0 "0xD00029D0"
+SIGN -1155 2 "sysPad5_YesImg" "" "General Purpose Pad Variable 5 YesImg          " 1 0 1 0 "0xD00029D4"
+SIGN -1156 2 "sysPad6_YesImg" "" "General Purpose Pad Variable 6 YesImg          " 1 0 1 0 "0xD00029D8"
+SIGN -1157 2 "sysPad7_YesImg" "" "General Purpose Pad Variable 7 YesImg          " 1 0 1 0 "0xD00029DC"
+SIGN -1158 2 "sysPad8_YesImg" "" "General Purpose Pad Variable 8 YesImg          " 1 0 1 0 "0xD00029E0"
+SIGN -1159 2 "sysPad9_YesImg" "" "General Purpose Pad Variable 9 YesImg          " 1 0 1 0 "0xD00029E4"
+SIGN -1160 2 "sysPad10_YesImg" "" "General Purpose Pad Variable 10 YesImg         " 1 0 1 0 "0xD00029E8"
+SIGN -1161 2 "sysPad11_YesImg" "" "General Purpose Pad Variable 11 YesImg         " 1 0 1 0 "0xD00029EC"
+SIGN -1162 2 "sysPad12_YesImg" "" "General Purpose Pad Variable 12 YesImg         " 1 0 1 0 "0xD00029F0"
+SIGN -1163 2 "sysPad13_YesImg" "" "General Purpose Pad Variable 13 YesImg         " 1 0 1 0 "0xD00029F4"
+SIGN -1164 2 "sysPad14_YesImg" "" "General Purpose Pad Variable 14 YesImg         " 1 0 1 0 "0xD00029F8"
+SIGN -1165 2 "sysPad15_YesImg" "" "General Purpose Pad Variable 15 YesImg         " 1 0 1 0 "0xD00029FC"
+SIGN -1166 2 "sysPad16_YesImg" "" "General Purpose Pad Variable 16 YesImg         " 1 0 1 0 "0xD0002A00"
+SIGN -1167 2 "sysUsrLowerTrqLim_YesImg" "" "Lower torque limit YesImg [cnts]                " 1 0 1 0 "0xD0002B1C"
+SIGN -1168 3 "sysAsymTrqLim_YesImg" "" "Symmetric / Asymmetric torque limit mode YesImg " 1 0 1 0 "0xD0002B20"
+SIGN -1169 2 "sysTrqFFwd_YesImg" "" "User feed-forward torque reference YesImg       " 1 0 1 0 "0xD0002B2C"
+SIGN -1170 2 "sysUsrReductTrqLim_YesImg" "" "Reduct torque limit YesImg [cnts]               " 1 0 1 0 "0xD0002B30"
+SIGN -1171 5 "sysTrqFFwdFilter_YesImg" "" "Filter on torque feed forward YesImg            " 1 0 1 0 "0xD0002D10"
+SIGN -1172 5 "sysIdRef_in_YesImg" "" "Id ref YesImg                                   " 1 0 1 0 "0xD0002DCA"
+SIGN -1173 2 "sysPosTrqLim_YesImg" "" "Positive torque limit [cnts] YesImg             " 1 0 1 0 "0xD0002B24"
+SIGN -1174 2 "sysNegTrqLim_YesImg" "" "Negative torque limit [cnts] YesImg             " 1 0 1 0 "0xD0002B28"
+SIGN -1175 1 "sysFL_IsrCounter" "" "Fastlink interrupt service routine counter      " 1 0 1 0 "0x803F2A40"
+SIGN -1176 2 "sysFBState" "" "Fieldbus State						           " 1 0 1 0 "0xD0003328"
+SIGN -1177 2 "sysFBMdPlcDirect" "" "Enable fast exchange of MdPlc pars with Fieldbus" 1 0 1 0 "0xD0003334"
+SIGN -1178 2 "sysE1_CNTLT_L" "" "E1 Position counter latched on sync [cnts]      " 1 0 1 0 "0xE0106048"
+SIGN -1179 2 "sysE1_TLTLT_L" "" "E1 Timer of encoder tick latched on sync [cnts] " 1 0 1 0 "0xE0106050"
+SIGN -1180 2 "sysE2_CNTLT_L" "" "E2 Position counter latched on sync [cnts]      " 1 0 1 0 "0xE0106448"
+SIGN -1181 2 "sysE2_TLTLT_L" "" "E2 Timer of encoder tick latched on sync [cnts] " 1 0 1 0 "0xE0106450"
+SIGN -1182 2 "sysE3_CNTLT_L" "" "E3 Position counter latched on sync [cnts]      " 1 0 1 0 "0xE0106848"
+SIGN -1183 2 "sysE3_TLTLT_L" "" "E3 Timer of encoder tick latched on sync [cnts] " 1 0 1 0 "0xE0106850"
+SIGN -1184 2 "sysE1_CNTLT_L_NoImg" "" "E1 Position counter latched on sync [cnts]      " 1 0 1 0 "0xE0106048"
+SIGN -1185 2 "sysE1_TLTLT_L_NoImg" "" "E1 Timer of encoder tick latched on sync [cnts] " 1 0 1 0 "0xE0106050"
+SIGN -1186 2 "sysE2_CNTLT_L_NoImg" "" "E2 Position counter latched on sync [cnts]      " 1 0 1 0 "0xE0106448"
+SIGN -1187 2 "sysE2_TLTLT_L_NoImg" "" "E2 Timer of encoder tick latched on sync [cnts] " 1 0 1 0 "0xE0106450"
+SIGN -1188 2 "sysE3_CNTLT_L_NoImg" "" "E3 Position counter latched on sync [cnts]      " 1 0 1 0 "0xE0106848"
+SIGN -1189 2 "sysE3_TLTLT_L_NoImg" "" "E3 Timer of encoder tick latched on sync [cnts] " 1 0 1 0 "0xE0106850"
+SIGN -1190 2 "sysIout" "" "Output current [cnts]" 1 0 1 0 "0xD0002B3C"
+SIGN -1191 2 "sysVo" "" "Output voltage [cnts]" 1 0 1 0 "0xD0002B40"
+SIGN -1192 2 "sysOutFreq" "" "Output Frequency" 1 0 1 0 "0xD0002B5C"
+SIGN -1193 2 "sysPout" "" "Output power [cnts]" 1 0 1 0 "0xD0002B44"
+SIGN -1194 2 "sysSpdFilt" "" "Calculated speed filtered" 1 0 1 0 "0xD00034B8"
+SIGN -1195 2 "sysSpd" "" "Calculated speed" 1 0 1 0 "0xD0002B74"
+SIGN -1196 2 "sysVdcLink" "" "DC link voltage [cnts]" 1 0 1 0 "0xD0002B80"
+SIGN -1197 2 "sysHeatSinkTemp" "" "Heatsink temperature" 1 0 1 0 "0xD000389C"
+SIGN -1198 2 "sysIqRef" "" "Actual quadrature current reference [cnts]" 1 0 1 0 "0xD0002B64"
+SIGN -1199 2 "sysIdRef" "" "Actual magnetizing current reference [cnts]" 1 0 1 0 "0xD0002B60"
+SIGN -1200 2 "sysIq" "" "Actual quadrature current [cnts]" 1 0 1 0 "0xD0002B70"
+SIGN -1201 2 "sysId" "" "Actual magnetizing current [cnts]" 1 0 1 0 "0xD0002B6C"
+SIGN -1202 5 "sysIdRef_in" "" "" 1 0 1 0 "0xD0002DCA"
+SIGN -1203 2 "sysSensInpXMon" "" "Sensor input X temperature monitor" 1 0 1 0 "0xC0004684"
+SIGN -1204 6 "sysOverloadStatus" "" "Drive overload status" 1 0 1 0 "0xC000317C"
+SIGN -1205 6 "sysDriveOvldComing" "" "Drive overload coming" 1 0 1 0 "0xC0003180"
+SIGN -1206 2 "sysOverloadFact" "" "Drive overload factor [%]" 1 0 1 0 "0xC0003184"
+SIGN -1207 4 "sysControlMode" "" "Control Mode: Ramp, Speed, Torque" 1 0 1 0 "0xC00045DC"
+SIGN -1208 2 "sysRampRef" "" "Ramp Reference 1" 1 0 1 0 "0xC000336C"
+SIGN -1209 2 "sysRampRef2" "" "Ramp Reference 2" 1 0 1 0 "0xC0003370"
+SIGN -1210 2 "sysRampRef3" "" "Ramp Reference 3" 1 0 1 0 "0xC0003374"
+SIGN -1211 6 "sysRampRefInv" "" "Ramp Reference Inversion Status" 1 0 1 0 "0xC000338C"
+SIGN -1212 2 "sysRampRef1mon" "" "Ramp Reference 1 monitor" 1 0 1 0 "0xC0003378"
+SIGN -1213 2 "sysRampRef2mon" "" "Ramp Reference 2 monitor" 1 0 1 0 "0xC000337C"
+SIGN -1214 2 "sysRampRef3mon" "" "Ramp Reference 3 monitor" 1 0 1 0 "0xC0003380"
+SIGN -1215 2 "sysRampIn" "" "Actual Ramp Reference" 1 0 1 0 "0xC0003390"
+SIGN -1216 2 "sysRampSkip" "" "Ramp reference after frequency skip" 1 0 1 0 "0xC00033A0"
+SIGN -1217 2 "sysRampMaxCCW" "" "Top Ramp Reference Limit" 1 0 1 0 "0xC0003388"
+SIGN -1218 2 "sysRampMinCCW" "" "Bottom Ramp Reference Limit" 1 0 1 0 "0xC0003384"
+SIGN -1219 2 "sysSpdRef1" "" "Speed Reference 1" 1 0 1 0 "0xD0003CF0"
+SIGN -1220 2 "sysSpdRef2" "" "Speed Reference 2" 1 0 1 0 "0xD0003CF4"
+SIGN -1221 6 "sysSpdRefInv" "" "Speed Reference Inversion Status" 1 0 1 0 "0xD0003D08"
+SIGN -1222 2 "sysSpeedRef1" "" "Speed Reference 1 monitor" 1 0 1 0 "0xD0003D0C"
+SIGN -1223 2 "sysSpeedRef2" "" "Speed Reference 2 monitor" 1 0 1 0 "0xD0003D10"
+SIGN -1224 2 "sysSpdRef" "" "Speed Reference" 1 0 1 0 "0xD0003CFC"
+SIGN -1225 4 "sysSpeedRefFilter" "" "Speed reference filter" 1 0 1 0 "0xD0003D20"
+SIGN -1226 2 "sysSpdMaxCW" "" "Positive Speed Limit" 1 0 1 0 "0xD0003D14"
+SIGN -1227 2 "sysSpdMaxCCW" "" "Negative Speed Limit" 1 0 1 0 "0xD0003D18"
+SIGN -1228 2 "sysMRampAcc1" "" "Multi Ramp Acceleration 1" 1 0 1 0 "0xD0003A2C"
+SIGN -1229 2 "sysMRampDec1" "" "Multi Ramp Deceleration 1" 1 0 1 0 "0xD0003A30"
+SIGN -1230 2 "sysMRampAcc2" "" "Multi Ramp Acceleration 2" 1 0 1 0 "0xD0003A34"
+SIGN -1231 2 "sysMRampDec2" "" "Multi Ramp Deceleration 2" 1 0 1 0 "0xD0003A38"
+SIGN -1232 2 "sysMRampAcc3" "" "Multi Ramp Acceleration 3" 1 0 1 0 "0xD0003A3C"
+SIGN -1233 2 "sysMRampDec3" "" "Multi Ramp Deceleration 3" 1 0 1 0 "0xD0003A40"
+SIGN -1234 2 "sysMRampAcc4" "" "Multi Ramp Acceleration 4" 1 0 1 0 "0xD0003A44"
+SIGN -1235 2 "sysMRampDec4" "" "Multi Ramp Deceleration 4" 1 0 1 0 "0xD0003A48"
+SIGN -1236 3 "sysRampType" "" "Ramp Type" 1 0 1 0 "0xD0003BB8"
+SIGN -1237 2 "sysMRampAccJerk1" "" "Multi Ramp 1 Acceleration Jerk Time" 1 0 1 0 "0xD0003A4C"
+SIGN -1238 2 "sysMRampDecJerk1" "" "Multi Ramp 1 Deceleration Jerk Time" 1 0 1 0 "0xD0003A50"
+SIGN -1239 2 "sysMRampAccJerk2" "" "Multi Ramp 2 Acceleration Jerk Time" 1 0 1 0 "0xD0003A54"
+SIGN -1240 2 "sysMRampDecJerk2" "" "Multi Ramp 2 Deceleration Jerk Time" 1 0 1 0 "0xD0003A58"
+SIGN -1241 2 "sysMRampAccJerk3" "" "Multi Ramp 3 Acceleration Jerk Time" 1 0 1 0 "0xD0003A5C"
+SIGN -1242 2 "sysMRampDecJerk3" "" "Multi Ramp 3 Deceleration Jerk Time" 1 0 1 0 "0xD0003A60"
+SIGN -1243 2 "sysMRampAccJerk4" "" "Multi Ramp 4 Acceleration Jerk Time" 1 0 1 0 "0xD0003A64"
+SIGN -1244 2 "sysMRampDecJerk4" "" "Multi Ramp 4 Deceleration Jerk Time" 1 0 1 0 "0xD0003A68"
+SIGN -1245 2 "sysRampOut" "" "Ramp Output" 1 0 1 0 "0xD0003BA8"
+SIGN -1246 6 "sysRampAccStateMon" "" "Ramp acceleration state monitor" 1 0 1 0 "0xD0003BA0"
+SIGN -1247 6 "sysRampDecStateMon" "" "Ramp deceleration state monitor" 1 0 1 0 "0xD0003BA4"
+SIGN -1248 2 "sysMultiReference0" "" "Multi Reference 0" 1 0 1 0 "0xC0003248"
+SIGN -1249 2 "sysMultiReference1" "" "Multi Reference 1" 1 0 1 0 "0xC000324C"
+SIGN -1250 2 "sysMultiReference2" "" "Multi Reference 2" 1 0 1 0 "0xC0003250"
+SIGN -1251 2 "sysMultiReference3" "" "Multi Reference 3" 1 0 1 0 "0xC0003254"
+SIGN -1252 2 "sysMultiReference4" "" "Multi Reference 4" 1 0 1 0 "0xC0003258"
+SIGN -1253 2 "sysMultiReference5" "" "Multi Reference 5" 1 0 1 0 "0xC000325C"
+SIGN -1254 2 "sysMultiReference6" "" "Multi Reference 6" 1 0 1 0 "0xC0003260"
+SIGN -1255 2 "sysMultiReference7" "" "Multi Reference 7" 1 0 1 0 "0xC0003264"
+SIGN -1256 2 "sysMultiReference8" "" "Multi Reference 8" 1 0 1 0 "0xC0003268"
+SIGN -1257 2 "sysMultiReference9" "" "Multi Reference 9" 1 0 1 0 "0xC000326C"
+SIGN -1258 2 "sysMultiReference10" "" "Multi Reference 10" 1 0 1 0 "0xC0003270"
+SIGN -1259 2 "sysMultiReference11" "" "Multi Reference 11" 1 0 1 0 "0xC0003274"
+SIGN -1260 2 "sysMultiReference12" "" "Multi Reference 12" 1 0 1 0 "0xC0003278"
+SIGN -1261 2 "sysMultiReference13" "" "Multi Reference 13" 1 0 1 0 "0xC000327C"
+SIGN -1262 2 "sysMultiReference14" "" "Multi Reference 14" 1 0 1 0 "0xC0003280"
+SIGN -1263 2 "sysMultiReference15" "" "Multi Reference 15" 1 0 1 0 "0xC0003284"
+SIGN -1264 4 "sysMultiReferenceSel" "" "Multi Reference Selection Monitor" 1 0 1 0 "0xC0003288"
+SIGN -1265 2 "sysMultiReferenceOut" "" "Multi Reference Selected Reference" 1 0 1 0 "0xC000328C"
+SIGN -1266 2 "sysMPotAcc" "" "Motor Potentiometer Acceleration" 1 0 1 0 "0xC00032B4"
+SIGN -1267 2 "sysMPotDec" "" "Motor Potentiometer Deceleration" 1 0 1 0 "0xC00032B8"
+SIGN -1268 2 "sysMPotUpLim" "" "Motor Potentiometer Upper Limit" 1 0 1 0 "0xC00032C0"
+SIGN -1269 2 "sysMPotLowLim" "" "Motor Potentiometer Lower Limit" 1 0 1 0 "0xC00032BC"
+SIGN -1270 2 "sysMPotOutput" "" "Motor Potentiometer Output" 1 0 1 0 "0xC00032E4"
+SIGN -1271 2 "sysJogInput" "" "Jog Input" 1 0 1 0 "0xD00039EC"
+SIGN -1272 2 "sysJogAcc" "" "Jog Acceleration" 1 0 1 0 "0xD00039F0"
+SIGN -1273 2 "sysJogDec" "" "Jog Deceleration" 1 0 1 0 "0xD00039F4"
+SIGN -1274 2 "sysJogOutput" "" "Jog Output" 1 0 1 0 "0xD00039E4"
+SIGN -1275 2 "sysSpdRefZeroThr" "" "Speed Reference zero threshold" 1 0 1 0 "0xC00034AC"
+SIGN -1276 3 "sysSpdRefZeroDly" "" "Speed Reference zero delay time [ms]" 1 0 1 0 "0xC00034A4"
+SIGN -1277 6 "sysSpdRefZero" "" "Speed Reference is Zero status" 1 0 1 0 "0xC000347C"
+SIGN -1278 6 "sysSpdRefZeroDelayed" "" "Speed Reference is Zero delayed status" 1 0 1 0 "0xC0003484"
+SIGN -1279 2 "sysSpeedZerothr" "" "Speed zero threshold" 1 0 1 0 "0xC00034A8"
+SIGN -1280 3 "sysSpeedZeroDly" "" "Speed zero delay time [ms]" 1 0 1 0 "0xC00034A2"
+SIGN -1281 6 "sysSpeedZero" "" "Speed is Zero status" 1 0 1 0 "0xC0003478"
+SIGN -1282 6 "sysSpeedZeroDelayed" "" "Speed is Zero delayed status" 1 0 1 0 "0xC0003480"
+SIGN -1283 6 "sysSpeedThr1_2Mon" "" "Speed threshold 1_2 status" 1 0 1 0 "0xD0003CA4"
+SIGN -1284 6 "sysSetSpeed" "" "Set speed status" 1 0 1 0 "0xD0003CA8"
+SIGN -1285 6 "sysSpeedThr3Mon" "" "Speed threshold 3 status" 1 0 1 0 "0xD0003CAC"
+SIGN -1286 6 "sysCurrentThrMon" "" "Current threshold status" 1 0 1 0 "0xD0003780"
+SIGN -1287 6 "sysEnCmdStatus" "" "Drive Enable Command Status" 1 0 1 0 "0xC0004574"
+SIGN -1288 6 "sysStopCmdStatus" "" "Stop Command Status" 1 0 1 0 "0xC0004578"
+SIGN -1289 6 "sysFastStopCmdStat" "" "Fast Stop Command Status" 1 0 1 0 "0xC0004598"
+SIGN -1290 6 "sysLocalCmdStatus" "" "Local Command Status" 1 0 1 0 "0xC0004584"
+SIGN -1291 6 "sysDrvInterlockStat" "" "Drive Interlock Status" 1 0 1 0 "0xC0004594"
+SIGN -1292 6 "sysSafeStartMon" "" "Safe Stat Status" 1 0 1 0 "0xC000459C"
+SIGN -1293 4 "sysSequencerStatus" "" "Sequencer Status" 1 0 1 0 "0xD0003C08"
+SIGN -1294 6 "sysDriveOk" "" "Drive OK" 1 0 1 0 "0xD0003C20"
+SIGN -1295 6 "sysDriveReady" "" "Drive Ready Status" 1 0 1 0 "0xD0003C1C"
+SIGN -1296 6 "sysEnableStatus" "" "Physical drive enable" 1 0 1 0 "0xD0003C0C"
+SIGN -1297 6 "sysStartStatus" "" "Drive Start Status" 1 0 1 0 "0xD0003C10"
+SIGN -1298 6 "sysFastStopStatus" "" "Fast Stop Status" 1 0 1 0 "0xD0003C14"
+SIGN -1299 4 "sysDIBitWord" "" "Digital input word" 1 0 1 0 "0xC00041BC"
+SIGN -1300 4 "sysDIHwBitWord" "" "Digital hw input word" 1 0 1 0 "0xC00041DE"
+SIGN -1301 6 "sysDIBitWordBit0" "" "Digital input 0 (Enable)" 1 0 1 0 "0xC00041A4"
+SIGN -1302 6 "sysDIBitWordBit1" "" "Digital input 1" 1 0 1 0 "0xC00041A8"
+SIGN -1303 6 "sysDIBitWordBit2" "" "Digital input 2" 1 0 1 0 "0xC00041AC"
+SIGN -1304 6 "sysDIBitWordBit3" "" "Digital input 3" 1 0 1 0 "0xC00041B0"
+SIGN -1305 6 "sysDIBitWordBit4" "" "Digital input 4" 1 0 1 0 "0xC00041B4"
+SIGN -1306 6 "sysDIBitWordBit5" "" "Digital input 5" 1 0 1 0 "0xC00041B8"
+SIGN -1307 4 "sysEDIBitWord" "" "Exp Digital input word" 1 0 1 0 "0xC0004224"
+SIGN -1308 6 "sysEDIBitWordBit0" "" "Exp Digital input 0" 1 0 1 0 "0xC00041E4"
+SIGN -1309 6 "sysEDIBitWordBit1" "" "Exp Digital input 1" 1 0 1 0 "0xC00041E8"
+SIGN -1310 6 "sysEDIBitWordBit2" "" "Exp Digital input 2" 1 0 1 0 "0xC00041EC"
+SIGN -1311 6 "sysEDIBitWordBit3" "" "Exp Digital input 3" 1 0 1 0 "0xC00041F0"
+SIGN -1312 6 "sysEDIBitWordBit4" "" "Exp Digital input 4" 1 0 1 0 "0xC00041F4"
+SIGN -1313 6 "sysEDIBitWordBit5" "" "Exp Digital input 5" 1 0 1 0 "0xC00041F8"
+SIGN -1314 6 "sysEDIBitWordBit6" "" "Exp Digital input 6" 1 0 1 0 "0xC00041FC"
+SIGN -1315 6 "sysEDIBitWordBit7" "" "Exp Digital input 7" 1 0 1 0 "0xC0004200"
+SIGN -1316 4 "sysDOBitWord" "" "Read only digital output word" 1 0 1 0 "0xC000428C"
+SIGN -1317 4 "sysEDOBitWord" "" "Read only exp digital output word" 1 0 1 0 "0xC00042DC"
+SIGN -1318 2 "sysAI0" "" "Analog Input 0" 1 0 1 0 "0xC0004014"
+SIGN -1319 2 "sysAI0Thr" "" "Analog Input 0 Threshold" 1 0 1 0 "0xC0004030"
+SIGN -1320 4 "sysAI0DB" "" "Analog input 0 Dead Band" 1 0 1 0 "0xC0004040"
+SIGN -1321 2 "sysAI0AltValue" "" "Analog Input 0 Alternate Value" 1 0 1 0 "0xC0004050"
+SIGN -1322 6 "sysAI0LTThr" "" "Analog Input 0 Less Than Threshold" 1 0 1 0 "0xC0004018"
+SIGN -1323 6 "sysAI0Err" "" "Analog Input 0 Error" 1 0 1 0 "0xC0002F04"
+SIGN -1324 6 "sysAI0LTThr2" "" "Analog Input 0 Plus Than Threshold" 1 0 1 0 "0xC000401C"
+SIGN -1325 2 "sysAI0tempMon" "" "Analog Input 0 temperature monitor" 1 0 1 0 "0xC0004674"
+SIGN -1326 2 "sysAI1" "" "Analog Input 1" 1 0 1 0 "0xC0004068"
+SIGN -1327 2 "sysAI1Thr" "" "Analog Input 1 Threshold" 1 0 1 0 "0xC0004084"
+SIGN -1328 4 "sysAI1DB" "" "Analog input 1 Dead Band" 1 0 1 0 "0xC0004094"
+SIGN -1329 2 "sysAI1AltValue" "" "Analog Input 1 Alternate Value" 1 0 1 0 "0xC00040A4"
+SIGN -1330 6 "sysAI1LTThr" "" "Analog Input 1 Less Than Threshold" 1 0 1 0 "0xC000406C"
+SIGN -1331 6 "sysAI1Err" "" "Analog Input 1 Error" 1 0 1 0 "0xC0002F08"
+SIGN -1332 6 "sysAI1LTThr2" "" "Analog Input 1 Plus Than Threshold" 1 0 1 0 "0xC0004070"
+SIGN -1333 2 "sysAI1tempMon" "" "Analog Input 1 temperature monitor" 1 0 1 0 "0xC0004678"
+SIGN -1334 2 "sysEAI0" "" "Exp Analog input 0" 1 0 1 0 "0xC00040B4"
+SIGN -1335 2 "sysEAI0tempMon" "" "Exp Analog input 0 temperature monitor" 1 0 1 0 "0xC000467C"
+SIGN -1336 6 "sysEAI0Err" "" "Exp Analog Input 0 Error" 1 0 1 0 "0xC0002F0C"
+SIGN -1337 2 "sysEAI1" "" "Exp Analog input 1" 1 0 1 0 "0xC00040F4"
+SIGN -1338 2 "sysEAI1tempMon" "" "Exp Analog input 1 temperature monitor" 1 0 1 0 "0xC0004680"
+SIGN -1339 6 "sysEAI1Err" "" "Exp Analog Input 1 Error" 1 0 1 0 "0xC0002F10"
+SIGN -1340 2 "sysAO0Value" "" "Analog Output 0 Value" 1 0 1 0 "0xC000412C"
+SIGN -1341 2 "sysAO1Value" "" "Analog Output 1 Value" 1 0 1 0 "0xC000413C"
+SIGN -1342 2 "sysEAO0Value" "" "Exp Analog Output 0 Value" 1 0 1 0 "0xC0004168"
+SIGN -1343 2 "sysEAO1Value" "" "Exp Analog Output 1 Value" 1 0 1 0 "0xC0004178"
+SIGN -1344 2 "sysEncSpdFilt" "" "Encoder speed" 1 0 1 0 "0xD0002BB0"
+SIGN -1345 2 "sysSpeedPosPulsesPerRev" "" "Speed/pos encoder virtual pulses" 1 0 1 0 "0xD0002CB8"
+SIGN -1346 2 "sysPos" "" "Actual encoder position" 1 0 1 0 "0xD0002B84"
+SIGN -1347 2 "sysRev" "" "Actual encoder number of revolutions" 1 0 1 0 "0xD0002B88"
+SIGN -1348 3 "sysEncoderPos" "" "Actual encoder position (Pulses * 4)" 1 0 1 0 "0xD0002BB8"
+SIGN -1349 4 "sysEncoderAbsPos" "" "Actual encoder abs position" 1 0 1 0 "0xD0002C1C"
+SIGN -1350 4 "sysEncoderAbsRev" "" "Actual encoder abs number of revolutions" 1 0 1 0 "0xD0002C24"
+SIGN -1351 4 "sysSpeedPosPulsesPerRevAbs" "" "Speed/pos encoder absolute pulses" 1 0 1 0 "0xD0002D60"
+SIGN -1352 2 "sysSpeedRegPFactor" "" "Speed reg Proportional factor" 1 0 1 0 "0xD00034D0"
+SIGN -1353 2 "sysSpeedRegIFactor" "" "Speed reg Integral factor" 1 0 1 0 "0xD00034D4"
+SIGN -1354 2 "sysCalcTrqNoFilt" "" "Not limited speed loop output=torque ref  [cnts]" 1 0 1 0 "0xD0002BAC"
+SIGN -1355 2 "sysUsrUpperTrqLim" "" "Upper torque limit [cnts]" 1 0 1 0 "0xD0002B1C"
+SIGN -1356 2 "sysUsrLowerTrqLim" "" "Lower torque limit [cnts]" 1 0 1 0 "0xD0002B20"
+SIGN -1357 3 "sysAsymTrqLim" "" "Symmetric / Asymmetric torque limit mode" 1 0 1 0 "0xD0002D78"
+SIGN -1358 2 "sysUpperTrqLim" "" "Actual upper torque limit [cnts]" 1 0 1 0 "0xD0003B48"
+SIGN -1359 2 "sysLowerTrqLim" "" "Actual lower torque limit [cnts]" 1 0 1 0 "0xD0003B4C"
+SIGN -1360 2 "sysUsrReductTrqLim" "" "Reduct torque limit [cnts]" 1 0 1 0 "0xD0002B30"
+SIGN -1361 2 "sysPosTrqLim" "" "Positive torque limit [cnts]" 1 0 1 0 "0xD0002B24"
+SIGN -1362 2 "sysNegTrqLim" "" "Negative torque limit [cnts]" 1 0 1 0 "0xD0002B28"
+SIGN -1363 5 "sysTrqFFwdFilter" "" "Filter on torque feed forward" 1 0 1 0 "0xD0002D10"
+SIGN -1364 2 "sysTrqFFwd" "" "User feed-forward torque reference" 1 0 1 0 "0xD0002B2C"
+SIGN -1365 2 "sysTrqRef" "" "Filtered speed loop output=torque ref [cnts]" 1 0 1 0 "0xD00034BC"
+SIGN -1366 2 "sysTrqRefNoFilt" "" "Not filtered speed loop output=torque ref [cnts]" 1 0 1 0 "0xD0002BA8"
+SIGN -1367 2 "sysTrqFFwdMon" "" "User feed-forward torque reference monitor" 1 0 1 0 "0xD0002BD0"
+SIGN -1368 2 "sysTrq" "" "Filtered actual torque" 1 0 1 0 "0xD00034C4"
+SIGN -1369 2 "sysTrqNoFilt" "" "Not filtered actual torque" 1 0 1 0 "0xD0002BDC"
+SIGN -1370 2 "sysSpeedRatio" "" "External reference factor" 1 0 1 0 "0xD0003CF8"
+SIGN -1371 2 "sysSpeedRatioOut" "" "Multiplied Speed Reference" 1 0 1 0 "0xD0003D04"
+SIGN -1372 2 "sysDroopOut" "" "Droop output" 1 0 1 0 "0xC00042FC"
+SIGN -1373 2 "sysInertiaComp" "" "Inertia" 1 0 1 0 "0xD00034FC"
+SIGN -1374 2 "sysInertiaCompMon" "" "InertiaCompMon" 1 0 1 0 "0xD0003508"
+SIGN -1375 6 "sysBrakeControlMon" "" "Brake control monitor" 1 0 1 0 "0xC00044F0"
+SIGN -1376 2 "sysMotorOvldFact" "" "Motor overload factor [%]" 1 0 1 0 "0xD00039A4"
+SIGN -1377 6 "sysMotorOvldStatus" "" "Motor overload status" 1 0 1 0 "0xD00039A0"
+SIGN -1378 2 "sysBrakeResOvldFact" "" "Brake resistor overload factor [%]" 1 0 1 0 "0xD0003960"
+SIGN -1379 6 "sysBrakeStatus" "" "Brake unit status" 1 0 1 0 "0xD0003964"
+SIGN -1380 6 "sysRampdownReady" "" "Ramp Down Executed" 1 0 1 0 "0xC0003018"
+SIGN -1381 2 "sysNextRatio" "" "Power loss ratio for slave" 1 0 1 0 "0xC0003020"
+SIGN -1382 6 "sysNextActive" "" "Power loss function active" 1 0 1 0 "0xC000301C"
+SIGN -1383 2 "sysTimer1Mon" "" "Timer1 monitor" 1 0 1 0 "0xC0003070"
+SIGN -1384 2 "sysTimer2Mon" "" "Timer2 monitor" 1 0 1 0 "0xC0003084"
+SIGN -1385 2 "sysPadX" "" "General Purpose Pad Variable X" 1 0 1 0 "0xD00029C4"
+SIGN -1386 2 "sysPad1" "" "General Purpose Pad Variable 1" 1 0 1 0 "0xD00029C4"
+SIGN -1387 2 "sysPad2" "" "General Purpose Pad Variable 2" 1 0 1 0 "0xD00029C8"
+SIGN -1388 2 "sysPad3" "" "General Purpose Pad Variable 3" 1 0 1 0 "0xD00029CC"
+SIGN -1389 2 "sysPad4" "" "General Purpose Pad Variable 4" 1 0 1 0 "0xD00029D0"
+SIGN -1390 2 "sysPad5" "" "General Purpose Pad Variable 5" 1 0 1 0 "0xD00029D4"
+SIGN -1391 2 "sysPad6" "" "General Purpose Pad Variable 6" 1 0 1 0 "0xD00029D8"
+SIGN -1392 2 "sysPad7" "" "General Purpose Pad Variable 7" 1 0 1 0 "0xD00029DC"
+SIGN -1393 2 "sysPad8" "" "General Purpose Pad Variable 8" 1 0 1 0 "0xD00029E0"
+SIGN -1394 2 "sysPad9" "" "General Purpose Pad Variable 9" 1 0 1 0 "0xD00029E4"
+SIGN -1395 2 "sysPad10" "" "General Purpose Pad Variable 10" 1 0 1 0 "0xD00029E8"
+SIGN -1396 2 "sysPad11" "" "General Purpose Pad Variable 11" 1 0 1 0 "0xD00029EC"
+SIGN -1397 2 "sysPad12" "" "General Purpose Pad Variable 12" 1 0 1 0 "0xD00029F0"
+SIGN -1398 2 "sysPad13" "" "General Purpose Pad Variable 13" 1 0 1 0 "0xD00029F4"
+SIGN -1399 2 "sysPad14" "" "General Purpose Pad Variable 14" 1 0 1 0 "0xD00029F8"
+SIGN -1400 2 "sysPad15" "" "General Purpose Pad Variable 15" 1 0 1 0 "0xD00029FC"
+SIGN -1401 2 "sysPad16" "" "General Purpose Pad Variable 16" 1 0 1 0 "0xD0002A00"
+SIGN -1402 2 "sysFBRxdwX" "" "Fieldbus Rx buff DWX" 1 0 1 0 "0xD000345C"
+SIGN -1403 2 "sysFBRxdw1" "" "Fieldbus Rx buff DW1" 1 0 1 0 "0xD000345C"
+SIGN -1404 2 "sysFBRxdw2" "" "Fieldbus Rx buff DW2" 1 0 1 0 "0xD0003460"
+SIGN -1405 2 "sysFBRxdw3" "" "Fieldbus Rx buff DW3" 1 0 1 0 "0xD0003464"
+SIGN -1406 2 "sysFBRxdw4" "" "Fieldbus Rx buff DW4" 1 0 1 0 "0xD0003468"
+SIGN -1407 2 "sysFBRxdw5" "" "Fieldbus Rx buff DW5" 1 0 1 0 "0xD000346C"
+SIGN -1408 2 "sysFBRxdw6" "" "Fieldbus Rx buff DW6" 1 0 1 0 "0xD0003470"
+SIGN -1409 2 "sysFBRxdw7" "" "Fieldbus Rx buff DW7" 1 0 1 0 "0xD0003474"
+SIGN -1410 2 "sysFBRxdw8" "" "Fieldbus Rx buff DW8" 1 0 1 0 "0xD0003478"
+SIGN -1411 2 "sysFBRxdw9" "" "Fieldbus Rx buff DW9" 1 0 1 0 "0xD000347C"
+SIGN -1412 2 "sysFBRxdw10" "" "Fieldbus Rx buff DW10" 1 0 1 0 "0xD0003480"
+SIGN -1413 2 "sysFBRxdw11" "" "Fieldbus Rx buff DW11" 1 0 1 0 "0xD0003484"
+SIGN -1414 2 "sysFBRxdw12" "" "Fieldbus Rx buff DW12" 1 0 1 0 "0xD0003488"
+SIGN -1415 2 "sysFBRxdw13" "" "Fieldbus Rx buff DW13" 1 0 1 0 "0xD000348C"
+SIGN -1416 2 "sysFBRxdw14" "" "Fieldbus Rx buff DW14" 1 0 1 0 "0xD0003490"
+SIGN -1417 2 "sysFBRxdw15" "" "Fieldbus Rx buff DW15" 1 0 1 0 "0xD0003494"
+SIGN -1418 2 "sysFBRxdw16" "" "Fieldbus Rx buff DW16" 1 0 1 0 "0xD0003498"
+SIGN -1419 2 "sysFBTxdwX" "" "Fieldbus Tx buff DWX" 1 0 1 0 "0xD00032E4"
+SIGN -1420 2 "sysFBTxdw1" "" "Fieldbus Tx buff DW1" 1 0 1 0 "0xD00032E4"
+SIGN -1421 2 "sysFBTxdw2" "" "Fieldbus Tx buff DW2" 1 0 1 0 "0xD00032E8"
+SIGN -1422 2 "sysFBTxdw3" "" "Fieldbus Tx buff DW3" 1 0 1 0 "0xD00032EC"
+SIGN -1423 2 "sysFBTxdw4" "" "Fieldbus Tx buff DW4" 1 0 1 0 "0xD00032F0"
+SIGN -1424 2 "sysFBTxdw5" "" "Fieldbus Tx buff DW5" 1 0 1 0 "0xD00032F4"
+SIGN -1425 2 "sysFBTxdw6" "" "Fieldbus Tx buff DW6" 1 0 1 0 "0xD00032F8"
+SIGN -1426 2 "sysFBTxdw7" "" "Fieldbus Tx buff DW7" 1 0 1 0 "0xD00032FC"
+SIGN -1427 2 "sysFBTxdw8" "" "Fieldbus Tx buff DW8" 1 0 1 0 "0xD0003300"
+SIGN -1428 2 "sysFBTxdw9" "" "Fieldbus Tx buff DW9" 1 0 1 0 "0xD0003304"
+SIGN -1429 2 "sysFBTxdw10" "" "Fieldbus Tx buff DW10" 1 0 1 0 "0xD0003308"
+SIGN -1430 2 "sysFBTxdw11" "" "Fieldbus Tx buff DW11" 1 0 1 0 "0xD000330C"
+SIGN -1431 2 "sysFBTxdw12" "" "Fieldbus Tx buff DW12" 1 0 1 0 "0xD0003310"
+SIGN -1432 2 "sysFBTxdw13" "" "Fieldbus Tx buff DW13" 1 0 1 0 "0xD0003314"
+SIGN -1433 2 "sysFBTxdw14" "" "Fieldbus Tx buff DW14" 1 0 1 0 "0xD0003318"
+SIGN -1434 2 "sysFBTxdw15" "" "Fieldbus Tx buff DW15" 1 0 1 0 "0xD000331C"
+SIGN -1435 2 "sysFBTxdw16" "" "Fieldbus Tx buff DW16" 1 0 1 0 "0xD0003320"
+SIGN -1436 3 "sysDS402Enable" "" "DS402 Enable" 1 0 1 0 "0xC0003120"
+SIGN -1437 3 "sysDS402Start" "" "DS402 Start" 1 0 1 0 "0xC0003124"
+SIGN -1438 3 "sysDS402FastStop" "" "DS402 FastStop" 1 0 1 0 "0xC0003128"
+SIGN -1439 4 "sysDS402RfgEnable" "" "DS402 RfgEnable" 1 0 1 0 "0xC000312C"
+SIGN -1440 4 "sysDS402RfgUnlock" "" "DS402 RfgUnlock" 1 0 1 0 "0xC0003130"
+SIGN -1441 4 "sysDS402RfgUseref" "" "DS402 RfgUseref" 1 0 1 0 "0xC0003134"
+SIGN -1442 4 "sysDS402Halt" "" "DS402 Halt" 1 0 1 0 "0xC0003144"
+SIGN -1443 4 "sysDS402JogCmd" "" "DS402 JogCmd" 1 0 1 0 "0xC0003148"
+SIGN -1444 4 "sysDS402JogInvert" "" "DS402 JogInvert" 1 0 1 0 "0xC000314C"
+SIGN -1445 3 "sysDS402AlarmReset" "" "DS402 AlarmReset" 1 0 1 0 "0xC0003138"
+SIGN -1446 3 "sysDS402StatusWord" "" "DS402 StatusWord" 1 0 1 0 "0xC0003140"
+SIGN -1447 4 "PFdrv_profile_enable" "" "" 1 0 1 0 "0xC0003348"
+SIGN -1448 3 "PFdrv_enable" "" "" 1 0 1 0 "0xC0003318"
+SIGN -1449 3 "PFdrv_start" "" "" 1 0 1 0 "0xC000331C"
+SIGN -1450 3 "PFdrv_fast_stop" "" "" 1 0 1 0 "0xC0003320"
+SIGN -1451 4 "PFdrv_rfg_enable" "" "" 1 0 1 0 "0xC0003324"
+SIGN -1452 4 "PFdrv_rfg_unlock" "" "" 1 0 1 0 "0xC0003328"
+SIGN -1453 4 "PFdrv_rfg_useref" "" "" 1 0 1 0 "0xC000332C"
+SIGN -1454 4 "PFdrv_jog_cmd" "" "" 1 0 1 0 "0xC0003340"
+SIGN -1455 4 "PFdrv_jog_invert" "" "" 1 0 1 0 "0xC0003344"
+SIGN -1456 3 "PFdrv_alarm_reset" "" "" 1 0 1 0 "0xC0003330"
+SIGN -1457 3 "PFdrv_status_word_1" "" "" 1 0 1 0 "0xC0003338"
+SIGN -1458 3 "PFdrv_status_word_2" "" "" 1 0 1 0 "0xC000333C"
+SIGN -1459 2 "sysWComp" "" "Word Compression Value" 1 0 1 0 "0xD00036AC"
+SIGN -1460 2 "sysWDecomp" "" "Word Decompression Value" 1 0 1 0 "0xD00036F4"
+SIGN -1461 6 "sysDecompBX" "" "Word Decompression Bit X Value" 1 0 1 0 "0xD00036B4"
+SIGN -1462 6 "sysDecompB0" "" "Word Decompression Bit 0 Value" 1 0 1 0 "0xD00036B4"
+SIGN -1463 6 "sysDecompB1" "" "Word Decompression Bit 1 Value" 1 0 1 0 "0xD00036B8"
+SIGN -1464 6 "sysDecompB2" "" "Word Decompression Bit 2 Value" 1 0 1 0 "0xD00036BC"
+SIGN -1465 6 "sysDecompB3" "" "Word Decompression Bit 3 Value" 1 0 1 0 "0xD00036C0"
+SIGN -1466 6 "sysDecompB4" "" "Word Decompression Bit 4 Value" 1 0 1 0 "0xD00036C4"
+SIGN -1467 6 "sysDecompB5" "" "Word Decompression Bit 5 Value" 1 0 1 0 "0xD00036C8"
+SIGN -1468 6 "sysDecompB6" "" "Word Decompression Bit 6 Value" 1 0 1 0 "0xD00036CC"
+SIGN -1469 6 "sysDecompB7" "" "Word Decompression Bit 7 Value" 1 0 1 0 "0xD00036D0"
+SIGN -1470 6 "sysDecompB8" "" "Word Decompression Bit 8 Value" 1 0 1 0 "0xD00036D4"
+SIGN -1471 6 "sysDecompB9" "" "Word Decompression Bit 9 Value" 1 0 1 0 "0xD00036D8"
+SIGN -1472 6 "sysDecompB10" "" "Word Decompression Bit 10 Value" 1 0 1 0 "0xD00036DC"
+SIGN -1473 6 "sysDecompB11" "" "Word Decompression Bit 11 Value" 1 0 1 0 "0xD00036E0"
+SIGN -1474 6 "sysDecompB12" "" "Word Decompression Bit 12 Value" 1 0 1 0 "0xD00036E4"
+SIGN -1475 6 "sysDecompB13" "" "Word Decompression Bit 13 Value" 1 0 1 0 "0xD00036E8"
+SIGN -1476 6 "sysDecompB14" "" "Word Decompression Bit 14 Value" 1 0 1 0 "0xD00036EC"
+SIGN -1477 6 "sysDecompB15" "" "Word Decompression Bit 15 Value" 1 0 1 0 "0xD00036F0"
+SIGN -1478 4 "sysMotorOTmon" "" "Measured motor temperature" 1 0 1 0 "0xC0004688"
+SIGN -1479 4 "sysFirstAlarm" "" "First Alarm Code" 1 0 1 0 "0xC0004424"
+SIGN -1480 4 "sysAlarmLO" "" "Alarms 1 .. 32 state" 1 0 1 0 "0xC0004444"
+SIGN -1481 4 "sysAlarmHI" "" "Alarms 33 .. 64 state" 1 0 1 0 "0xC0004448"
+SIGN -1482 2 "sysTestGenHighLevel" "" "Test generator high level" 1 0 1 0 "0xC000315C"
+SIGN -1483 2 "sysTestGenLowLevel" "" "Test generator low level" 1 0 1 0 "0xC0003160"
+SIGN -1484 2 "sysTestGenOutput" "" "Test generator output" 1 0 1 0 "0xC0003168"
+SIGN -1485 6 "sysAlarmReset" "" "Alarm reset" 1 0 1 0 "0xC00045B4"
+SIGN -1486 2 "sysEncSpdFiltEnc2" "" "Encoder 2 speed" 1 0 1 0 "0xD0002BB4"
+SIGN -1487 2 "sysSpeedPosPulsesPerRevEnc2" "" "Speed/pos encoder 2 virtual pulses" 1 0 1 0 "0xD0002CC4"
+SIGN -1488 2 "sysPosEnc2" "" "Actual encoder 2 position" 1 0 1 0 "0xD0002B8C"
+SIGN -1489 2 "sysRevEnc2" "" "Actual encoder 2 number of revolutions" 1 0 1 0 "0xD0002B90"
+SIGN -1490 3 "sysEncoderPosEnc2" "" "Actual encoder 2 position (Pulses * 4)" 1 0 1 0 "0xD0002BBC"
+SIGN -1491 4 "sysEncoderAbsPos2" "" "Actual encoder 2 abs position" 1 0 1 0 "0xD0002C20"
+SIGN -1492 4 "sysEncoderAbsRev2" "" "Actual encoder 2 abs number of revolutions" 1 0 1 0 "0xD0002C28"
+SIGN -1493 4 "sysSpeedPosPulsesPerRevAbs2" "" "Speed/pos encoder 2 absolute pulses" 1 0 1 0 "0xD0002D64"
+SIGN -1494 2 "sysSpeedPosPulsesPerRevEnc3" "" "Speed/pos encoder 3 virtual pulses" 1 0 1 0 "0xD0002CD0"
+SIGN -1495 2 "sysPosEnc3" "" "Actual encoder 3 position" 1 0 1 0 "0xD0002B94"
+SIGN -1496 2 "sysRevEnc3" "" "Actual encoder 3 number of revolutions" 1 0 1 0 "0xD0002B98"
+SIGN -1497 3 "sysEncoderPosEnc3" "" "Actual encoder 3 position (Pulses * 4)" 1 0 1 0 "0xD0002BC0"
+SIGN -1498 4 "sysEncoder1state" "" "Encoder 1 state" 1 0 1 0 "0xC00033FE"
+SIGN -1499 4 "sysEncoder1errcode" "" "Encoder 1 error code" 1 0 1 0 "0xC00033F2"
+SIGN -1500 4 "sysEncoder2state" "" "Encoder 2 state" 1 0 1 0 "0xC0003402"
+SIGN -1501 4 "sysEncoder2errcode" "" "Encoder 2 error code" 1 0 1 0 "0xC00033F6"
+SIGN -1502 3 "sysEncoder3state" "" "Encoder 3 state" 1 0 1 0 "0xC0003406"
+SIGN -1503 4 "sysEncoder3errcode" "" "Encoder 3 error code" 1 0 1 0 "0xC00033FA"
+SIGN -1504 4 "sysExtIODigInX" "" "External expansion digital input X" 1 0 1 0 "0xC000433C"
+SIGN -1505 4 "sysExtIODigIn0" "" "External expansion digital input 0" 1 0 1 0 "0xC000433C"
+SIGN -1506 4 "sysExtIODigIn1" "" "External expansion digital input 1" 1 0 1 0 "0xC0004340"
+SIGN -1507 1 "sysExtIOAnaInX" "" "External expansion analog input X" 1 0 1 0 "0xC0004354"
+SIGN -1508 1 "sysExtIOAnaIn0" "" "External expansion analog input 0" 1 0 1 0 "0xC0004354"
+SIGN -1509 1 "sysExtIOAnaIn1" "" "External expansion analog input 1" 1 0 1 0 "0xC0004356"
+SIGN -1510 1 "sysExtIOAnaIn2" "" "External expansion analog input 2" 1 0 1 0 "0xC0004358"
+SIGN -1511 1 "sysExtIOAnaIn3" "" "External expansion analog input 3" 1 0 1 0 "0xC000435A"
+SIGN -1512 1 "sysExtIOAnaIn4" "" "External expansion analog input 4" 1 0 1 0 "0xC000435C"
+SIGN -1513 1 "sysExtIOAnaIn5" "" "External expansion analog input 5" 1 0 1 0 "0xC000435E"
+SIGN -1514 1 "sysExtIOAnaIn6" "" "External expansion analog input 6" 1 0 1 0 "0xC0004360"
+SIGN -1515 1 "sysExtIOAnaIn7" "" "External expansion analog input 7" 1 0 1 0 "0xC0004362"
+SIGN -1516 4 "sysExtIODigOutX" "" "External expansion digita output X" 1 0 1 0 "0xC0004334"
+SIGN -1517 4 "sysExtIODigOut0" "" "External expansion digita output 0" 1 0 1 0 "0xC0004334"
+SIGN -1518 4 "sysExtIODigOut1" "" "External expansion digita output 1" 1 0 1 0 "0xC0004338"
+SIGN -1519 1 "sysExtIOAnaOutX" "" "External expansion analog output X" 1 0 1 0 "0xC0004344"
+SIGN -1520 1 "sysExtIOAnaOut0" "" "External expansion analog output 0" 1 0 1 0 "0xC0004344"
+SIGN -1521 1 "sysExtIOAnaOut1" "" "External expansion analog output 1" 1 0 1 0 "0xC0004346"
+SIGN -1522 1 "sysExtIOAnaOut2" "" "External expansion analog output 2" 1 0 1 0 "0xC0004348"
+SIGN -1523 1 "sysExtIOAnaOut3" "" "External expansion analog output 3" 1 0 1 0 "0xC000434A"
+SIGN -1524 1 "sysExtIOAnaOut4" "" "External expansion analog output 4" 1 0 1 0 "0xC000434C"
+SIGN -1525 1 "sysExtIOAnaOut5" "" "External expansion analog output 5" 1 0 1 0 "0xC000434E"
+SIGN -1526 1 "sysExtIOAnaOut6" "" "External expansion analog output 6" 1 0 1 0 "0xC0004350"
+SIGN -1527 1 "sysExtIOAnaOut7" "" "External expansion analog output 7" 1 0 1 0 "0xC0004352"
+SIGN -1528 6 "sysExtIOstate" "" "External expansion state" 1 0 1 0 "0xC0004390"
+SIGN -1529 6 "sysEDIBitWordBit8" "" "Exp Digital input 8" 1 0 1 0 "0xC0004204"
+SIGN -1530 6 "sysEDIBitWordBit9" "" "Exp Digital input 9" 1 0 1 0 "0xC0004208"
+SIGN -1531 6 "sysEDIBitWordBit10" "" "Exp Digital input10" 1 0 1 0 "0xC000420C"
+SIGN -1532 6 "sysEDIBitWordBit11" "" "Exp Digital input11" 1 0 1 0 "0xC0004210"
+SIGN -1533 6 "sysEDIBitWordBit12" "" "Exp Digital input12" 1 0 1 0 "0xC0004214"
+SIGN -1534 6 "sysEDIBitWordBit13" "" "Exp Digital input13" 1 0 1 0 "0xC0004218"
+SIGN -1535 6 "sysEDIBitWordBit14" "" "Exp Digital input14" 1 0 1 0 "0xC000421C"
+SIGN -1536 6 "sysEDIBitWordBit15" "" "Exp Digital input15" 1 0 1 0 "0xC0004220"
+SIGN -1537 2 "sysFBMdPlcRxdwX" "" "Fieldbus MdPlc Rx buff DWX" 1 0 1 0 "0x803F2ADC"
+SIGN -1538 2 "sysFBMdPlcRxdw1" "" "Fieldbus MdPlc Rx buff DW1" 1 0 1 0 "0x803F2ADC"
+SIGN -1539 2 "sysFBMdPlcRxdw2" "" "Fieldbus MdPlc Rx buff DW2" 1 0 1 0 "0x803F2AE0"
+SIGN -1540 2 "sysFBMdPlcRxdw3" "" "Fieldbus MdPlc Rx buff DW3" 1 0 1 0 "0x803F2AE4"
+SIGN -1541 2 "sysFBMdPlcRxdw4" "" "Fieldbus MdPlc Rx buff DW4" 1 0 1 0 "0x803F2AE8"
+SIGN -1542 2 "sysFBMdPlcRxdw5" "" "Fieldbus MdPlc Rx buff DW5" 1 0 1 0 "0x803F2AEC"
+SIGN -1543 2 "sysFBMdPlcRxdw6" "" "Fieldbus MdPlc Rx buff DW6" 1 0 1 0 "0x803F2AF0"
+SIGN -1544 2 "sysFBMdPlcRxdw7" "" "Fieldbus MdPlc Rx buff DW7" 1 0 1 0 "0x803F2AF4"
+SIGN -1545 2 "sysFBMdPlcRxdw8" "" "Fieldbus MdPlc Rx buff DW8" 1 0 1 0 "0x803F2AF8"
+SIGN -1546 2 "sysFBMdPlcTxdwX" "" "Fieldbus MdPlc Tx buff DWX" 1 0 1 0 "0x803F2AFC"
+SIGN -1547 2 "sysFBMdPlcTxdw1" "" "Fieldbus MdPlc Tx buff DW1" 1 0 1 0 "0x803F2AFC"
+SIGN -1548 2 "sysFBMdPlcTxdw2" "" "Fieldbus MdPlc Tx buff DW2" 1 0 1 0 "0x803F2B00"
+SIGN -1549 2 "sysFBMdPlcTxdw3" "" "Fieldbus MdPlc Tx buff DW3" 1 0 1 0 "0x803F2B04"
+SIGN -1550 2 "sysFBMdPlcTxdw4" "" "Fieldbus MdPlc Tx buff DW4" 1 0 1 0 "0x803F2B08"
+SIGN -1551 2 "sysFBMdPlcTxdw5" "" "Fieldbus MdPlc Tx buff DW5" 1 0 1 0 "0x803F2B0C"
+SIGN -1552 2 "sysFBMdPlcTxdw6" "" "Fieldbus MdPlc Tx buff DW6" 1 0 1 0 "0x803F2B10"
+SIGN -1553 2 "sysFBMdPlcTxdw7" "" "Fieldbus MdPlc Tx buff DW7" 1 0 1 0 "0x803F2B14"
+SIGN -1554 2 "sysFBMdPlcTxdw8" "" "Fieldbus MdPlc Tx buff DW8" 1 0 1 0 "0x803F2B18"
+SIGN -1555 6 "sysSyncSlaveStatus" "" "Syncronization Slave Status" 1 0 1 0 "0xD0002BC8"
+SIGN -1556 2 "sysFL_Fw1_mon" "" "Fast Link  Forward 1 monitor" 1 0 1 0 "0x803F29F0"
+SIGN -1557 2 "sysFL_Fw2_mon" "" "Fast Link  Forward 2 monitor" 1 0 1 0 "0x803F29F4"
+SIGN -1558 2 "sysFL_Fw3_mon" "" "Fast Link  Forward 3 monitor" 1 0 1 0 "0x803F29F8"
+SIGN -1559 2 "sysFL_Fw4_mon" "" "Fast Link  Forward 4 monitor" 1 0 1 0 "0x803F29FC"
+SIGN -1560 2 "sysFL_Fw5_mon" "" "Fast Link  Forward 5 monitor" 1 0 1 0 "0x803F2A00"
+SIGN -1561 2 "sysFL_Fw6_mon" "" "Fast Link  Forward 6 monitor" 1 0 1 0 "0x803F2A04"
+SIGN -1562 2 "sysFL_Fw7_mon" "" "Fast Link  Forward 7 monitor" 1 0 1 0 "0x803F2A08"
+SIGN -1563 2 "sysFL_Fw8_mon" "" "Fast Link  Forward 8 monitor" 1 0 1 0 "0x803F2A0C"
+SIGN -1564 2 "sysFL_Fw5" "" "Fast Link  Forward 5" 1 0 1 0 "0x803F29DC"
+SIGN -1565 2 "sysFL_Fw6" "" "Fast Link  Forward 6" 1 0 1 0 "0x803F29E0"
+SIGN -1566 2 "sysFL_Fw7" "" "Fast Link  Forward 7" 1 0 1 0 "0x803F29E4"
+SIGN -1567 2 "sysFL_Fw8" "" "Fast Link  Forward 8" 1 0 1 0 "0x803F29E8"
+SIGN -1568 2 "sysFL_Fw1_inv_mon" "" "Fast Link  Forward 1 inverted monitor" 1 0 1 0 "0x803F2A10"
+SIGN -1569 2 "sysFL_Fw2_inv_mon" "" "Fast Link  Forward 2 inverted monitor" 1 0 1 0 "0x803F2A14"
+SIGN -1570 2 "sysFL_Fw3_inv_mon" "" "Fast Link  Forward 3 inverted monitor" 1 0 1 0 "0x803F2A18"
+SIGN -1571 2 "sysFL_Fw4_inv_mon" "" "Fast Link  Forward 4 inverted monitor" 1 0 1 0 "0x803F2A1C"
+SIGN -1572 2 "sysFL_Fw5_inv_mon" "" "Fast Link  Forward 5 inverted monitor" 1 0 1 0 "0x803F2A20"
+SIGN -1573 2 "sysFL_Fw6_inv_mon" "" "Fast Link  Forward 6 inverted monitor" 1 0 1 0 "0x803F2A24"
+SIGN -1574 2 "sysFL_Fw7_inv_mon" "" "Fast Link  Forward 7 inverted monitor" 1 0 1 0 "0x803F2A28"
+SIGN -1575 2 "sysFL_Fw8_inv_mon" "" "Fast Link  Forward 8 inverted monitor" 1 0 1 0 "0x803F2A2C"
+SIGN -1576 6 "sysSpdRefLimited" "" "Speed Reference is Limited" 1 0 1 0 "0xD0003D00"
+SIGN -1577 6 "sysTrqLimited" "" "Current is Limited" 1 0 1 0 "0xD0003B54"
+SIGN -1578 5 "sysLCAirHumidity" "" "Measured air humidity" 1 0 1 0 "0xC0003538"
+SIGN -1579 5 "sysLCAirTemperature" "" "Measured air temperature" 1 0 1 0 "0xC000353C"
+SIGN -1580 2 "sysLCDewTemperature" "" "Measured dew temperature" 1 0 1 0 "0xC0003540"
+SIGN -1581 2 "sysLCTempSetpoint" "" "Liquid temperature setpoint" 1 0 1 0 "0xC00034F4"
+SIGN -1582 2 "sysLCTempSens" "" "Liquid temperature sensor" 1 0 1 0 "0xD00038A0"
+SIGN -1583 2 "sysLCTempMon" "" "Liquid temperature monitor" 1 0 1 0 "0xC00034F0"
+SIGN -1584 4 "sysLCCondensation" "" "Condensation state monitor" 1 0 1 0 "0xC00034F8"
+SIGN -1585 4 "sysLCOverhumidity" "" "Overhumidity state monitor" 1 0 1 0 "0xC00034FC"
+SIGN -1586 2 "sysControlModeMon" "" "Control mode monitor" 1 0 1 0 "0xC00045D8"
+SIGN -1587 5 "sysSLSidCurrentCorr" "" "SLS id current" 1 0 1 0 "0xC0002EA8"
+SIGN -4000 5 "v_Position" "" "" 1 0 1 0 "0xC0002030"
+SIGN -4001 5 "v_Speed" "" "" 1 0 1 0 "0xC0002034"
+SIGN -4002 5 "v_Torque" "" "" 1 0 1 0 "0xC0002038"
+SIGN -4003 5 "vEstStatFrict" "" "" 1 0 1 0 "0xC000204C"
+SIGN -4004 5 "vEstInertia" "" "" 1 0 1 0 "0xC0002048"
+SIGN -4005 5 "vEstDynFrict" "" "" 1 0 1 0 "0xC0002050"
+SIGN -4006 5 "vEstBandwidth" "" "" 1 0 1 0 "0xC000205C"
+SIGN -4007 5 "vCalcTiSp" "" "" 1 0 1 0 "0xC0002058"
+SIGN -4008 5 "vCalcKpSp" "" "" 1 0 1 0 "0xC0002054"
+SIGN -4009 2 "sysTrqRef" "" "" 1 0 1 0 "0xD00034BC"
+SIGN -4010 2 "sysSpeedPosPulsesPerRev" "" "" 1 0 1 0 "0xD0002CB8"
+SIGN -4011 5 "Torque_bis" "" "" 1 0 1 0 "0xC0000A20"
+SIGN -4012 2 "sysPad10" "" "" 1 0 1 0 "0xD00029E8"
+SIGN -4013 6 "pStartAuto" "" "" 1 0 1 0 "0xC0001B40"
+SIGN -4014 6 "sysEnableStatus" "" "" 1 0 1 0 "0xD0003C0C"
+SIGN -4015 6 "sysStartStatus" "" "" 1 0 1 0 "0xD0003C10"
+SIGN -4016 6 "StartCND" "" "" 1 0 1 0 "0xC0000A24"
+SIGN -4017 1 "State_internal" "" "" 1 0 1 0 "0xC0000A28"
+SIGN -4018 5 "MaxTorque" "" "" 1 0 1 0 "0xC0000A32"
+SIGN -4019 5 "KNm2Cnt" "" "" 1 0 1 0 "0xC0000A36"
+SIGN -4020 2 "sysTrqFFwd" "" "" 1 0 1 0 "0xD0002B2C"
+SIGN -4021 5 "FullScaleSpeed" "" "" 1 0 1 0 "0xC0000A3A"
+SIGN -4022 2 "sysSpdRef1" "" "" 1 0 1 0 "0xD0003CF0"
+SIGN -4023 3 "vStateMachine" "" "" 1 0 1 0 "0xC0002044"
+SIGN -4024 4 "TimeMsg" "" "" 1 0 1 0 "0xC0000A3E"
+SIGN -4025 6 "ENABLE_CYCLIC_PRG" "" "" 1 0 1 0 "0xC0000A4E"
+SIGN -4026 4 "sysControlMode" "" "" 1 0 1 0 "0xC00045DC"
+SIGN -4027 5 "DriveRatCur" "" "" 1 0 1 0 "0xC0000A5E"
+SIGN -4028 5 "RatCur" "" "" 1 0 1 0 "0xC0000A6E"
+SIGN -4029 5 "RatKTrq" "" "" 1 0 1 0 "0xC0000A72"
+SIGN -4030 5 "RatedTorque" "" "" 1 0 1 0 "0xC0000A76"
+SIGN -4031 2 "res" "" "" 1 0 1 0 "0xC0000A7A"
+SIGN -4032 2 "sysSpdRef2" "" "" 1 0 1 0 "0xD0003CF4"
+SIGN -4033 5 "pMaxTorque" "" "" 1 0 1 0 "0xC0001B30"
+SIGN -4034 5 "pMaxSpeed" "" "" 1 0 1 0 "0xC0001B34"
+SIGN -4035 5 "MaxSpeed" "" "" 1 0 1 0 "0xC0000A7E"
+SIGN -4036 5 "pMaxPos" "" "" 1 0 1 0 "0xC0001B38"
+SIGN -4037 5 "MaxPosition" "" "" 1 0 1 0 "0xC0000A82"
+SIGN -4038 5 "pMotJ" "" "" 1 0 1 0 "0xC0001B3C"
+SIGN -4039 5 "MotorInertia" "" "" 1 0 1 0 "0xC0000A86"
+SIGN -4040 5 "pMinWc" "" "" 1 0 1 0 "0xC0001B44"
+SIGN -4041 5 "pMaxWc" "" "" 1 0 1 0 "0xC0001B48"
+SIGN -4042 1 "state_of_the_machine" "" "" 1 0 1 0 "0xC0000A8C"
+SIGN -4043 6 "ABORT_PROCEDURE" "" "" 1 0 1 0 "0xC0000A92"
+SIGN -4044 2 "SPEED_REF_IPA" "" "" 1 0 1 0 "0xC0000A96"
+SIGN -4045 5 "pLow_Vel_Thr" "" "" 1 0 1 0 "0xC0001B4C"
+SIGN -4046 0 "sysMsgPlc1" "" "" 1 0 1 0 "0x803F0264"
+SIGN -4047 5 "v_LoadPosition" "" "" 1 0 1 0 "0xC000203C"
+SIGN -4048 5 "v_LoadSpeed" "" "" 1 0 1 0 "0xC0002040"
+SIGN -4049 2 "sysSpd:Fast" "" "" 1 0 1 0 "0xC0000A0C"
+SIGN -4050 2 "sysPos:Fast" "" "" 1 0 1 0 "0xC0000A10"
+SIGN -4051 2 "sysIq:Fast" "" "" 1 0 1 0 "0xC0000A14"
+SIGN -4052 2 "sysRev:Fast" "" "" 1 0 1 0 "0xC0000A18"
+SIGN -4053 2 "sysTrqNoFilt:Fast" "" "" 1 0 1 0 "0xC0000A1C"

@@ -1,0 +1,334 @@
+# ES Español
+
+<_LoadPosition
+>
+
+<_LoadSpeed
+>
+
+<_Position
+>
+
+<_Speed
+>
+
+<_Torque
+>
+
+<APPLICATION
+>
+
+<Bit0 decomp mon
+>
+
+<Bit1 decomp mon
+>
+
+<Bit10 decomp mon
+>
+
+<Bit11 decomp mon
+>
+
+<Bit12 decomp mon
+>
+
+<Bit13 decomp mon
+>
+
+<Bit14 decomp mon
+>
+
+<Bit15 decomp mon
+>
+
+<Bit2 decomp mon
+>
+
+<Bit3 decomp mon
+>
+
+<Bit4 decomp mon
+>
+
+<Bit5 decomp mon
+>
+
+<Bit6 decomp mon
+>
+
+<Bit7 decomp mon
+>
+
+<Bit8 decomp mon
+>
+
+<Bit9 decomp mon
+>
+
+<CalcKpSp
+>
+
+<CalcTiSp
+>
+
+<CONFIGURATION
+>
+
+<Est Bandwidth Speed
+>
+
+<Est Dyn Friction
+>
+
+<Est Static Friction
+>
+
+<EstBandwidth
+>
+
+<EstDynFrict
+>
+
+<Estimated Bandwidth Speed
+>
+
+<Estimated Dynamic Friction
+>
+
+<Estimated Inertia
+>
+
+<Estimated Static Friction
+>
+
+<EstInertia
+>
+
+<EstStatFrict
+>
+
+<IDENTIFICATION
+>
+
+<Kgm2
+>
+
+<Load Position
+>
+
+<Load Speed
+>
+
+<Low Vel Thr
+>
+
+<Low vel threshold
+>
+
+<Low_Vel_Thr
+>
+
+<m_mpc
+>
+
+<Max Speed
+>
+
+<Max Torque
+>
+
+<Max Turns
+>
+
+<Max Wc
+>
+
+<MaxPos
+>
+
+<MaxSpeed
+>
+
+<MaxTorque
+>
+
+<MaxWc
+>
+
+<Min Wc
+>
+
+<MinWc
+>
+
+<MONITOR
+>
+
+<MotJ
+>
+
+<MPC
+>
+
+<n_mpc
+>
+
+<Nc_mpc
+>
+
+<Nm
+>
+
+<Nom Mot Inertia
+>
+
+<Nominal Motor Inertia
+>
+
+<Np_mpc
+>
+
+<Oscill Tollerance
+>
+
+<Oscillation Tollerance
+>
+
+<OscillationTollerance
+>
+
+<Pad 1
+>
+
+<Pad 10
+>
+
+<Pad 11
+>
+
+<Pad 12
+>
+
+<Pad 13
+>
+
+<Pad 14
+>
+
+<Pad 15
+>
+
+<Pad 16
+>
+
+<Pad 2
+>
+
+<Pad 3
+>
+
+<Pad 4
+>
+
+<Pad 5
+>
+
+<Pad 6
+>
+
+<Pad 7
+>
+
+<Pad 8
+>
+
+<Pad 9
+>
+
+<Plc1 fault
+>
+
+<Plc10 fault
+>
+
+<Plc11 fault
+>
+
+<Plc12 fault
+>
+
+<Plc13 fault
+>
+
+<Plc14 fault
+>
+
+<Plc15 fault
+>
+
+<Plc16 fault
+>
+
+<Plc2 fault
+>
+
+<Plc3 fault
+>
+
+<Plc4 fault
+>
+
+<Plc5 fault
+>
+
+<Plc6 fault
+>
+
+<Plc7 fault
+>
+
+<Plc8 fault
+>
+
+<Plc9 fault
+>
+
+<Position
+>
+
+<q_mpc
+>
+
+<Rpm
+>
+
+<Speed
+>
+
+<Start Autotuning
+>
+
+<StartAuto
+>
+
+<State Machine
+>
+
+<StateMachine
+>
+
+<Torque
+>
+
+<Tuned Ki Speed
+>
+
+<Tuned Kp Speed
+>
+
+<Tuned Ti Speed
+>
+
+<Turns
+>

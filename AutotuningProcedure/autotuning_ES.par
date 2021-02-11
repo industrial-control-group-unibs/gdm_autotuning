@@ -844,14 +844,14 @@ PAR	7054	-2	"SLS PLL AdpGain Up"	5	3	5	1	0	""	""	""	"%.3f"	"1"	"50"	"3"	"access=
 PAR	7056	-2	"SLS PLL AdpSpd Up"	5	300	5	1	0	"rpm"	""	""	"%.0f"	"1"	"3000"	"300"	"access=30"	""	
 PAR	7060	-2	"Despl absoluto SLS"	4	0	4	1	0	"cnt"	""	""	"%u"	"0"	"0"	"0"	"access=30"	""	
 PAR	11000	1	"MaxTorque"	5	3	5	1	0	"Nm"	"Max Torque"	""	""	"0"	"1000"	"3"	""	"Max Torque"	
-PAR	11002	1	"MaxSpeed"	5	3000	5	1	0	"Rpm"	"Max Speed"	""	""	"0"	"5000"	"3000"	""	"Max Speed"	
-PAR	11004	1	"MaxPos"	5	0.5	5	1	0	"Turns"	"Max Turns"	""	""	"0"	"100"	"0.5"	""	"Max Turns"	
+PAR	11002	1	"MaxSpeed"	5	1000	5	1	0	"Rpm"	"Max Speed"	""	""	"0"	"5000"	"1000"	""	"Max Speed"	
+PAR	11004	1	"MaxPos"	5	1	5	1	0	"Turns"	"Max Turns"	""	""	"0"	"100"	"1"	""	"Max Turns"	
 PAR	11006	1	"MotJ"	5	0.00028	5	1	0	"Kgm2"	"Nominal Motor Inertia"	""	""	"1e-006"	"10"	"0.00028"	""	"Nom Mot Inertia"	
 PAR	11008	1	"StartAuto"	6	1	6	1	0	""	"Start Autotuning"	""	""	"1.79769313486e+308"	"1.79769313486e+308"	"1"	""	"Start Autotuning"	
 PAR	11010	1	"MinWc"	5	10	5	1	0	""	"Min Wc"	""	""	"0"	"1000"	"10"	""	"Min Wc"	
-PAR	11012	1	"MaxWc"	5	140	5	1	0	""	"Max Wc"	""	""	"0"	"1000"	"140"	""	"Max Wc"	
+PAR	11012	1	"MaxWc"	5	300	5	1	0	""	"Max Wc"	""	""	"0"	"1000"	"300"	""	"Max Wc"	
 PAR	11014	1	"Low_Vel_Thr"	5	5	5	1	0	""	"Low Vel Thr"	""	""	"0"	"100"	"5"	""	"Low vel threshold"	
-PAR	11016	1	"OscillationTollerance"	5	1	5	1	0	""	"Oscillation Tollerance"	""	""	"0"	"1000"	"1"	""	"Oscill Tollerance"	
+PAR	11016	1	"OscillationTollerance"	5	0.8	5	1	0	""	"Oscillation Tollerance"	""	""	"0"	"1000"	"0.8"	""	"Oscill Tollerance"	
 ;
 ;	Variables record
 ;

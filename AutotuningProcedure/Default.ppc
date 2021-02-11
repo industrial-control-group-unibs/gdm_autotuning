@@ -1,0 +1,13 @@
+;
+;	Version record
+;
+VER	"PLC1"	1	1
+;
+;	Datablock definitions
+;
+DBLK	10	2	1	1000	2000
+DBLK	11	4	1	3000	4128
+DBLK	12	-1	1	5000	5128
+DBLK	20	2	0	7000	7320
+DBLK	21	4	0	9000	9340
+DBLK	22	-1	0	11000	11128

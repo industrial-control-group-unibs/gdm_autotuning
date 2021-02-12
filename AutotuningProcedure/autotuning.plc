@@ -467,6 +467,7 @@ ELSE
 				fb_Tune_PID.phi_m_v := phi_m_v *(PI/180.0);
 				fb_Tune_PID.phi_m_p	:= phi_m_p *(PI/180.0);
 				fb_Tune_PID();
+				Vel_SP:=0.0;
 				
 				IF TUNE_LOW_VEL THEN
 					Kp_v:=fb_Tune_PID.kp_v;
@@ -553,6 +554,16 @@ ELSE
 					
 					IF (friction_trial>=3.0) THEN
 						state:=2;
+						
+						OL_trj_generator.maxTRQ:= maxTrq;
+						OL_trj_generator.maxVEL:= maxVel;
+						OL_trj_generator.maxPOS:= maxPos;
+						OL_trj_generator.minVEL:= minVel;
+						OL_trj_generator.minPOS:= minPos;
+						OL_trj_generator.fbInit:=TRUE;
+						OL_trj_generator();
+						OL_trj_generator.fbInit:=FALSE;
+						
 					ELSE
 						(* Static Friction Identification Trajectory *)
 						StaticFrictionID_Trj.fbInit := TRUE;
@@ -582,7 +593,7 @@ ELSE
 					OL_trj_generator.STOP:=TRUE;
 					Time:=0.0;
 				END_IF;
-			3: 
+			3,91: 
 				IF OL_trj_generator.STOPPED THEN
 					Time:=0.0;
 					state := 4; (* TEST *)
@@ -599,6 +610,7 @@ ELSE
 						Bm:=0.00001;
 					END_IF;
 					
+					
 					Torque:=0.0;
 					Vel_SP:=0.0;
 					TUNED:=FALSE;
@@ -613,7 +625,7 @@ ELSE
 					Vel_SP:=0.0;
 				END_IF;
 			5:  (* stop *)
-				IF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel))  THEN
+				IF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel) AND (Time>0.2*TrialTime))  THEN
 					tmpF := (minPos+maxPos)*0.5;
 					IF Position>tmpF THEN
 						Vel_SP:=(minPos-Position)/(TrialTime);
@@ -643,6 +655,11 @@ ELSE
 					fb_VARIANCE.ssMethodType:=1;
 					state:=7;			
 				END_IF;
+				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
+						Wc_act:=Wc_act*0.75;
+						TUNED:=TRUE;
+						state	:=	9;	
+				END_IF;
 				IF (Time>=TrialTime) THEN (* unable to reach the setpoint velocity, increase band*)
 					Wc_act := Wc_act + Wc_Step;
 				 	IF (Wc_act >= MaxWc) THEN
@@ -657,6 +674,12 @@ ELSE
 			7:
 				IF ((Time>3.0*rise_time) OR (Time>0.4*TrialTime)) THEN
 					state:=8;
+				END_IF;
+				tmpF := Vel_SP * 0.95;
+				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
+						Wc_act:=Wc_act*0.75;
+						TUNED:=TRUE;
+						state	:=	9;	
 				END_IF;
 			8:
 				IF ((Time>5.0*rise_time) OR (Time>0.7*TrialTime)) THEN
@@ -691,7 +714,7 @@ ELSE
 					Vel_SP:=0.0;
 				END_IF;
 			10:  (* stop *)
-				IF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel))  THEN
+				IF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel)  AND (Time>0.2*TrialTime))  THEN
 					tmpF := (minPos+maxPos)*0.5;
 					IF Position>tmpF THEN
 						Vel_SP:=(minPos-Position)/(TrialTime);
@@ -700,14 +723,14 @@ ELSE
 					END_IF;
 					RAND();
 					IF (Vel_SP > 0.0) THEN
-						Vel_SP:= maxVel*(0.2+0.6*RAND.rnd);
+						Vel_SP:= maxVel*(0.2+0.4*RAND.rnd);
 						Time_HIGH_VEL:=(maxPos-Position)/Vel_SP*0.5;
 						IF (Time_HIGH_VEL<0.1*TrialTime) THEN
 							Time_HIGH_VEL:=0.1*TrialTime;
 							Vel_SP:=(maxPos-Position)/(Time_HIGH_VEL);
 						END_IF;
 					ELSIF Vel_SP< 0.0 THEN
-						Vel_SP:= -maxVel*(0.2+0.6*RAND.rnd);
+						Vel_SP:= -maxVel*(0.2+0.4*RAND.rnd);
 						Time_HIGH_VEL:=(minPos-Position)/Vel_SP*0.5;
 						IF (Time_HIGH_VEL<0.1*TrialTime) THEN
 							Time_HIGH_VEL:=0.1*TrialTime;
@@ -732,6 +755,11 @@ ELSE
 					fb_VARIANCE.ssMethodType:=1;
 					state:=12;			
 				END_IF;
+				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
+					Wc_act:=Wc_act*0.75;
+					TUNED:=TRUE;
+					state	:=	14;	
+				END_IF;
 				IF (Time>=Time_HIGH_VEL) THEN (* unable to reach the setpoint velocity, increase band*)
 					Wc_act := Wc_act + Wc_Step;
 				 	IF (Wc_act >= MaxWc) THEN
@@ -746,6 +774,12 @@ ELSE
 			12:
 				IF (Time>3.0*rise_time) OR (Time>0.5*Time_HIGH_VEL) THEN
 					state:=13;
+				END_IF;
+				tmpF := Vel_SP * 0.95;
+				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
+					Wc_act:=Wc_act*0.75;
+					TUNED:=TRUE;
+					state	:=	14;	
 				END_IF;
 			13: 
 				IF ((Time>5.0*rise_time) OR (Time>Time_HIGH_VEL)) THEN
@@ -793,6 +827,8 @@ vEstDynFrict := fb_RLS.Bm;
 vCalcKpSp := Kp_v * RPM2RAD;
 vCalcTiSp := Ti_v * 1000.0;
 vEstBandwidth := Wc_low_speed;
+
+
 
 
 
@@ -1627,6 +1663,7 @@ PROGRAM state_machine
 	SEND_MESSAGE : BOOL; 
 	PAUSE : UDINT; 
 	motor_sim : fb_motor_sim; 
+	state_machine_idx : UINT; 
 	END_VAR
 
 	{ CODE:SFC }$N:1^ 200,35
@@ -1959,15 +1996,17 @@ END_IF;
 AutotuningManager.state
 AutotuningManager.Jm
 AutotuningManager.Bm
-AutotuningManager.noiseLevel
 AutotuningManager.staticFriction
+AutotuningManager.noiseLevel
 AutotuningManager.rise_time
 AutotuningManager.fb_VARIANCE.SIGMA
 AutotuningManager.Wc_act
 AutotuningManager.Wc_low_speed
 AutotuningManager.Wc_high_speed
 CL_control_STOP
+c_idx
 *)
+
 
 
 
@@ -2055,11 +2094,15 @@ STEP Stop_state :
 v_Torque := 0.0;
 State_internal:=3;
 
-IF (pStartAuto) THEN
+IF ((state_machine_idx>10) AND (pStartAuto)) THEN
 	CYCLE_STOP 	:= TRUE;
+	state_machine_idx:=0;
 ELSE
 	CYCLE_STOP 	:= FALSE;
 END_IF;
+
+state_machine_idx:=state_machine_idx+1;
+
 
 (*
 IF (state_of_the_machine=0) THEN
@@ -2072,16 +2115,19 @@ END_IF;
 
 
 
+
+
 END_STEP
 
 STEP CL_control :
 	{ CODE:ST }
 
-
+state_machine_idx:=0;
 State_internal := 2;
 
 
 	
+
 
 
 

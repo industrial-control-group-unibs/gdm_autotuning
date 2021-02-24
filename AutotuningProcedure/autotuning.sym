@@ -1,4 +1,4 @@
-ID 1613135277
+ID 1614159273
 VG DWORD $$STKLIMIT$$ C00004C0
 F REAL sign A0010080
 F DINT sysDBWriteIntegerPar FFFFFFFF
@@ -77,51 +77,15 @@ F REAL AiToUnit A001089C
 F BOOL ReadCommand A00108BC
 F BOOL ReadCommandAnd A00109B0
 F BOOL ReadCommandOr A0010B24
-L $label0 .sign A00100A8
-L $label2 .sign A00100DC
-L $label1 .sign A00100D0
-L l0_Version ._BasicVersion A0010100
 L END_FUNCTION ._BasicVersion A0010108
-L l0_Version ._ControlVersion A001012C
 L END_FUNCTION ._ControlVersion A0010134
-L l0 .LIMIT_R A0010150
-L l1 .LIMIT_R A0010178
 L END_FUNCTION .LIMIT_R A00101AC
-L l2 .LIMIT_R A00101A4
-L l0_Version ._GeneralVersion A00101D0
 L END_FUNCTION ._GeneralVersion A00101D8
-L l0_RBitIn .RBitIn A001046C
 L END_FUNCTION .RBitIn A0010474
-L l0_Segment .Segment A00104A4
-L lEnd_Segment .Segment A00104F8
-L l1_Segment .Segment A00104EC
-L $label0 .CLAMP A001063C
-L $label2 .CLAMP A001067C
-L $label1 .CLAMP A0010674
-L l0_Version ._InOutVersion A0010784
 L END_FUNCTION ._InOutVersion A001078C
-L $label0 .ReadCommand A001090C
 L END_FUNCTION .ReadCommand A00109A0
-L $label1 .ReadCommand A0010954
-L $label2 .ReadCommand A00109A0
-L $label0 .ReadCommandAnd A0010A1C
-L $label1 .ReadCommandAnd A0010A1C
 L END_FUNCTION .ReadCommandAnd A0010B14
-L $label2 .ReadCommandAnd A0010A98
-L $label3 .ReadCommandAnd A0010A98
-L $label4 .ReadCommandAnd A0010A98
-L $label5 .ReadCommandAnd A0010B0C
-L $label6 .ReadCommandAnd A0010B0C
-L $label7 .ReadCommandAnd A0010B0C
-L $label0 .ReadCommandOr A0010B84
-L $label1 .ReadCommandOr A0010B84
 L END_FUNCTION .ReadCommandOr A0010C64
-L $label2 .ReadCommandOr A0010BF4
-L $label3 .ReadCommandOr A0010BF4
-L $label4 .ReadCommandOr A0010BF4
-L $label5 .ReadCommandOr A0010C5C
-L $label6 .ReadCommandOr A0010C5C
-L $label7 .ReadCommandOr A0010C5C
 VF InputConversionADV200 REAL Krpm 00000000
 VF InputConversionADV200 REAL Krad_s 00000004
 VF InputConversionADV200 REAL KArms 00000008
@@ -139,13 +103,6 @@ VF InputConversionADV200 REAL vel_rpm 00000034
 VF InputConversionADV200 REAL vel 00000038
 VF InputConversionADV200 REAL trq 0000003C
 VF InputConversionADV200 REAL curr 00000040
-L $label0 .fb_NoiseLevelID A0010E1C
-L $label1 .fb_NoiseLevelID A0010F18
-L $label2 .fb_NoiseLevelID A0010EF0
-L $label4 .fb_NoiseLevelID A0010EDC
-L $label6 .fb_NoiseLevelID A0010ED8
-L $label5 .fb_NoiseLevelID A0010EEC
-L $label3 .fb_NoiseLevelID A0010F18
 VF fb_NoiseLevelID BOOL fbInit 00000004
 VF fb_NoiseLevelID REAL timeID 00000008
 VF fb_NoiseLevelID REAL signal 0000000C
@@ -154,21 +111,10 @@ VF fb_NoiseLevelID REAL Ts 00000014
 VF fb_NoiseLevelID REAL noiseLevel 00000018
 VF fb_NoiseLevelID BOOL END 0000001C
 VF fb_NoiseLevelID REAL time 00000000
-L $label0 .fb_NoiseLevelID_Trj A0010F44
-L $label1 .fb_NoiseLevelID_Trj A0010F84
-L $label2 .fb_NoiseLevelID_Trj A0010F70
-L $label3 .fb_NoiseLevelID_Trj A0010F84
 VF fb_NoiseLevelID_Trj BOOL fbInit 00000000
 VF fb_NoiseLevelID_Trj BOOL ENABLE 00000004
 VF fb_NoiseLevelID_Trj REAL reference 00000008
 VF fb_NoiseLevelID_Trj REAL TrqRef 0000000C
-L $label0 .fb_StaticFrictionID_OL A0010FD4
-L $label1 .fb_StaticFrictionID_OL A0011104
-L $label2 .fb_StaticFrictionID_OL A00110EC
-L $label4 .fb_StaticFrictionID_OL A00110A4
-L $label5 .fb_StaticFrictionID_OL A00110E8
-L $label6 .fb_StaticFrictionID_OL A00110E8
-L $label3 .fb_StaticFrictionID_OL A0011104
 VF fb_StaticFrictionID_OL BOOL fbInit 00000010
 VF fb_StaticFrictionID_OL REAL input 00000014
 VF fb_StaticFrictionID_OL REAL output 00000018
@@ -181,13 +127,6 @@ VF fb_StaticFrictionID_OL REAL time 00000000
 VF fb_StaticFrictionID_OL UINT cnt 00000004
 VF fb_StaticFrictionID_OL REAL $$TMP0 00000008
 VF fb_StaticFrictionID_OL REAL $$TMP1 0000000C
-L $label0 .fb_StaticFrictionID_OL_Trj A00111A8
-L $label2 .fb_StaticFrictionID_OL_Trj A0011194
-L $label3 .fb_StaticFrictionID_OL_Trj A00111A4
-L $label1 .fb_StaticFrictionID_OL_Trj A0011240
-L $label4 .fb_StaticFrictionID_OL_Trj A001122C
-L $label6 .fb_StaticFrictionID_OL_Trj A0011228
-L $label5 .fb_StaticFrictionID_OL_Trj A0011240
 VF fb_StaticFrictionID_OL_Trj BOOL fbInit 00000004
 VF fb_StaticFrictionID_OL_Trj REAL maxTrq 00000008
 VF fb_StaticFrictionID_OL_Trj REAL TrqResolution 0000000C
@@ -197,25 +136,12 @@ VF fb_StaticFrictionID_OL_Trj REAL maxPos 00000018
 VF fb_StaticFrictionID_OL_Trj REAL Position 0000001C
 VF fb_StaticFrictionID_OL_Trj REAL TrqRef 00000020
 VF fb_StaticFrictionID_OL_Trj REAL direction 00000000
-L $label0 .fb_Random A001129C
-L $label1 .fb_Random A0011338
 VF fb_Random BOOL fb_Init 00000010
 VF fb_Random REAL rnd 00000014
 VF fb_Random DINT rnd_int 00000000
 VF fb_Random DINT a 00000004
 VF fb_Random DINT b 00000008
 VF fb_Random DINT m 0000000C
-L $label1 .RLS_senzaKf A0011374
-L $label2 .RLS_senzaKf A0011554
-L $label0 .RLS_senzaKf A0011B90
-L $label4 .RLS_senzaKf A0011408
-L $label6 .RLS_senzaKf A00114B8
-L $label8 .RLS_senzaKf A0011528
-L $label9 .RLS_senzaKf A00115B0
-L $label10 .RLS_senzaKf A00115E4
-L $label11 .RLS_senzaKf A00115F4
-L $label13 .RLS_senzaKf A0011B14
-L $label14 .RLS_senzaKf A0011B90
 VF RLS_senzaKf REAL S 0000006C
 VF RLS_senzaKf REAL y 00000070
 VF RLS_senzaKf REAL vel 00000074
@@ -245,13 +171,6 @@ VF RLS_senzaKf REAL $$TMP9 0000005C
 VF RLS_senzaKf REAL $$TMP10 00000060
 VF RLS_senzaKf REAL $$TMP11 00000064
 VF RLS_senzaKf REAL $$TMP12 00000068
-L $label0 .Tune_PID A0011BDC
-L $label1 .Tune_PID A00120E0
-L $label3 .Tune_PID A0011FC4
-L $label5 .Tune_PID A0011FC0
-L $label4 .Tune_PID A00120C8
-L $label2 .Tune_PID A001245C
-L $label6 .Tune_PID A001245C
 VF Tune_PID REAL phi_m_v 00000070
 VF Tune_PID REAL phi_m_p 00000074
 VF Tune_PID REAL Wc_pos 00000078
@@ -293,12 +212,6 @@ VF Tune_PID REAL $$TMP18 00000060
 VF Tune_PID REAL $$TMP19 00000064
 VF Tune_PID REAL $$TMP20 00000068
 VF Tune_PID REAL $$TMP21 0000006C
-L $label1 .VARIANCE A0012498
-L $label2 .VARIANCE A00124E8
-L $label0 .VARIANCE A00126B4
-L $label3 .VARIANCE A001264C
-L $label4 .VARIANCE A00126A0
-L $label5 .VARIANCE A00126B4
 VF VARIANCE REAL INPUT 0000001C
 VF VARIANCE SINT ssMethodType 00000020
 VF VARIANCE REAL SIGMA 00000024
@@ -312,24 +225,6 @@ VF VARIANCE REAL $$TMP2 00000018
 VF fb_InertiaEstim_trj fb_Random rand 00000008
 FBC fb_Random A0011244 00000018
 FB fb_Random rand fb_InertiaEstim_trj 00000000 24
-L $label0 .fb_InertiaEstim_trj A0012834
-L $label1 .fb_InertiaEstim_trj A0012EF4
-L $label2 .fb_InertiaEstim_trj A0012914
-L $label12 .fb_InertiaEstim_trj A00128EC
-L $label13 .fb_InertiaEstim_trj A0012910
-L $label11 .fb_InertiaEstim_trj A0012EA4
-L $label3 .fb_InertiaEstim_trj A0012A04
-L $label14 .fb_InertiaEstim_trj A00129B0
-L $label15 .fb_InertiaEstim_trj A0012A00
-L $label4 .fb_InertiaEstim_trj A0012A6C
-L $label5 .fb_InertiaEstim_trj A0012AD4
-L $label6 .fb_InertiaEstim_trj A0012B30
-L $label7 .fb_InertiaEstim_trj A0012B8C
-L $label8 .fb_InertiaEstim_trj A0012C58
-L $label9 .fb_InertiaEstim_trj A0012D18
-L $label10 .fb_InertiaEstim_trj A0012DE8
-L $label16 .fb_InertiaEstim_trj A0012ED0
-L $label17 .fb_InertiaEstim_trj A0012EE0
 VF fb_InertiaEstim_trj REAL vel 00000038
 VF fb_InertiaEstim_trj REAL pos 0000003C
 VF fb_InertiaEstim_trj BOOL fbInit 00000040
@@ -376,133 +271,39 @@ FB Tune_PID fb_Tune_PID fb_AutotuningManager 00000000 164
 VF fb_AutotuningManager VARIANCE fb_VARIANCE 00000280
 FBC VARIANCE A0012460 00000028
 FB VARIANCE fb_VARIANCE fb_AutotuningManager 00000000 40
-L $label0 .fb_AutotuningManager A0013410
-L $label1 .fb_AutotuningManager A0016260
-L $label2 .fb_AutotuningManager A0016238
-L $label4 .fb_AutotuningManager A0013548
-L $label5 .fb_AutotuningManager A001352C
-L $label7 .fb_AutotuningManager A00137B0
-L $label8 .fb_AutotuningManager A00139E4
-L $label9 .fb_AutotuningManager A0013A88
-L $label10 .fb_AutotuningManager A0013B5C
-L $label11 .fb_AutotuningManager A0013C84
-L $label12 .fb_AutotuningManager A0013D20
-L $label13 .fb_AutotuningManager A001400C
-L $label14 .fb_AutotuningManager A0014024
-L $label15 .fb_AutotuningManager A0014028
-L $label16 .fb_AutotuningManager A001402C
-L $label17 .fb_AutotuningManager A0014070
-L $label18 .fb_AutotuningManager A00140AC
-L $label6 .fb_AutotuningManager A00140D4
-L $label19 .fb_AutotuningManager A0013E94
-L $label20 .fb_AutotuningManager A0013FF8
-L $label21 .fb_AutotuningManager A0013FF8
-L $label23 .fb_AutotuningManager A001427C
-L $label24 .fb_AutotuningManager A001434C
-L $label25 .fb_AutotuningManager A0014504
-L $label26 .fb_AutotuningManager A0014850
-L $label27 .fb_AutotuningManager A00148AC
-L $label28 .fb_AutotuningManager A00149EC
-L $label29 .fb_AutotuningManager A0014A58
-L $label30 .fb_AutotuningManager A0014DA8
-L $label31 .fb_AutotuningManager A0015148
-L $label32 .fb_AutotuningManager A0015334
-L $label33 .fb_AutotuningManager A00154F0
-L $label34 .fb_AutotuningManager A00155AC
-L $label35 .fb_AutotuningManager A0015A78
-L $label36 .fb_AutotuningManager A0015E18
-L $label37 .fb_AutotuningManager A0016004
-L $label38 .fb_AutotuningManager A00161A4
-L $label22 .fb_AutotuningManager A0016234
-L $label39 .fb_AutotuningManager A00142A4
-L $label40 .fb_AutotuningManager A0014348
-L $label41 .fb_AutotuningManager A0014500
-L $label42 .fb_AutotuningManager A001484C
-L $label43 .fb_AutotuningManager A00146F4
-L $label44 .fb_AutotuningManager A001484C
-L $label45 .fb_AutotuningManager A00148A8
-L $label46 .fb_AutotuningManager A00149E8
-L $label47 .fb_AutotuningManager A001491C
-L $label48 .fb_AutotuningManager A0014940
-L $label49 .fb_AutotuningManager A001497C
-L $label50 .fb_AutotuningManager A00149A0
-L $label51 .fb_AutotuningManager A0014A54
-L $label52 .fb_AutotuningManager A0014DA4
-L $label53 .fb_AutotuningManager A0014BC4
-L $label54 .fb_AutotuningManager A0014BFC
-L $label55 .fb_AutotuningManager A0014CC8
-L $label56 .fb_AutotuningManager A0014D80
-L $label57 .fb_AutotuningManager A0014F4C
-L $label58 .fb_AutotuningManager A0014EF4
-L $label59 .fb_AutotuningManager A0015074
-L $label60 .fb_AutotuningManager A0015144
-L $label61 .fb_AutotuningManager A0015134
-L $label62 .fb_AutotuningManager A0015144
-L $label63 .fb_AutotuningManager A00151E4
-L $label64 .fb_AutotuningManager A0015330
-L $label65 .fb_AutotuningManager A00154EC
-L $label66 .fb_AutotuningManager A0015440
-L $label67 .fb_AutotuningManager A00154D8
-L $label68 .fb_AutotuningManager A00154A0
-L $label69 .fb_AutotuningManager A00154B0
-L $label70 .fb_AutotuningManager A00155A8
-L $label71 .fb_AutotuningManager A0015584
-L $label72 .fb_AutotuningManager A0015A74
-L $label73 .fb_AutotuningManager A0015718
-L $label74 .fb_AutotuningManager A0015750
-L $label75 .fb_AutotuningManager A00158BC
-L $label77 .fb_AutotuningManager A00158B8
-L $label76 .fb_AutotuningManager A0015A14
-L $label78 .fb_AutotuningManager A0015A14
-L $label79 .fb_AutotuningManager A0015A50
-L $label80 .fb_AutotuningManager A0015C1C
-L $label81 .fb_AutotuningManager A0015BC4
-L $label82 .fb_AutotuningManager A0015D44
-L $label83 .fb_AutotuningManager A0015E14
-L $label84 .fb_AutotuningManager A0015E04
-L $label85 .fb_AutotuningManager A0015E14
-L $label86 .fb_AutotuningManager A0015EB4
-L $label87 .fb_AutotuningManager A0016000
-L $label88 .fb_AutotuningManager A00161A0
-L $label89 .fb_AutotuningManager A00160F4
-L $label90 .fb_AutotuningManager A001618C
-L $label91 .fb_AutotuningManager A0016154
-L $label92 .fb_AutotuningManager A0016164
-L $label93 .fb_AutotuningManager A0016234
-L $label3 .fb_AutotuningManager A0016260
-VF fb_AutotuningManager BOOL fbInit 000002E8
-VF fb_AutotuningManager BOOL ENABLE 000002EC
-VF fb_AutotuningManager REAL Speed 000002F0
-VF fb_AutotuningManager REAL Position 000002F4
-VF fb_AutotuningManager REAL maxTrq 000002F8
-VF fb_AutotuningManager REAL maxVel 000002FC
-VF fb_AutotuningManager REAL maxPos 00000300
-VF fb_AutotuningManager REAL Ts 00000304
-VF fb_AutotuningManager REAL Time_identification 00000308
-VF fb_AutotuningManager REAL phi_m_v 0000030C
-VF fb_AutotuningManager REAL phi_m_p 00000310
-VF fb_AutotuningManager BOOL PARAMETERS_UPDATED 00000314
-VF fb_AutotuningManager REAL Torque_ref 00000318
-VF fb_AutotuningManager REAL minPos 0000031C
-VF fb_AutotuningManager REAL minVel 00000320
-VF fb_AutotuningManager REAL MaxWc 00000324
-VF fb_AutotuningManager REAL MinWc 00000328
-VF fb_AutotuningManager REAL low_vel_thr 0000032C
-VF fb_AutotuningManager BOOL END 00000330
-VF fb_AutotuningManager REAL Torque 00000334
-VF fb_AutotuningManager REAL staticFriction 00000338
-VF fb_AutotuningManager USINT state 0000033C
-VF fb_AutotuningManager REAL noiseLevel 00000340
-VF fb_AutotuningManager REAL Kp_v 00000344
-VF fb_AutotuningManager REAL Kp_p 00000348
-VF fb_AutotuningManager REAL Ti_v 0000034C
-VF fb_AutotuningManager REAL Ti_p 00000350
-VF fb_AutotuningManager REAL Vel_SP 00000354
-VF fb_AutotuningManager BOOL UPDATE_PARAMETERS 00000358
-VF fb_AutotuningManager REAL Jm 0000035C
-VF fb_AutotuningManager BOOL TUNE_LOW_VEL 00000360
-VF fb_AutotuningManager INT Kp_high_vel_perc 00000364
-VF fb_AutotuningManager INT Ti_high_vel_perc 00000366
+VF fb_AutotuningManager BOOL fbInit 000002EC
+VF fb_AutotuningManager BOOL ENABLE 000002F0
+VF fb_AutotuningManager REAL Speed 000002F4
+VF fb_AutotuningManager REAL Position 000002F8
+VF fb_AutotuningManager REAL maxTrq 000002FC
+VF fb_AutotuningManager REAL maxVel 00000300
+VF fb_AutotuningManager REAL maxPos 00000304
+VF fb_AutotuningManager REAL Ts 00000308
+VF fb_AutotuningManager REAL Time_identification 0000030C
+VF fb_AutotuningManager REAL phi_m_v 00000310
+VF fb_AutotuningManager REAL phi_m_p 00000314
+VF fb_AutotuningManager BOOL PARAMETERS_UPDATED 00000318
+VF fb_AutotuningManager REAL Torque_ref 0000031C
+VF fb_AutotuningManager REAL minPos 00000320
+VF fb_AutotuningManager REAL minVel 00000324
+VF fb_AutotuningManager REAL MaxWc 00000328
+VF fb_AutotuningManager REAL MinWc 0000032C
+VF fb_AutotuningManager REAL low_vel_thr 00000330
+VF fb_AutotuningManager BOOL END 00000334
+VF fb_AutotuningManager REAL Torque 00000338
+VF fb_AutotuningManager REAL staticFriction 0000033C
+VF fb_AutotuningManager USINT state 00000340
+VF fb_AutotuningManager REAL noiseLevel 00000344
+VF fb_AutotuningManager REAL Kp_v 00000348
+VF fb_AutotuningManager REAL Kp_p 0000034C
+VF fb_AutotuningManager REAL Ti_v 00000350
+VF fb_AutotuningManager REAL Ti_p 00000354
+VF fb_AutotuningManager REAL Vel_SP 00000358
+VF fb_AutotuningManager BOOL UPDATE_PARAMETERS 0000035C
+VF fb_AutotuningManager REAL Jm 00000360
+VF fb_AutotuningManager BOOL TUNE_LOW_VEL 00000364
+VF fb_AutotuningManager INT Kp_high_vel_perc 00000368
+VF fb_AutotuningManager INT Ti_high_vel_perc 0000036A
 VF fb_AutotuningManager BOOL FLAG_LIMITS 00000000
 VF fb_AutotuningManager BOOL TUNED 00000004
 VF fb_AutotuningManager UINT NO_OF_TRIAL 00000008
@@ -529,23 +330,17 @@ VF fb_AutotuningManager INT estimation_trials 000002B2
 VF fb_AutotuningManager REAL friction_trial 000002B4
 VF fb_AutotuningManager BOOL $$TMP2 000002B8
 VF fb_AutotuningManager BOOL $$TMP3 000002BC
-VF fb_AutotuningManager REAL $$TMP13 000002C0
-VF fb_AutotuningManager REAL $$TMP14 000002C4
-VF fb_AutotuningManager REAL $$TMP15 000002C8
-VF fb_AutotuningManager BOOL $$TMP17 000002CC
-VF fb_AutotuningManager BOOL $$TMP21 000002D0
-VF fb_AutotuningManager BOOL $$TMP22 000002D4
-VF fb_AutotuningManager REAL $$TMP23 000002D8
-VF fb_AutotuningManager BOOL $$TMP48 000002DC
-VF fb_AutotuningManager BOOL $$TMP49 000002E0
-VF fb_AutotuningManager REAL $$TMP50 000002E4
-L $label0 .fb_motor_sim A00163A8
-L $label2 .fb_motor_sim A001637C
-L $label3 .fb_motor_sim A0016390
-L $label1 .fb_motor_sim A00165C0
-L $label4 .fb_motor_sim A0016464
-L $label5 .fb_motor_sim A00164AC
-L $label6 .fb_motor_sim A0016550
+VF fb_AutotuningManager REAL $$TMP12 000002C0
+VF fb_AutotuningManager REAL $$TMP13 000002C4
+VF fb_AutotuningManager REAL $$TMP14 000002C8
+VF fb_AutotuningManager BOOL $$TMP15 000002CC
+VF fb_AutotuningManager BOOL $$TMP19 000002D0
+VF fb_AutotuningManager BOOL $$TMP20 000002D4
+VF fb_AutotuningManager REAL $$TMP21 000002D8
+VF fb_AutotuningManager BOOL $$TMP35 000002DC
+VF fb_AutotuningManager BOOL $$TMP47 000002E0
+VF fb_AutotuningManager BOOL $$TMP48 000002E4
+VF fb_AutotuningManager REAL $$TMP49 000002E8
 VF fb_motor_sim BOOL fbInit 00000014
 VF fb_motor_sim REAL I 00000018
 VF fb_motor_sim REAL Bm 0000001C
@@ -565,8 +360,6 @@ VF sysDBReadIntegerPar DINT val 00000008
 VF sysDBReadRealPar DINT ipa 00000000
 VF sysDBReadRealPar DINT result 00000004
 VF sysDBReadRealPar REAL val 00000008
-L l1 .Derivative_PB A0016704
-L l2 .Derivative_PB A0016768
 VF Derivative_PB DINT inU 00000014
 VF Derivative_PB DINT fS 00000018
 VF Derivative_PB DINT tauP 0000001C
@@ -582,8 +375,6 @@ VF DerivativeR REAL tauP 00000008
 VF DerivativeR REAL Ts 0000000C
 VF DerivativeR REAL outY 00000010
 VF DerivativeR REAL prevInU 00000000
-L l1 .IntegratorDW A00168A0
-L l2 .IntegratorDW A00168F0
 VF IntegratorDW DINT inU 00000010
 VF IntegratorDW DINT preset 00000014
 VF IntegratorDW DINT fS 00000018
@@ -595,7 +386,6 @@ VF IntegratorDW DINT Yint 00000000
 VF IntegratorDW DINT prevYint 00000004
 VF IntegratorDW DINT intLowLim 00000008
 VF IntegratorDW DINT intHighLim 0000000C
-L l1 .IntegratorR A001695C
 VF IntegratorR REAL inU 00000000
 VF IntegratorR REAL Ts 00000004
 VF IntegratorR REAL presetValue 00000008
@@ -603,8 +393,7 @@ VF IntegratorR BOOL presetBit 0000000C
 VF IntegratorR REAL lowLimit 00000010
 VF IntegratorR REAL highLimit 00000014
 VF IntegratorR REAL outY 00000018
-L l1 .LP_FilterDW A0016A0C
-L END_FUNCTION_BLOCK .LP_FilterDW A0016B38
+L END_FUNCTION_BLOCK .LP_FilterDW A0016BE8
 VF LP_FilterDW DINT inU 00000014
 VF LP_FilterDW DINT fS 00000018
 VF LP_FilterDW DINT tauP 0000001C
@@ -642,41 +431,41 @@ VL REAL InputConv.vel_rpm InputConv C00004F8
 VL REAL InputConv.vel InputConv C00004FC
 VL REAL InputConv.trq InputConv C0000500
 VL REAL InputConv.curr InputConv C0000504
-FBC fb_AutotuningManager A0012EF8 00000368
-FB fb_AutotuningManager AutotuningManager $$GLOBAL$$ C0000508 872
-VL BOOL AutotuningManager.fbInit AutotuningManager C00007F0
-VL BOOL AutotuningManager.ENABLE AutotuningManager C00007F4
-VL REAL AutotuningManager.Speed AutotuningManager C00007F8
-VL REAL AutotuningManager.Position AutotuningManager C00007FC
-VL REAL AutotuningManager.maxTrq AutotuningManager C0000800
-VL REAL AutotuningManager.maxVel AutotuningManager C0000804
-VL REAL AutotuningManager.maxPos AutotuningManager C0000808
-VL REAL AutotuningManager.Ts AutotuningManager C000080C
-VL REAL AutotuningManager.Time_identification AutotuningManager C0000810
-VL REAL AutotuningManager.phi_m_v AutotuningManager C0000814
-VL REAL AutotuningManager.phi_m_p AutotuningManager C0000818
-VL BOOL AutotuningManager.PARAMETERS_UPDATED AutotuningManager C000081C
-VL REAL AutotuningManager.Torque_ref AutotuningManager C0000820
-VL REAL AutotuningManager.minPos AutotuningManager C0000824
-VL REAL AutotuningManager.minVel AutotuningManager C0000828
-VL REAL AutotuningManager.MaxWc AutotuningManager C000082C
-VL REAL AutotuningManager.MinWc AutotuningManager C0000830
-VL REAL AutotuningManager.low_vel_thr AutotuningManager C0000834
-VL BOOL AutotuningManager.END AutotuningManager C0000838
-VL REAL AutotuningManager.Torque AutotuningManager C000083C
-VL REAL AutotuningManager.staticFriction AutotuningManager C0000840
-VL USINT AutotuningManager.state AutotuningManager C0000844
-VL REAL AutotuningManager.noiseLevel AutotuningManager C0000848
-VL REAL AutotuningManager.Kp_v AutotuningManager C000084C
-VL REAL AutotuningManager.Kp_p AutotuningManager C0000850
-VL REAL AutotuningManager.Ti_v AutotuningManager C0000854
-VL REAL AutotuningManager.Ti_p AutotuningManager C0000858
-VL REAL AutotuningManager.Vel_SP AutotuningManager C000085C
-VL BOOL AutotuningManager.UPDATE_PARAMETERS AutotuningManager C0000860
-VL REAL AutotuningManager.Jm AutotuningManager C0000864
-VL BOOL AutotuningManager.TUNE_LOW_VEL AutotuningManager C0000868
-VL INT AutotuningManager.Kp_high_vel_perc AutotuningManager C000086C
-VL INT AutotuningManager.Ti_high_vel_perc AutotuningManager C000086E
+FBC fb_AutotuningManager A0012EF8 0000036C
+FB fb_AutotuningManager AutotuningManager $$GLOBAL$$ C0000508 876
+VL BOOL AutotuningManager.fbInit AutotuningManager C00007F4
+VL BOOL AutotuningManager.ENABLE AutotuningManager C00007F8
+VL REAL AutotuningManager.Speed AutotuningManager C00007FC
+VL REAL AutotuningManager.Position AutotuningManager C0000800
+VL REAL AutotuningManager.maxTrq AutotuningManager C0000804
+VL REAL AutotuningManager.maxVel AutotuningManager C0000808
+VL REAL AutotuningManager.maxPos AutotuningManager C000080C
+VL REAL AutotuningManager.Ts AutotuningManager C0000810
+VL REAL AutotuningManager.Time_identification AutotuningManager C0000814
+VL REAL AutotuningManager.phi_m_v AutotuningManager C0000818
+VL REAL AutotuningManager.phi_m_p AutotuningManager C000081C
+VL BOOL AutotuningManager.PARAMETERS_UPDATED AutotuningManager C0000820
+VL REAL AutotuningManager.Torque_ref AutotuningManager C0000824
+VL REAL AutotuningManager.minPos AutotuningManager C0000828
+VL REAL AutotuningManager.minVel AutotuningManager C000082C
+VL REAL AutotuningManager.MaxWc AutotuningManager C0000830
+VL REAL AutotuningManager.MinWc AutotuningManager C0000834
+VL REAL AutotuningManager.low_vel_thr AutotuningManager C0000838
+VL BOOL AutotuningManager.END AutotuningManager C000083C
+VL REAL AutotuningManager.Torque AutotuningManager C0000840
+VL REAL AutotuningManager.staticFriction AutotuningManager C0000844
+VL USINT AutotuningManager.state AutotuningManager C0000848
+VL REAL AutotuningManager.noiseLevel AutotuningManager C000084C
+VL REAL AutotuningManager.Kp_v AutotuningManager C0000850
+VL REAL AutotuningManager.Kp_p AutotuningManager C0000854
+VL REAL AutotuningManager.Ti_v AutotuningManager C0000858
+VL REAL AutotuningManager.Ti_p AutotuningManager C000085C
+VL REAL AutotuningManager.Vel_SP AutotuningManager C0000860
+VL BOOL AutotuningManager.UPDATE_PARAMETERS AutotuningManager C0000864
+VL REAL AutotuningManager.Jm AutotuningManager C0000868
+VL BOOL AutotuningManager.TUNE_LOW_VEL AutotuningManager C000086C
+VL INT AutotuningManager.Kp_high_vel_perc AutotuningManager C0000870
+VL INT AutotuningManager.Ti_high_vel_perc AutotuningManager C0000872
 VL BOOL AutotuningManager.FLAG_LIMITS AutotuningManager C0000508
 VL BOOL AutotuningManager.TUNED AutotuningManager C000050C
 VL UINT AutotuningManager.NO_OF_TRIAL AutotuningManager C0000510
@@ -848,16 +637,17 @@ VL INT AutotuningManager.estimation_trials AutotuningManager C00007BA
 VL REAL AutotuningManager.friction_trial AutotuningManager C00007BC
 VL BOOL AutotuningManager.$$TMP2 AutotuningManager C00007C0
 VL BOOL AutotuningManager.$$TMP3 AutotuningManager C00007C4
-VL REAL AutotuningManager.$$TMP13 AutotuningManager C00007C8
-VL REAL AutotuningManager.$$TMP14 AutotuningManager C00007CC
-VL REAL AutotuningManager.$$TMP15 AutotuningManager C00007D0
-VL BOOL AutotuningManager.$$TMP17 AutotuningManager C00007D4
-VL BOOL AutotuningManager.$$TMP21 AutotuningManager C00007D8
-VL BOOL AutotuningManager.$$TMP22 AutotuningManager C00007DC
-VL REAL AutotuningManager.$$TMP23 AutotuningManager C00007E0
-VL BOOL AutotuningManager.$$TMP48 AutotuningManager C00007E4
-VL BOOL AutotuningManager.$$TMP49 AutotuningManager C00007E8
-VL REAL AutotuningManager.$$TMP50 AutotuningManager C00007EC
+VL REAL AutotuningManager.$$TMP12 AutotuningManager C00007C8
+VL REAL AutotuningManager.$$TMP13 AutotuningManager C00007CC
+VL REAL AutotuningManager.$$TMP14 AutotuningManager C00007D0
+VL BOOL AutotuningManager.$$TMP15 AutotuningManager C00007D4
+VL BOOL AutotuningManager.$$TMP19 AutotuningManager C00007D8
+VL BOOL AutotuningManager.$$TMP20 AutotuningManager C00007DC
+VL REAL AutotuningManager.$$TMP21 AutotuningManager C00007E0
+VL BOOL AutotuningManager.$$TMP35 AutotuningManager C00007E4
+VL BOOL AutotuningManager.$$TMP47 AutotuningManager C00007E8
+VL BOOL AutotuningManager.$$TMP48 AutotuningManager C00007EC
+VL REAL AutotuningManager.$$TMP49 AutotuningManager C00007F0
 VG REAL v_Position C0002030
 VG REAL v_Speed C0002034
 VG REAL v_Torque C0002038
@@ -868,127 +658,101 @@ VG REAL vEstBandwidth C000205C
 VG REAL vEstDynFrict C0002050
 VG REAL vEstInertia C0002048
 VG REAL vEstStatFrict C000204C
-P cyclic_prg Fast A0016BF0
-VI DINT sysSpd Fast C0000870
-VI DINT sysPos Fast C0000874
-VI DINT sysIq Fast C0000878
-VG DINT sysTrqRef D00034D0
-VI DINT sysRev Fast C000087C
+P cyclic_prg Fast A0016CA0
+VI DINT sysSpd Fast C0000874
+VI DINT sysPos Fast C0000878
+VI DINT sysIq Fast C000087C
+VG DINT sysTrqRef D00034BC
+VI DINT sysRev Fast C0000880
 VG DINT sysSpeedPosPulsesPerRev D0002CB8
-VI DINT sysTrqRefNoFilt Fast C0000880
-VG REAL Torque_bis C0000884
+VI DINT sysTrqRefNoFilt Fast C0000884
+VG REAL Torque_bis C0000888
 VG DINT sysPad10 D00029E8
 VG DINT sysPad11 D00029EC
 VG BOOL pStartAuto C0001B40
-VG BOOL sysEnableStatus D0003C20
-VG BOOL sysStartStatus D0003C24
-VG BOOL StartCND C0000888
-VG INT State_internal C000088C
-L $label1 :Fast.cyclic_prg A0016CD8
-L $label2 :Fast.cyclic_prg A0016D2C
-L $label3 :Fast.cyclic_prg A0016D44
-L $label0 :Fast.cyclic_prg A0016D5C
-VL REAL VEL_SP_ cyclic_prg C000088E
-VL REAL VEL_TESTING cyclic_prg C0000892
-VG REAL MaxTorque C0000896
-L $label4 :Fast.cyclic_prg A0016D7C
-L $label5 :Fast.cyclic_prg A0016DC0
-VG REAL KNm2Cnt C000089A
+VG BOOL sysEnableStatus D0003C0C
+VG BOOL sysStartStatus D0003C10
+VG BOOL StartCND C000088C
+VG INT State_internal C0000890
+VL REAL VEL_SP_ cyclic_prg C0000892
+VL REAL VEL_TESTING cyclic_prg C0000896
+VG REAL MaxTorque C000089A
+VG REAL KNm2Cnt C000089E
 VG DINT sysTrqFFwd D0002B2C
-VG REAL FullScaleSpeed C000089E
-VG DINT sysSpdRef1 D0003D04
+VG REAL FullScaleSpeed C00008A2
+VG DINT sysSpdRef1 D0003CF0
 VG UINT vStateMachine C0002044
-VG UDINT TimeMsg C00008A2
-L $label6 :Fast.cyclic_prg A0016E40
-P state_machine Background A0016EE0
-VL BOOL state_machine$$Init_x state_machine C00008A6
-L end_state_machine$Init :Background.state_machine A00176F8
-VL BOOL INIT_END state_machine C00008AA
-VL BOOL CYCLE_STOP state_machine C00008AE
-VG BOOL ENABLE_CYCLIC_PRG C00008B2
+VG UDINT TimeMsg C00008A6
+P state_machine Background A0016F90
+VL BOOL state_machine$$Init_x state_machine C00008AA
+VL BOOL INIT_END state_machine C00008AE
+VL BOOL CYCLE_STOP state_machine C00008B2
+VG BOOL ENABLE_CYCLIC_PRG C00008B6
 VG UDINT sysControlMode C00045DC
 FBC sysDBReadRealPar FFFFFFFF 0000000C
-FB sysDBReadRealPar readRealPar state_machine C00008B6 12
-VL DINT readRealPar.ipa readRealPar C00008B6
-VL DINT readRealPar.result readRealPar C00008BA
-VL REAL readRealPar.val readRealPar C00008BE
-VG REAL DriveRatCur C00008C2
+FB sysDBReadRealPar readRealPar state_machine C00008BA 12
+VL DINT readRealPar.ipa readRealPar C00008BA
+VL DINT readRealPar.result readRealPar C00008BE
+VL REAL readRealPar.val readRealPar C00008C2
+VG REAL DriveRatCur C00008C6
 FBC sysDBReadIntegerPar FFFFFFFF 0000000C
-FB sysDBReadIntegerPar readIntPar state_machine C00008C6 12
-VL DINT readIntPar.ipa readIntPar C00008C6
-VL DINT readIntPar.result readIntPar C00008CA
-VL DINT readIntPar.val readIntPar C00008CE
-VG REAL RatCur C00008D2
-VG REAL RatKTrq C00008D6
-VG REAL RatedTorque C00008DA
-VG DINT res C00008DE
-VG DINT sysSpdRef2 D0003D08
+FB sysDBReadIntegerPar readIntPar state_machine C00008CA 12
+VL DINT readIntPar.ipa readIntPar C00008CA
+VL DINT readIntPar.result readIntPar C00008CE
+VL DINT readIntPar.val readIntPar C00008D2
+VG REAL RatCur C00008D6
+VG REAL RatKTrq C00008DA
+VG REAL RatedTorque C00008DE
+VG DINT res C00008E2
+VG DINT sysSpdRef2 D0003CF4
 VG REAL pMaxTorque C0001B30
 VG REAL pMaxSpeed C0001B34
-VG REAL MaxSpeed C00008E2
+VG REAL MaxSpeed C00008E6
 VG REAL pMaxPos C0001B38
-VG REAL MaxPosition C00008E6
+VG REAL MaxPosition C00008EA
 VG REAL pMotJ C0001B3C
-VG REAL MotorInertia C00008EA
+VG REAL MotorInertia C00008EE
 VG REAL pMinWc C0001B44
 VG REAL pMaxWc C0001B48
-VL INT state_machine/Init_state$$TEMP1 state_machine C00008EE
-L state_machine/Init_state$lab3 :Background.state_machine A00172A0
-VG INT state_of_the_machine C00008F0
-L state_machine/Init_state$lab2 :Background.state_machine A00172B8
-FBC fb_motor_sim A00162F4 00000034
-FB fb_motor_sim motor_sim state_machine C00008F2 52
-VL BOOL motor_sim.fbInit motor_sim C0000906
-VL REAL motor_sim.I motor_sim C000090A
-VL REAL motor_sim.Bm motor_sim C000090E
-VL REAL motor_sim.Fc motor_sim C0000912
-VL REAL motor_sim.st motor_sim C0000916
-VL REAL motor_sim.torque motor_sim C000091A
-VL REAL motor_sim.position motor_sim C000091E
-VL REAL motor_sim.velocity motor_sim C0000922
-VL REAL motor_sim.position_internal motor_sim C00008F2
-VL REAL motor_sim.velocity_internal motor_sim C00008F6
-VL REAL motor_sim.sum_torques motor_sim C00008FA
-VL REAL motor_sim.inv_inertia_st motor_sim C00008FE
-VL REAL motor_sim.sum_torques_old motor_sim C0000902
-VL INT state_machine/Init_state$$TEMP0 state_machine C0000926
-L state_machine/Init_state$lab1 :Background.state_machine A00176C4
-L state_machine/Init_state$lab0 :Background.state_machine A00176DC
-VL BOOL state_machine$$Cycle_x state_machine C0000928
-L end_state_machine$Cycle :Background.state_machine A00179FC
-VG BOOL ABORT_PROCEDURE C000092C
-VG DINT SPEED_REF_IPA C0000930
+VL INT state_machine/Init_state$$TEMP1 state_machine C00008F2
+VG INT state_of_the_machine C00008F4
+FBC fb_motor_sim A00163A4 00000034
+FB fb_motor_sim motor_sim state_machine C00008F6 52
+VL BOOL motor_sim.fbInit motor_sim C000090A
+VL REAL motor_sim.I motor_sim C000090E
+VL REAL motor_sim.Bm motor_sim C0000912
+VL REAL motor_sim.Fc motor_sim C0000916
+VL REAL motor_sim.st motor_sim C000091A
+VL REAL motor_sim.torque motor_sim C000091E
+VL REAL motor_sim.position motor_sim C0000922
+VL REAL motor_sim.velocity motor_sim C0000926
+VL REAL motor_sim.position_internal motor_sim C00008F6
+VL REAL motor_sim.velocity_internal motor_sim C00008FA
+VL REAL motor_sim.sum_torques motor_sim C00008FE
+VL REAL motor_sim.inv_inertia_st motor_sim C0000902
+VL REAL motor_sim.sum_torques_old motor_sim C0000906
+VL INT state_machine/Init_state$$TEMP0 state_machine C000092A
+VL BOOL state_machine$$Cycle_x state_machine C000092C
+VG BOOL ABORT_PROCEDURE C0000930
+VG DINT SPEED_REF_IPA C0000934
 VG REAL pLow_Vel_Thr C0001B4C
-L state_machine/Cycle_state$lab10 :Background.state_machine A001798C
-VL REAL state_machine/Cycle_state$$TEMP3 state_machine C0000934
-VL REAL state_machine/Cycle_state$$TEMP2 state_machine C0000938
-VL BOOL SEND_MESSAGE state_machine C000093C
-L state_machine/Cycle_state$lab8 :Background.state_machine A00178D0
+VL REAL state_machine/Cycle_state$$TEMP3 state_machine C0000938
+VL REAL state_machine/Cycle_state$$TEMP2 state_machine C000093C
+VL BOOL SEND_MESSAGE state_machine C0000940
 VG STRING.20 sysMsgPlc1 803F0264 20
-VL UINT TempUI state_machine C0000940
-L state_machine/Cycle_state$lab7 :Background.state_machine A0017980
-L state_machine/Cycle_state$lab9 :Background.state_machine A00179A4
-L state_machine/Cycle_state$lab6 :Background.state_machine A00179A4
-L state_machine/Cycle_state$lab5 :Background.state_machine A00179B8
-VL BOOL AUTOTUNING_STOP state_machine C0000942
-L state_machine/Cycle_state$lab4 :Background.state_machine A00179C0
-VL BOOL state_machine$$CL_control_state_x state_machine C0000946
-VL BOOL state_machine$$Jump9_x state_machine C000094A
-L end_state_machine$CL_control_state :Background.state_machine A0017A30
-VL UINT state_machine_idx state_machine C000094E
-VL BOOL CL_control_STOP state_machine C0000950
-VL BOOL state_machine$$Stop_x state_machine C0000954
-L end_state_machine$Stop :Background.state_machine A0017AA8
-L state_machine/Stop_state$lab12 :Background.state_machine A0017A78
-L state_machine/Stop_state$lab11 :Background.state_machine A0017A80
-VL BOOL state_machine$$Jump8_x state_machine C0000958
-L end_state_machine$Jump8 :Background.state_machine A0017ACC
-L end_state_machine$Jump9 :Background.state_machine A0017AF0
+VL UINT TempUI state_machine C0000944
+VL BOOL AUTOTUNING_STOP state_machine C0000946
+VL BOOL state_machine$$CL_control_state_x state_machine C000094A
+VL BOOL state_machine$$Jump9_x state_machine C000094E
+VL UINT state_machine_idx state_machine C0000952
+VL BOOL CL_control_STOP state_machine C0000954
+VL BOOL state_machine$$Stop_x state_machine C0000958
+VL BOOL state_machine$$Jump8_x state_machine C000095C
 VG REAL v_LoadPosition C000203C
 VG REAL v_LoadSpeed C0002040
 VG UDINT $$CODESTART$$ A0010080
-VG UDINT $$CODESIZE$$ A0017B42
+VG UDINT $$CODESIZE$$ A0017BE2
 VG UDINT $$CODEEND$$ A0030000
-VG UDINT $$DATASIZE$$ C000095C
+VG UDINT $$DATASIZE$$ C0000960
 VG UDINT $$BITDATASIZE$$ C0001B00
 VG UDINT $$RITDATASIZE$$ C0001AC0

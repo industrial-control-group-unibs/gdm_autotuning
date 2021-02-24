@@ -1,5 +1,5 @@
 clear all;clc;close all
-Motor = OpenDriveConnection(38400,'7'); 
+Motor = OpenDriveConnection(38400,'8'); 
 %Load = OpenDriveConnection(38400,'4');
 % MaxPos=4;
 % MaxVel=2000;
@@ -36,8 +36,8 @@ while true
         ylabel('Fc')
         subplot(3,1,3)
         stem(Bm)
-        hold on
-        stem(friction)
+   %     hold on
+    %    stem(friction)
         ylabel('Bm')
         figure(2)
         subplot(3,1,1)  

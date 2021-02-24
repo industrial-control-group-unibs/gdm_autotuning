@@ -510,8 +510,7 @@ ELSE
 			100: (* reset to wrong model identification *)
 				IF (estimation_trials>3) THEN
 					state:=92;
-				END_IF;
-				IF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel)) THEN
+				ELSIF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel)) THEN
 					state:=0;
 					estimation_trials:=estimation_trials+1;
 				END_IF;
@@ -833,6 +832,7 @@ vEstDynFrict := fb_RLS.Bm;
 vCalcKpSp := Kp_v * RPM2RAD;
 vCalcTiSp := Ti_v * 1000.0;
 vEstBandwidth := Wc_low_speed;
+
 
 
 

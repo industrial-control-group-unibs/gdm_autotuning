@@ -1,4 +1,4 @@
-ID 1614159273
+ID 1614167023
 VG DWORD $$STKLIMIT$$ C00004C0
 F REAL sign A0010080
 F DINT sysDBWriteIntegerPar FFFFFFFF
@@ -393,7 +393,7 @@ VF IntegratorR BOOL presetBit 0000000C
 VF IntegratorR REAL lowLimit 00000010
 VF IntegratorR REAL highLimit 00000014
 VF IntegratorR REAL outY 00000018
-L END_FUNCTION_BLOCK .LP_FilterDW A0016BE8
+L END_FUNCTION_BLOCK .LP_FilterDW A0016BEC
 VF LP_FilterDW DINT inU 00000014
 VF LP_FilterDW DINT fS 00000018
 VF LP_FilterDW DINT tauP 0000001C
@@ -685,6 +685,7 @@ VG UINT vStateMachine C0002044
 VG UDINT TimeMsg C00008A6
 P state_machine Background A0016F90
 VL BOOL state_machine$$Init_x state_machine C00008AA
+L end_state_machine$Init :Background.state_machine A001779C
 VL BOOL INIT_END state_machine C00008AE
 VL BOOL CYCLE_STOP state_machine C00008B2
 VG BOOL ENABLE_CYCLIC_PRG C00008B6
@@ -715,8 +716,10 @@ VG REAL MotorInertia C00008EE
 VG REAL pMinWc C0001B44
 VG REAL pMaxWc C0001B48
 VL INT state_machine/Init_state$$TEMP1 state_machine C00008F2
+L state_machine/Init_state$lab3 :Background.state_machine A0017344
 VG INT state_of_the_machine C00008F4
-FBC fb_motor_sim A00163A4 00000034
+L state_machine/Init_state$lab2 :Background.state_machine A001735C
+FBC fb_motor_sim A00163A8 00000034
 FB fb_motor_sim motor_sim state_machine C00008F6 52
 VL BOOL motor_sim.fbInit motor_sim C000090A
 VL REAL motor_sim.I motor_sim C000090E
@@ -732,22 +735,38 @@ VL REAL motor_sim.sum_torques motor_sim C00008FE
 VL REAL motor_sim.inv_inertia_st motor_sim C0000902
 VL REAL motor_sim.sum_torques_old motor_sim C0000906
 VL INT state_machine/Init_state$$TEMP0 state_machine C000092A
+L state_machine/Init_state$lab1 :Background.state_machine A0017768
+L state_machine/Init_state$lab0 :Background.state_machine A0017780
 VL BOOL state_machine$$Cycle_x state_machine C000092C
+L end_state_machine$Cycle :Background.state_machine A0017AA0
 VG BOOL ABORT_PROCEDURE C0000930
 VG DINT SPEED_REF_IPA C0000934
 VG REAL pLow_Vel_Thr C0001B4C
+L state_machine/Cycle_state$lab10 :Background.state_machine A0017A30
 VL REAL state_machine/Cycle_state$$TEMP3 state_machine C0000938
 VL REAL state_machine/Cycle_state$$TEMP2 state_machine C000093C
 VL BOOL SEND_MESSAGE state_machine C0000940
+L state_machine/Cycle_state$lab8 :Background.state_machine A0017974
 VG STRING.20 sysMsgPlc1 803F0264 20
 VL UINT TempUI state_machine C0000944
+L state_machine/Cycle_state$lab7 :Background.state_machine A0017A24
+L state_machine/Cycle_state$lab9 :Background.state_machine A0017A48
+L state_machine/Cycle_state$lab6 :Background.state_machine A0017A48
+L state_machine/Cycle_state$lab5 :Background.state_machine A0017A5C
 VL BOOL AUTOTUNING_STOP state_machine C0000946
+L state_machine/Cycle_state$lab4 :Background.state_machine A0017A64
 VL BOOL state_machine$$CL_control_state_x state_machine C000094A
 VL BOOL state_machine$$Jump9_x state_machine C000094E
+L end_state_machine$CL_control_state :Background.state_machine A0017AD4
 VL UINT state_machine_idx state_machine C0000952
 VL BOOL CL_control_STOP state_machine C0000954
 VL BOOL state_machine$$Stop_x state_machine C0000958
+L end_state_machine$Stop :Background.state_machine A0017B4C
+L state_machine/Stop_state$lab12 :Background.state_machine A0017B1C
+L state_machine/Stop_state$lab11 :Background.state_machine A0017B24
 VL BOOL state_machine$$Jump8_x state_machine C000095C
+L end_state_machine$Jump8 :Background.state_machine A0017B70
+L end_state_machine$Jump9 :Background.state_machine A0017B94
 VG REAL v_LoadPosition C000203C
 VG REAL v_LoadSpeed C0002040
 VG UDINT $$CODESTART$$ A0010080

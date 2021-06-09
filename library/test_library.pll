@@ -1,0 +1,148 @@
+(*
+ *
+ * MDPlc source file: C:\projects\gdm_autotuning\library\test_library.pll
+ * for project:       
+ *
+ *)
+
+
+	(***************************)
+	(*                         *)
+	(*     FUNCTION BLOCKS     *)
+	(*                         *)
+	(***************************)
+
+FUNCTION_BLOCK fb_InertiaEstim_trj
+
+	VAR_INPUT
+	vel : REAL; 
+	pos : REAL; 
+	fbInit : BOOL; 
+	maxTRQ : REAL; 
+	maxVEL : REAL; 
+	maxPOS : REAL; 
+	minPOS : REAL; 
+	minVEL : REAL; 
+	STOP : BOOL; 
+	staticFriction : REAL; 
+	END_VAR
+
+	VAR_OUTPUT
+	torque : REAL; 
+	STOPPED : BOOL; 
+	END_VAR
+
+	VAR
+	torque_internal : REAL; 
+	state : SINT; 
+	rand : fb_Random; 
+	STOPPING : BOOL; 
+	pos_threshold : REAL; 
+	neg_threshold : REAL; 
+	vel_percentage : REAL; 
+	pos_mean : REAL; 
+	hysteresis : REAL; 
+	END_VAR
+
+	{ CODE:ST }IF fbInit THEN
+
+	
+	rand.fb_Init:=TRUE;
+	rand();
+	rand.fb_Init:=FALSE;
+	STOP:=FALSE;
+	STOPPED:=FALSE;
+	STOPPING:=FALSE;
+
+	torque_internal:=0.0;
+	pos_mean:=0.5*(maxPOS+minPOS);
+	hysteresis:=(maxPOS-pos_mean)*0.1;
+	pos_threshold:=pos_mean+hysteresis;
+	neg_threshold:=pos_mean-hysteresis;
+	vel_percentage:=0.5;
+	state:=-1;
+ELSE
+
+	rand();
+	
+	(*
+	STATE MACHINE:
+	-1   initial state
+	 0   reaching central position (pos_mean) from an higher position  (PROCEED TO 3)
+	 1   reaching central position (pos_mean) from an lower position  (PROCEED TO 2)
+	 2   moving in positive direction  (PROCEED TO 4)
+	 3   moving in negative direction  (PROCEED TO 5)
+	 4   breaking from a positive direction movement  (PROCEED TO 3)
+	 5   breaking from a negative direction movement  (PROCEED TO 2)
+	 6   decelerating from a negative velocity (final stop movement)  (TRIGGER BY STOP, PROCEED TO 8)
+	 7   decelerating from a positive velocity (final stop movement)  (TRIGGER BY STOP, PROCEED TO 8)
+	 8   stopped (FINAL STATE)
+	*)
+	IF (STOP AND NOT(STOPPING)) THEN
+		STOPPING:=TRUE;
+		IF (vel>0.0) THEN
+			state:=7;
+			torque_internal:=-maxTRQ;
+		ELSE
+			state:=6;
+			torque_internal:=maxTRQ;
+		END_IF;
+	ELSIF (state=-1) THEN
+		IF (pos>pos_mean) THEN
+			state:=0;
+			torque_internal:= -(staticFriction+(maxTRQ-staticFriction)*0.2);
+		ELSE
+			state:=1;
+			torque_internal:=  (staticFriction+(maxTRQ-staticFriction)*0.2);
+		END_IF;
+	ELSIF ((state=7) AND (vel<0.0)) THEN
+		torque_internal:=0.0;
+		state:=8;
+	ELSIF ((state=6) AND (vel>0.0)) THEN
+		torque_internal:=0.0;
+		state:=8;
+	ELSIF ((state=0) AND (pos<pos_mean)) THEN
+		state:=3;
+	ELSIF ((state=1) AND (pos>pos_mean)) THEN
+		state:=2;
+	ELSIF (((state=2) AND (pos>pos_threshold)) OR (vel>maxVEL*vel_percentage)) THEN
+		state:=4;
+		torque_internal:=-maxTRQ;
+	ELSIF (((state=3) AND (pos<neg_threshold)) OR (vel<minVEL*vel_percentage)) THEN
+		state:=5;
+		torque_internal:=maxTRQ;
+	ELSIF ((state=4) AND (vel<0.0)) THEN
+		state:=3;
+		torque:= -(staticFriction+(maxTRQ-staticFriction)*(0.2+0.5*rand.rnd));
+	ELSIF ((state=5) AND (vel>0.0)) THEN
+		state:=2;
+		torque_internal:=  (staticFriction+(maxTRQ-staticFriction)*(0.2+0.5*rand.rnd));
+	END_IF;
+
+	IF (state=8) THEN
+		STOPPED:=TRUE;
+	ELSE 
+		STOPPED:=FALSE;
+	END_IF;
+	torque:=torque_internal;
+END_IF;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+END_FUNCTION_BLOCK
+

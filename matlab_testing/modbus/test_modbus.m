@@ -1,6 +1,6 @@
 clear all;clc;close all
-Motor = OpenDriveConnection(38400,'6'); 
-Load = OpenDriveConnection(38400,'4');
+Motor = OpenDriveConnection(38400,'3'); 
+%Load = OpenDriveConnection(38400,'4');
 % MaxPos=4;
 % MaxVel=2000;
 % set(Out.Modbus,'ParFloat',11004,0,MaxPos)
@@ -12,7 +12,7 @@ friction=logspace(-3,-1,10)';
 idx=1;
 while true       
         
-    set(Load.Modbus,'ParDword',3700,0,friction(idx)*1000);
+    %set(Load.Modbus,'ParDword',3700,0,friction(idx)*1000);
     sm=get(Motor.Modbus,'ParWord',12010,0);
     if and(sm==15,save_it)
         disp('one')

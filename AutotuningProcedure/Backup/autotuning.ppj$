@@ -1,0 +1,19 @@
+;
+;	IEC 1131 project file
+;   c:\projects\gdm_autotuning\autotuningprocedure\Backup\autotuning.ppj$
+;
+
+IMAGE = "autotuning.img"
+PARAMS = "autotuning.par"
+PARFILE = "1"
+SOURCE = "autotuning.plc"
+TARGET = "adv200syn_7_7_19.tgt"
+FIRMWARE = "adv200syn_7_7_19_fw_lang.fl2"
+FPRJ_DOWNLLANG = 0
+RELEASE = "1_1_37_1"
+AUTOR = "dc"
+APPGEN = "ADV200Syn_7_7_19_ApllGen.bat"
+LIB = "adv200lib\adv_basic.pll"
+LIB = "adv200lib\adv_control.pll"
+LIB = "adv200lib\adv_general.pll"
+LIB = "adv200lib\adv_inout.pll"

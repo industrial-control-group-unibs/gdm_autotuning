@@ -115,20 +115,20 @@ FUNCTION_BLOCK InputConversionADV200
 	END_VAR
 
 	{ CODE:ST }	(*Function Block utile alla lettura dei parametri in Ingresso provenienti dal motore*)
-	(*Leggo le grandezze del motore, effettuo le conversioni utili e restitusco le grandezze in unita'  SI*)  
-	
+	(*Leggo le grandezze del motore, effettuo le conversioni utili e restitusco le grandezze in unita'ï¿½ SI*)
+
 	pos:=(TO_REAL(sysPos)/PosDINT+sysRev)*2.0*PI + offset; 	(*Posizione in rad*)
-	
-	vel_rpm:= TO_REAL(sysSpd)*Krpm;  						(*Velocita'  in rpm a monte del filtro Par:2134*)
+
+	vel_rpm:= TO_REAL(sysSpd)*Krpm;  						(*Velocita'ï¿½ in rpm a monte del filtro Par:2134*)
 
 	vel:=TO_REAL(sysSpd)*Krad_s;    						(*Velocita' in rad/s*)
-		
+
 	curr:=TO_REAL(sysIq)*KArms;                             (*Corrente Iq*)
-	
+
 	trq := TO_REAL(_sysTrqNoFilt) * KCnt2Nm;                    (*Coppia Nm *)
-	
+
 	v_Position := pos;										(*Posizione in rad*)
-	
+
 	v_Speed := vel;											(*Velocita' in rad/s*)
 
 	v_Torque := trq;										(*Coppia Nm *)
@@ -217,7 +217,6 @@ FUNCTION_BLOCK fb_AutotuningManager
 	maxVel : REAL; 
 	maxPos : REAL; 
 	Ts : REAL; 
-	Time_identification : REAL; 
 	phi_m_v : REAL; 
 	phi_m_p : REAL; 
 	PARAMETERS_UPDATED : BOOL; 
@@ -258,55 +257,53 @@ FUNCTION_BLOCK fb_AutotuningManager
 	END_VAR
 
 	VAR
-	FLAG_LIMITS : BOOL; 
-	TUNED : BOOL; 
-	NO_OF_TRIAL : UINT := 10; 
-	Wc_counter : UINT; 
 	aux : REAL; 
 	Bm : REAL; 
-	Pos_SP : REAL; 
-	PosPreTial : REAL; 
-	Time : REAL; 
-	rise_time : REAL; 
-	Time_HIGH_VEL : REAL; 
-	tmpF : REAL; 
-	TrialTime : REAL; 
-	VARIANCE_THRESHOLD : REAL; 
-	Wc_act : REAL; 
-	Wc_high : REAL; 
-	Wc_low : REAL; 
-	Wc_pos : REAL; 
-	Wc_Step : REAL; 
-	NoiseLevelID : fb_NoiseLevelID; 
-	NoiseLevelID_Trj : fb_NoiseLevelID_Trj; 
-	RAND : fb_Random; 
-	StaticFrictionID : fb_StaticFrictionID_OL; 
-	StaticFrictionID_Trj : fb_StaticFrictionID_OL_Trj; 
-	OL_trj_generator : fb_InertiaEstim_trj; 
+	estimation_trials : INT; 
 	fb_RLS : RLS_senzaKf; 
 	fb_Tune_PID : Tune_PID; 
 	fb_VARIANCE : VARIANCE; 
-	Wc_low_speed : REAL; 
-	Wc_high_speed : REAL; 
-	state_before_error : USINT; 
-	estimation_trials : INT; 
+	FLAG_LIMITS : BOOL; 
 	friction_trial : REAL; 
+	NoiseLevelID : fb_NoiseLevelID; 
+	NoiseLevelID_Trj : fb_NoiseLevelID_Trj; 
+	OL_trj_generator : fb_InertiaEstim_trj; 
+	Pos_SP : REAL; 
+	PosPreTial : REAL; 
+	RAND : fb_Random; 
+	rise_time : REAL; 
+	state_before_error : USINT; 
+	StaticFrictionID : fb_StaticFrictionID_OL; 
+	StaticFrictionID_Trj : fb_StaticFrictionID_OL_Trj; 
+	Time : REAL; 
+	Time_HIGH_VEL : REAL; 
+	tmpF : REAL; 
+	TrialTime : REAL; 
+	TUNED : BOOL; 
+	VARIANCE_THRESHOLD : REAL; 
+	Wc_act : REAL; 
+	Wc_counter : UINT; 
+	Wc_high : REAL; 
+	Wc_high_speed : REAL; 
+	Wc_low : REAL; 
+	Wc_low_speed : REAL; 
+	Wc_pos : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
 	noiseLevel := 0.0;
 	END		   := FALSE;
-	
+
 	Time:=0.0;
 	state := 0;
-	
+
 	(* Noise Level Identification Trajectory *)
 	NoiseLevelID_Trj.fbInit := TRUE;
 	NoiseLevelID_Trj();
 	NoiseLevelID_Trj.fbInit := FALSE;
 	NoiseLevelID_Trj.ENABLE := FALSE;
 	NoiseLevelID_Trj.reference := 0.0;
-	
+
 	(* Noise Level Identification *)
 	NoiseLevelID.fbInit := TRUE;
 	NoiseLevelID();
@@ -314,7 +311,7 @@ FUNCTION_BLOCK fb_AutotuningManager
 	NoiseLevelID.ENABLE := FALSE;
 	NoiseLevelID.timeID := 1.0;
 	NoiseLevelID.Ts     := 0.001;
-	
+
 	(* Static Friction Identification Trajectory *)
 	StaticFrictionID_Trj.fbInit := TRUE;
 	StaticFrictionID_Trj();
@@ -322,18 +319,17 @@ FUNCTION_BLOCK fb_AutotuningManager
 	StaticFrictionID_Trj.ENABLE := FALSE;
 	StaticFrictionID_Trj.maxTrq := maxTrq;
 	StaticFrictionID_Trj.TrqResolution := maxTrq/100000.0;
-	
+
 	(* Static Friction Identification *)
 	StaticFrictionID.fbInit := TRUE;
 	StaticFrictionID();
 	StaticFrictionID.fbInit := FALSE;
 	StaticFrictionID.ENABLE := FALSE;
 	StaticFrictionID.Threshold := 5.0;
-	
-	Time_identification:=7.0;
-	
+
+
 	(* Inertia Identification *)
-	
+
 	OL_trj_generator.maxTRQ:= maxTrq;
 	OL_trj_generator.maxVEL:= maxVel;
 	OL_trj_generator.maxPOS:= maxPos;
@@ -342,29 +338,29 @@ FUNCTION_BLOCK fb_AutotuningManager
 	OL_trj_generator.fbInit:=TRUE;
 	OL_trj_generator();
 	OL_trj_generator.fbInit:=FALSE;
-	
-	
-	fb_RLS.Ts	:=	0.01;
-	fb_RLS.S 	:= 	3.0;
+
+
+	fb_RLS.Ts	:=	Ts;
+	fb_RLS.S 	:= 	30.0;
 	fb_RLS.Time_max:=10.0;
 	fb_RLS.ssMethodType:=0;
 	fb_RLS();
 	fb_RLS.ssMethodType:=1;
-	
+
 	RAND.fb_Init:=TRUE;
 	RAND();
 	RAND.fb_Init:=FALSE;
-	
+
 	(* Tuning *)
 	TUNED:=FALSE;
 	VARIANCE_THRESHOLD:=maxTrq*pOscillationTollerance; (*pOscillationTollerance: da tarare, coppia filtrata o meno?*)
-	Vel_SP:=00.0; (* mettere a zero? *)
+	Vel_SP:=0.0; (* mettere a zero? *)
 	TrialTime:=4.0; (*parametro*)
+	MaxWc:=MIN(MaxWc,2.0/Ts*phi_m_v);
+	
 	Wc_high:=MaxWc;
 	Wc_low:=MinWc;
 	Wc_act:= MinWc;
-	NO_OF_TRIAL := 10; (*parametro*)
-	Wc_Step := (Wc_high - Wc_low) / (TO_REAL(NO_OF_TRIAL));	
 	
 	TUNE_LOW_VEL:=TRUE;
 	FLAG_LIMITS:=FALSE;
@@ -373,7 +369,7 @@ FUNCTION_BLOCK fb_AutotuningManager
 ELSE
 
 	IF ENABLE THEN
-	
+
 		Time:=Time+Ts;
 		IF (Position>maxPos OR Position<minPos OR ABS(Speed)>maxVel) THEN
 			IF (NOT(FLAG_LIMITS)) THEN
@@ -390,7 +386,7 @@ ELSE
 				NoiseLevelID_Trj.fbInit := FALSE;
 				NoiseLevelID_Trj.ENABLE := FALSE;
 				NoiseLevelID_Trj.reference := 0.0;
-				
+
 				(* Noise Level Identification *)
 				NoiseLevelID.fbInit := TRUE;
 				NoiseLevelID();
@@ -398,12 +394,12 @@ ELSE
 				NoiseLevelID.ENABLE := FALSE;
 				NoiseLevelID.timeID := 1.0;
 				NoiseLevelID.Ts     := 0.001;
-				
-				
-				
-				
+
+
+
+
 				(* Inertia Identification *)
-				
+
 				OL_trj_generator.maxTRQ:= maxTrq;
 				OL_trj_generator.maxVEL:= maxVel;
 				OL_trj_generator.maxPOS:= maxPos;
@@ -412,15 +408,12 @@ ELSE
 				OL_trj_generator.fbInit:=TRUE;
 				OL_trj_generator();
 				OL_trj_generator.fbInit:=FALSE;
-				
-				
-				fb_RLS.Ts	:=	0.01;
-				fb_RLS.S 	:= 	3.0;
-				fb_RLS.Time_max:=10.0;
+
+
 				fb_RLS.ssMethodType:=0;
 				fb_RLS();
 				fb_RLS.ssMethodType:=1;
-				    		
+
 			0:	(* Noise level identification *)
 				NoiseLevelID_Trj.ENABLE := TRUE;
 				NoiseLevelID.ENABLE     := TRUE;
@@ -429,7 +422,7 @@ ELSE
 				NoiseLevelID.signal := Speed;
 				NoiseLevelID();
 
-				
+
 			1:	(* Static friction identification *)
 				StaticFrictionID_Trj.ENABLE := TRUE;
 				StaticFrictionID.ENABLE     := TRUE;
@@ -439,25 +432,25 @@ ELSE
 				StaticFrictionID.output     := Speed;
 				StaticFrictionID.noiseLevel := noiseLevel;
 				StaticFrictionID();
-				
-			
+
+
 			2:	(* Inertia identification *)
-			
-				fb_RLS.y	:=	Torque - staticFriction* TANH(10.0*Speed);
+
+				fb_RLS.y	:=	Torque - staticFriction* TANH(100.0*Speed);
 				fb_RLS.vel	:=	Speed;
 				fb_RLS();
 				OL_trj_generator.vel	:= Speed;
 				OL_trj_generator.pos	:= Position;
 				OL_trj_generator();
 				Torque:=OL_trj_generator.torque;
-				
+
 			3:	(* Inertia identification - stopping*)
 				Time:=Time+Ts;
 				OL_trj_generator.vel	:= Speed;
 				OL_trj_generator.pos	:= Position;
 				OL_trj_generator();
 				Torque:=OL_trj_generator.torque;
-			4,9,14:	(* tuning *)		
+			4,9,14:	(* tuning *)
 				fb_Tune_PID.Jm:=Jm;
 				fb_Tune_PID.Bm:=Bm;
 				fb_Tune_PID.TUNE:=0;
@@ -468,18 +461,18 @@ ELSE
 				fb_Tune_PID.phi_m_p	:= phi_m_p *(PI/180.0);
 				fb_Tune_PID();
 				Vel_SP:=0.0;
-				
+
 				IF TUNE_LOW_VEL THEN
 					Kp_v:=fb_Tune_PID.kp_v;
 					Ti_v:=fb_Tune_PID.ti_v;
 				ELSE (*TUNE_LOW_VEL*)
 					aux:=FLOOR(fb_Tune_PID.kp_v/Kp_v*100.0);
-					Kp_high_vel_perc:=TO_INT(FLOOR(fb_Tune_PID.kp_v/Kp_v*100.0));										
+					Kp_high_vel_perc:=TO_INT(FLOOR(fb_Tune_PID.kp_v/Kp_v*100.0));
 					Ti_high_vel_perc := TO_INT(FLOOR( (Kp_v / Ti_v) / ( fb_Tune_PID.kp_v/fb_Tune_PID.ti_v ) * 100.0 ));
 					IF(Ti_high_vel_perc > 400) THEN
 						Ti_high_vel_perc := 400;
 					END_IF;
-				END_IF;	
+				END_IF;
 
 				UPDATE_PARAMETERS:=TRUE;
 			5,10: (* stop *)
@@ -496,7 +489,7 @@ ELSE
 				Torque:=0.0;
 				END:=TRUE;
 
-			91,92,99:  
+			91,92,99:
 				(* 91 velocity tracking error *)
 				(* 92 parameter identification error *)
 				(* 99 constraints violation *)
@@ -504,11 +497,11 @@ ELSE
 				Torque:=0.0;
 				END:=TRUE;
 		END_CASE;
-		
+
 		(* TRANSITIONS *)
 		CASE state OF
 			100: (* reset to wrong model identification *)
-				IF (estimation_trials>3) THEN
+				IF (estimation_trials>10) THEN
 					state:=92;
 				ELSIF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel)) THEN
 					state:=0;
@@ -521,19 +514,19 @@ ELSE
 					NoiseLevelID.ENABLE     := FALSE;
 					state := 1;
 					Time:=0.0;
-					
+
 					(* Static Friction Identification Trajectory *)
 					StaticFrictionID_Trj.fbInit := TRUE;
 					StaticFrictionID_Trj.minPos:=minPos;
 					StaticFrictionID_Trj.maxPos:=maxPos;
 					StaticFrictionID_Trj.Position:=Position;
-					
+
 					StaticFrictionID_Trj();
 					StaticFrictionID_Trj.fbInit := FALSE;
 					StaticFrictionID_Trj.ENABLE := FALSE;
 					StaticFrictionID_Trj.maxTrq := maxTrq;
 					StaticFrictionID_Trj.TrqResolution := maxTrq/100000.0;
-					
+
 					(* Static Friction Identification *)
 					StaticFrictionID.fbInit := TRUE;
 					StaticFrictionID();
@@ -550,10 +543,10 @@ ELSE
 					StaticFrictionID.ENABLE     := FALSE;
 					OL_trj_generator.staticFriction:=staticFriction;
 					Time:=0.0;
-					
+
 					IF (friction_trial>=3.0) THEN
 						state:=2;
-						
+
 						OL_trj_generator.maxTRQ:= maxTrq;
 						OL_trj_generator.maxVEL:= maxVel;
 						OL_trj_generator.maxPOS:= maxPos;
@@ -562,20 +555,20 @@ ELSE
 						OL_trj_generator.fbInit:=TRUE;
 						OL_trj_generator();
 						OL_trj_generator.fbInit:=FALSE;
-						
+
 					ELSE
 						(* Static Friction Identification Trajectory *)
 						StaticFrictionID_Trj.fbInit := TRUE;
 						StaticFrictionID_Trj.minPos:=minPos;
 						StaticFrictionID_Trj.maxPos:=maxPos;
 						StaticFrictionID_Trj.Position:=Position;
-						
+
 						StaticFrictionID_Trj();
 						StaticFrictionID_Trj.fbInit := FALSE;
 						StaticFrictionID_Trj.ENABLE := FALSE;
 						StaticFrictionID_Trj.maxTrq := maxTrq;
 						StaticFrictionID_Trj.TrqResolution := maxTrq/100000.0;
-						
+
 						(* Static Friction Identification *)
 						StaticFrictionID.fbInit := TRUE;
 						StaticFrictionID();
@@ -587,7 +580,7 @@ ELSE
 					END_IF;
 				END_IF;
 			2:	(* Inertia identification *)
-				IF Time>Time_identification THEN
+				IF fb_RLS.END THEN
 					state:=3;
 					OL_trj_generator.STOP:=TRUE;
 					Time:=0.0;
@@ -605,15 +598,19 @@ ELSE
 					IF fb_RLS.Bm>0.0 THEN
 						Bm:=fb_RLS.Bm;
 					ELSE
-						state := 100; (* parameter identification error*)
-						Bm:=0.00001;
+						IF (estimation_trials<2) THEN
+							state := 100; (* TEST 90;*) (* parameter identification error*)
+							Bm:=0.00001;
+						ELSE
+							Bm:=0.0;
+						END_IF;
 					END_IF;
-					
+
 					Torque:=0.0;
 					Vel_SP:=0.0;
 					TUNED:=FALSE;
 					TUNE_LOW_VEL:=TRUE;
-				END_IF;	
+				END_IF;
 			4:	(* tuning *)
 				IF PARAMETERS_UPDATED THEN
 					Time:=0.0;
@@ -639,8 +636,8 @@ ELSE
 					state := 6;
 					Time:=0.0;
 				END_IF;
-					
-					
+
+
 			6:	(*  rise time *)
 				tmpF := Vel_SP * 0.95;
 				IF ( ((tmpF>0) AND (Speed>tmpF)) OR ((tmpF<0) AND (Speed<tmpF)))  THEN
@@ -651,19 +648,19 @@ ELSE
 					fb_VARIANCE.ssMethodType:=0;
 					fb_VARIANCE();
 					fb_VARIANCE.ssMethodType:=1;
-					state:=7;			
+					state:=7;
 				END_IF;
 				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-						Wc_act:=Wc_act*0.75;
+						(* Wc_act:=Wc_act*0.75;
 						TUNED:=TRUE;
-						state	:=	9;	
+						state	:=	9; *)
 				END_IF;
 				IF (Time>=TrialTime) THEN (* unable to reach the setpoint velocity, increase band*)
-					Wc_act := Wc_act + Wc_Step;
+					Wc_act := MIN(MaxWc,Wc_act*1.1);
 				 	IF (Wc_act >= MaxWc) THEN
 				 		Wc_act:=MinWc;
 				 		TUNED := FALSE;
-				 		
+
 				 		IF (estimation_trials>3) THEN
 							state:=91;
 						ELSIF ((Time > TrialTime) OR (ABS(Speed)<noiseLevel)) THEN
@@ -671,7 +668,7 @@ ELSE
 							estimation_trials:=estimation_trials+1;
 						END_IF;
 				 		Vel_SP:=0.0;
-				 	ELSE 
+				 	ELSE
 						state := 4; (* BACK TO Tuning Velocity *)
 						Time:=0.0;
 					END_IF;
@@ -681,27 +678,22 @@ ELSE
 					state:=8;
 				END_IF;
 				tmpF := Vel_SP * 0.95;
-				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-						Wc_act:=Wc_act*0.75;
-						TUNED:=TRUE;
-						state	:=	9;	
-				END_IF;
 			8:	(*computing variance*)
 				IF ((Time>5.0*rise_time) OR (Time>0.7*TrialTime)) THEN
 					Time:=0.0;
 					IF (fb_VARIANCE.SIGMA>VARIANCE_THRESHOLD) THEN
 							Wc_act:=Wc_act*0.75;
 							TUNED:=TRUE;
-							state	:=	9;	
-					ELSE (* Varianza ? contenuta nei limiti aumento la banda *)
+							state	:=	9;
+					ELSE (* Varianza è contenuta nei limiti aumento la banda *)
 					 	IF (Wc_act >= MaxWc) THEN
 					 		Wc_act:=MaxWc;
 					 		TUNED := TRUE;
-					 		state := 9; 
-					 	ELSE 
+					 		state := 9;
+					 	ELSE
 							state := 4; (* BACK TO Tuning Velocity *)
 						END_IF;
-						Wc_act := Wc_act + Wc_Step;
+							Wc_act := MIN(MaxWc,Wc_act*1.1);
 					END_IF;
 					Vel_SP:=0.0;
 				END_IF;
@@ -711,7 +703,7 @@ ELSE
 					UPDATE_PARAMETERS:=FALSE;
 					PARAMETERS_UPDATED:=FALSE;
 					IF (TUNE_LOW_VEL) THEN
-						TUNE_LOW_VEL:=FALSE; 
+						TUNE_LOW_VEL:=FALSE;
 						Wc_low_speed:=Wc_act;
 						Wc_act:=MinWc;
 					END_IF;
@@ -747,8 +739,8 @@ ELSE
 					END_IF;
 					state := 11;
 					Time:=0.0;
-				END_IF;	
-			11: (*  rise time HIGH VEL *)	
+				END_IF;
+			11: (*  rise time HIGH VEL *)
 				tmpF := Vel_SP * 0.95;
 				IF ( ((tmpF>0) AND (Speed>tmpF)) OR ((tmpF<0) AND (Speed<tmpF)))  THEN
 					rise_time:=Time;
@@ -758,53 +750,43 @@ ELSE
 					fb_VARIANCE.ssMethodType:=0;
 					fb_VARIANCE();
 					fb_VARIANCE.ssMethodType:=1;
-					state:=12;			
-				END_IF;
-				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-					Wc_act:=Wc_act*0.75;
-					TUNED:=TRUE;
-					state	:=	14;	
+					state:=12;
 				END_IF;
 				IF (Time>=Time_HIGH_VEL) THEN (* unable to reach the setpoint velocity, increase band*)
-					Wc_act := Wc_act + Wc_Step;
-				 	IF (Wc_act >= MaxWc) THEN
+					Wc_act := MIN(MaxWc,Wc_act*1.1);
+					IF (Wc_act >= MaxWc) THEN
 				 		Wc_act:=MaxWc;
 				 		TUNED := FALSE;
-				 		state := 91; 
+				 		state := 91;
 				 		Vel_SP:=0.0;
-				 	ELSE 
+				 	ELSE
 						state := 9; (* BACK TO Tuning Velocity *)
 					END_IF;
-				END_IF;	
+				END_IF;
 			12:	(*waiting steady state*)
 				IF (Time>3.0*rise_time) OR (Time>0.5*Time_HIGH_VEL) THEN
 					state:=13;
 				END_IF;
 				tmpF := Vel_SP * 0.95;
-				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-					Wc_act:=Wc_act*0.75;
-					TUNED:=TRUE;
-					state	:=	14;	
-				END_IF;
 			13: (*computing variance*)
 				IF ((Time>5.0*rise_time) OR (Time>Time_HIGH_VEL)) THEN
 					Time:=0.0;
 					IF (fb_VARIANCE.SIGMA>VARIANCE_THRESHOLD) THEN
 							Wc_act:=Wc_act*0.75;
 							TUNED:=TRUE;
-							state	:=	14;	
+							state	:=	14;
 					ELSE (* Varianza ? contenuta nei limiti aumento la banda *)
 					 	IF (Wc_act >= MaxWc) THEN
 					 		Wc_act:=MaxWc;
 					 		TUNED := TRUE;
-					 		state := 14; 
-					 	ELSE 
+					 		state := 14;
+					 	ELSE
 							state := 9; (* BACK TO Tuning Velocity *)
 						END_IF;
-						Wc_act := Wc_act + Wc_Step;
+							Wc_act := MIN(MaxWc,Wc_act*1.1);
 					END_IF;
 					Vel_SP:=0.0;
-				END_IF;	
+				END_IF;
 			14: (* verification *)
 				IF PARAMETERS_UPDATED THEN
 					Time:=0.0;
@@ -816,7 +798,7 @@ ELSE
 					Vel_SP:=0.0;
 				END_IF;
 		END_CASE;
-		
+
 	ELSE (* if is not enable*)
 		Torque:=0.0;
 		Vel_SP:=0.0;
@@ -826,12 +808,13 @@ END_IF;
 
 
 (* Da inserire in un blocco opportuno *)
-vEstInertia := fb_RLS.Jm;
+vEstInertia := Jm;
 vEstStatFrict := staticFriction;
-vEstDynFrict := fb_RLS.Bm;
+vEstDynFrict := Bm;
 vCalcKpSp := Kp_v * RPM2RAD;
 vCalcTiSp := Ti_v * 1000.0;
 vEstBandwidth := Wc_low_speed;
+
 
 
 
@@ -937,7 +920,7 @@ ELSE
 		TrqRef := TrqRef + TrqResolution*direction;
 		IF TrqRef >= maxTrq THEN
 			TrqRef := maxTrq;
-		END_IF;	
+		END_IF;
 	ELSE
 		TrqRef := 0.0;
 	END_IF;
@@ -981,7 +964,7 @@ FUNCTION_BLOCK RLS_conKf
 	VAR_INPUT
 	S : REAL; { DE:"Parametro tuning per la convergenza" } 
 	y : REAL; 
-	vel : REAL; { DE:"velocità" } 
+	vel : REAL; { DE:"velocitï¿½" } 
 	Ts : REAL; 
 	END_VAR
 
@@ -990,7 +973,7 @@ FUNCTION_BLOCK RLS_conKf
 	innovation : REAL; 
 	Q : ARRAY[ 0..8 ] OF REAL; 
 	acc : REAL; { DE:"accelerazione" } 
-	vel_sign : REAL; { DE:"segno velocità" } 
+	vel_sign : REAL; { DE:"segno velocitï¿½" } 
 	ssMethodType : SINT; 
 	i : SINT; 
 	vel_prec : REAL; 
@@ -1002,49 +985,49 @@ FUNCTION_BLOCK RLS_conKf
 
 	{ CODE:ST }CASE ssMethodType OF
     SS_INITIALIZE:
-    	(* inizializzo Q a matrice identità *)
-    	
-    	FOR i:=0 TO 8 DO 
+    	(* inizializzo Q a matrice identitï¿½ *)
+
+    	FOR i:=0 TO 8 DO
     		Q[i]	:=0.0;
     	END_FOR;
-    	
+
     	Q[0]:=1.0;
     	Q[4]:=1.0;
     	Q[8]:=1.0;
-    	
-    	FOR i:=0 TO 8 DO 
+
+    	FOR i:=0 TO 8 DO
     	Q_old[i]:=Q[i];
     	END_FOR;
-    	
-   
+
+
     	(* A=[acc vel vel_sign];*)
-    	
+
     	(* inizializzo PARAM a zero *)
-    	FOR i:=0 TO 2 DO 
+    	FOR i:=0 TO 2 DO
     	PARAM[i]:=0.0;
     	END_FOR;
-    	
-    	
+
+
     	(*   *)
     	acc:=0.0;
     	vel_prec:=0.0;
-    
+
 	SS_STEP:
-		
+
 		IF S=0.0 THEN
 			S:=30.0;
 		END_IF;
-	
-		(* segno della velocità *)
+
+		(* segno della velocitï¿½ *)
 		IF vel>0.0 THEN
 			vel_sign:=1.0;
 		ELSE
 			vel_sign:=-1.0;
 		END_IF;
-		
+
 		acc:= (vel-vel_prec)/Ts;
-		
-		
+
+
         Q[0] := S*POW(acc,2.0) + Q_old[0];
      	Q[1] := Q_old[1] + S*acc*vel;
      	Q[2] := Q_old[2] + S*acc*vel_sign;
@@ -1054,28 +1037,28 @@ FUNCTION_BLOCK RLS_conKf
      	Q[6] := Q_old[2] + S*acc*vel_sign;
      	Q[7] := Q_old[5] + S*vel*vel_sign;
      	Q[8] := S*POW(vel_sign,2.0) + Q_old[8];
-     	
-     	innovation := y- (PARAM[0]* acc + PARAM[1]* vel + PARAM[2]* vel_sign);
-     	
-    	
-		PARAM[0]:= PARAM[0] + (S*(acc*POW(Q_old[5],2.0) - acc*Q_old[4]*Q_old[8] - Q_old[2]*Q_old[5]*vel + Q_old[1]*Q_old[8]*vel - Q_old[1]*Q_old[5]*vel_sign + Q_old[2]*Q_old[4]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
-		
-		PARAM[1]:= PARAM[1] + (S*(POW(Q_old[2],2.0)*vel - acc*Q_old[2]*Q_old[5] + acc*Q_old[1]*Q_old[8] - Q_old[0]*Q_old[8]*vel - Q_old[1]*Q_old[2]*vel_sign + Q_old[0]*Q_old[5]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
-		
-		PARAM[2]:= PARAM[2] + (S*(POW(Q_old[1],2.0)*vel_sign - acc*Q_old[1]*Q_old[5] + acc*Q_old[2]*Q_old[4] - Q_old[1]*Q_old[2]*vel + Q_old[0]*Q_old[5]*vel - Q_old[0]*Q_old[4]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
-			
 
-     	FOR i:=0 TO 8 DO 
+     	innovation := y- (PARAM[0]* acc + PARAM[1]* vel + PARAM[2]* vel_sign);
+
+
+		PARAM[0]:= PARAM[0] + (S*(acc*POW(Q_old[5],2.0) - acc*Q_old[4]*Q_old[8] - Q_old[2]*Q_old[5]*vel + Q_old[1]*Q_old[8]*vel - Q_old[1]*Q_old[5]*vel_sign + Q_old[2]*Q_old[4]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
+
+		PARAM[1]:= PARAM[1] + (S*(POW(Q_old[2],2.0)*vel - acc*Q_old[2]*Q_old[5] + acc*Q_old[1]*Q_old[8] - Q_old[0]*Q_old[8]*vel - Q_old[1]*Q_old[2]*vel_sign + Q_old[0]*Q_old[5]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
+
+		PARAM[2]:= PARAM[2] + (S*(POW(Q_old[1],2.0)*vel_sign - acc*Q_old[1]*Q_old[5] + acc*Q_old[2]*Q_old[4] - Q_old[1]*Q_old[2]*vel + Q_old[0]*Q_old[5]*vel - Q_old[0]*Q_old[4]*vel_sign))/(Q_old[8]*POW(Q_old[1],2.0) - 2.0*Q_old[1]*Q_old[2]*Q_old[5] + Q_old[4]*POW(Q_old[2],2.0) + Q_old[0]*POW(Q_old[5],2.0) - Q_old[0]*Q_old[4]*Q_old[8])    * innovation;
+
+
+     	FOR i:=0 TO 8 DO
     	Q_old[i]:=Q[i];
     	END_FOR;
-    	
+
     	vel_prec:=vel;
-    	
+
     	Jm:=PARAM[0];
     	Bm:=PARAM[1];
     	Kf:=PARAM[2];
-     
-END_CASE; 
+
+END_CASE;
 
 
 END_FUNCTION_BLOCK
@@ -1085,7 +1068,7 @@ FUNCTION_BLOCK RLS_senzaKf
 	VAR_INPUT
 	S : REAL; { DE:"Parametro tuning per la convergenza" } 
 	y : REAL; 
-	vel : REAL; { DE:"velocità" } 
+	vel : REAL; { DE:"velocitï¿½" } 
 	Ts : REAL; 
 	Time_max : REAL; 
 	ssMethodType : SINT; 
@@ -1111,86 +1094,86 @@ FUNCTION_BLOCK RLS_senzaKf
 
 	{ CODE:ST }CASE ssMethodType OF
     0:
-    	(* inizializzo Q a matrice identità *)
+    	(* inizializzo Q a matrice identitï¿½ *)
     	Time:=0.0;
     	END:=FALSE;
-    	
-    	 FOR i:=0 TO 3 DO 
+
+    	 FOR i:=0 TO 3 DO
     		Q[i]	:=0.0;
     	END_FOR;
-    	
+
     	Q[0]:=1.0;
     	Q[3]:=1.0;
-    
-    	
-    	FOR i:=0 TO 3 DO 
+
+
+    	FOR i:=0 TO 3 DO
     	Q_old[i]:=Q[i];
     	END_FOR;
-    	
-   
+
+
     	(* A=[acc vel];*)
-    	
+
     	(* inizializzo PARAM a zero *)
-    	FOR i:=0 TO 1 DO 
+    	FOR i:=0 TO 1 DO
     	PARAM[i]:=0.0;
     	END_FOR;
-    	
-    	
-    	
-    	
+
+
+
+
     	(*   *)
     	acc:=0.0;
     	vel_prec:=0.0;
-    
+
 	1:
 		Time:=Time+Ts;
-		
+
 		IF S=0.0 THEN
 			S:=30.0;
 		END_IF;
-	
-		(* segno della velocità *)
+
+		(* segno della velocitï¿½ *)
 		IF vel>0.0 THEN
 			vel_sign:=1.0;
 		ELSE
 			vel_sign:=-1.0;
 		END_IF;
-		
+
 		acc:= (vel-vel_prec)/Ts;
-		
-		
+
+
         Q[0] := S*POW(acc,2.0) + Q_old[0];
      	Q[1] := Q_old[1] + S*acc*vel;
      	Q[2] := Q_old[2] + S*acc*vel;
      	Q[3] := S*POW(vel,2.0) + 	Q_old[3];
-     	
-     	
 
-     	
-     	
+
+
+
+
      	innovation := y- (PARAM[0]* acc + PARAM[1]* vel );
-     	
-    	
-		PARAM[0]:= PARAM[0] + (S*(acc*Q[3] - Q[1]*vel))/(- POW(Q[1],2.0) + Q[0]*Q[3])  * innovation;
-		
-		PARAM[1]:= PARAM[1] - (S*(acc*Q[1] - Q[0]*vel))/(- POW(Q[1],2.0) + Q[0]*Q[3])  * innovation;
-			
-			
 
-     	FOR i:=0 TO 3 DO 
+
+		PARAM[0]:= PARAM[0] + (S*(acc*Q[3] - Q[1]*vel))/(- POW(Q[1],2.0) + Q[0]*Q[3])  * innovation;
+
+		PARAM[1]:= PARAM[1] - (S*(acc*Q[1] - Q[0]*vel))/(- POW(Q[1],2.0) + Q[0]*Q[3])  * innovation;
+
+
+
+     	FOR i:=0 TO 3 DO
     	Q_old[i]:=Q[i];
     	END_FOR;
-    	
+
     	vel_prec:=vel;
-    	
+
     	Jm:=PARAM[0];
     	Bm:=PARAM[1];
-    	
+
     	IF Time>Time_max THEN
     	 END:=TRUE;
     	END_IF;
-     
-END_CASE; 
+
+END_CASE;
 
 
 
@@ -1202,7 +1185,7 @@ FUNCTION_BLOCK Tune_PID
 	phi_m_v : REAL; 
 	phi_m_p : REAL; 
 	Wc_pos : REAL; 
-	Wc_vel : REAL; { DE:"Omega c velocità" } 
+	Wc_vel : REAL; { DE:"Omega c velocitï¿½" } 
 	Jm : REAL; { DE:"Inerzia" } 
 	Bm : REAL; { DE:"Attrito statico" } 
 	TUNE : SINT; 
@@ -1235,7 +1218,7 @@ END_IF;
 
 IF TUNE=0 THEN
 	IF TRUE THEN (*Kp_v e Ti_v*)
-		
+
 		ti_v:=-1.0/(Wc_vel*TAN(phi_m_v + ATAN2(Jm*Wc_vel,Bm)));
 		kp_v:=(ti_v*Wc_vel*SQRT(POW(Bm,2.0) + POW(Jm,2.0)*POW(Wc_vel,2.0)))/SQRT(POW(ti_v,2.0)*POW(Wc_vel,2.0) + 1.0);
 		ONLY_kpv:=FALSE;
@@ -1243,27 +1226,27 @@ IF TUNE=0 THEN
 			kp_v:=SQRT(POW(Jm,2.0)*POW(Wc_vel,2.0)+POW(Bm,2.0));
 			ONLY_kpv:=TRUE;
 		END_IF;
-		
-	
+
+
 	ELSE (*solo Kp_v*)
 	ti_v:=0.0;
 	kp_v:=SQRT(POW(Jm,2.0)*POW(Wc_vel,2.0)+POW(Bm,2.0));
 	ONLY_kpv:=TRUE;
 	END_IF;
 	td_v:=0.0;
-	
-	
+
+
 
 ELSE
 
 		A:=kp_v/(kp_v+Bm);
 		B:=Jm/(kp_v+Bm);
-		
+
 		(*
 		ti_p:=TAN(phi_m_p - ATAN2(1.0,B*Wc_pos))/Wc_pos;
 		kp_p:=(ti_p*Wc_pos*SQRT(POW(B,2.0)*POW(Wc_pos,2.0) + 1.0))/(A*SQRT(POW(ti_p,2.0)*POW(Wc_pos,2.0) + 1.0));
-		
-		IF ti_p<=0.01 THEN		
+
+		IF ti_p<=0.01 THEN
 			ti_p:=0.0;
 			kp_p:=Wc_pos*SQRT(POW(B,2.0)*POW(Wc_pos,2.0)+1.0)/A;
 		END_IF;
@@ -1275,7 +1258,7 @@ ELSE
 			td_p:=0.0;
 		END_IF;
 
-	
+
 END_IF;
 
 
@@ -1307,26 +1290,26 @@ FUNCTION_BLOCK VARIANCE
 	    SUM_X		:=0.0;
 	    SUM_X_sqr	:=0.0;
 	    SIGMA_SQRD	:=0.0;
-	    
-    
+
+
    	1:
    		N:=N+1.0;
-   		
+
    		SUM_X  		:= SUM_X+INPUT;
    		SUM_X_sqr 	:= SUM_X_sqr+ POW(INPUT,2.0);
-   		
+
    		IF N>20.0 THEN
    			SIGMA_SQRD	:= (SUM_X_sqr-POW(SUM_X,2.0)/N)/(N-1.0);
    		END_IF;
-   		IF (SIGMA_SQRD>0.0) THEN 
-   			(* SIGMA_SQRD should be always positive, 
+   		IF (SIGMA_SQRD>0.0) THEN
+   			(* SIGMA_SQRD should be always positive,
    			but numerical errors can make it a little negative *)
    			SIGMA:=SQRT(SIGMA_SQRD);
    		ELSE
    			SIGMA:=0.0;
    		END_IF;
 
-    
+
 END_CASE;
 
 
@@ -1368,7 +1351,7 @@ FUNCTION_BLOCK OL_trj_Marco
 	state:=1;
 	state_prec:=0;
 	u:=1.0; (* setta meglio*)
-	
+
 	rand.fb_Init:=TRUE;
 	rand();
 	rand.fb_Init:=FALSE;
@@ -1379,7 +1362,7 @@ FUNCTION_BLOCK OL_trj_Marco
 ELSE
 
 	rand();
-	
+
 	IF (STOP AND NOT(STOPPING)) THEN
 		state:=99;
 	END_IF;
@@ -1391,7 +1374,7 @@ ELSE
             	state:=1;
             	u:=staticFriction+(maxTRQ-staticFriction)*(0.2+0.1*rand.rnd);
         	END_IF;
-	
+
 	 	1:
 
 	 		IF (vel>maxVEL*0.8 OR pos>(maxPOS-minPOS)/5.0*3.0) THEN
@@ -1412,7 +1395,7 @@ ELSE
         		STOPPED:=TRUE;
         		state:=-1;
         	END_IF;
-        	
+
 	END_CASE;
 
 END_IF;
@@ -1470,7 +1453,7 @@ FUNCTION_BLOCK fb_InertiaEstim_trj
 
 	{ CODE:ST }IF fbInit THEN
 
-	
+
 	rand.fb_Init:=TRUE;
 	rand();
 	rand.fb_Init:=FALSE;
@@ -1488,7 +1471,7 @@ FUNCTION_BLOCK fb_InertiaEstim_trj
 ELSE
 
 	rand();
-	
+
 	(*
 	STATE MACHINE:
 	-1   initial state
@@ -1519,10 +1502,10 @@ ELSE
 			state:=1;
 			torque_internal:=  (staticFriction+(maxTRQ-staticFriction)*0.2);
 		END_IF;
-	ELSIF ((state=7) AND (vel<0.0)) THEN
+	ELSIF ((state=7) AND (vel<=0.0)) THEN
 		torque_internal:=0.0;
 		state:=8;
-	ELSIF ((state=6) AND (vel>0.0)) THEN
+	ELSIF ((state=6) AND (vel>=0.0)) THEN
 		torque_internal:=0.0;
 		state:=8;
 	ELSIF ((state=0) AND (pos<pos_mean)) THEN
@@ -1545,11 +1528,12 @@ ELSE
 
 	IF (state=8) THEN
 		STOPPED:=TRUE;
-	ELSE 
+	ELSE
 		STOPPED:=FALSE;
 	END_IF;
 	torque:=torque_internal;
 END_IF;
+
 
 
 
@@ -1596,7 +1580,7 @@ FUNCTION_BLOCK fb_motor_sim
 
 	{ CODE:ST }IF fbInit THEN
 
-	
+
 	position:=0.0;
 	velocity:=0.0;
 	IF (I>0) THEN
@@ -1605,11 +1589,11 @@ FUNCTION_BLOCK fb_motor_sim
 		inv_inertia_st:=0.0;
 	END_IF;
 	sum_torques_old:=0.0;
-	
+
 ELSE
 	position:=position_internal;
 	velocity:=velocity_internal;
-	
+
 	sum_torques:=torque-Bm*velocity_internal;
 	IF (velocity>0.0) THEN
 		sum_torques:=sum_torques-Fc;
@@ -1621,10 +1605,10 @@ ELSE
 		velocity:=0.0;
 	END_IF;
 	position_internal:=position_internal+st*0.5*(velocity_internal+velocity);
-	
+
 	sum_torques_old:=sum_torques;
-	
-	
+
+
 END_IF;
 
 
@@ -1711,7 +1695,7 @@ I0 CYCLE_STOP C:2 5
 O1 C:3 5
 $E
 
-$TR:6^ 5,13,1
+$TR:6^ 5,14,1
 @PCD
 O1 AUTOTUNING_STOP C:5 5 
 O2 ABORT_PROCEDURE C:8 15 
@@ -1756,12 +1740,12 @@ $C:3^ 5,33,5,33
 TR:5.O1
 J:8
 $E
-$C:4^ 5,13,5,13
+$C:4^ 5,13,5,14
 @P
 ACT:Cycle.O1
 TR:6.I0
 $E
-$C:5^ 5,16,5,16
+$C:5^ 5,17,5,16
 @P
 TR:6.O1
 ACT:CL_control_state.I0
@@ -1776,7 +1760,7 @@ $C:7^ 5,24,5,24
 TR:7.O1
 ACT:Stop.I0
 $E
-$C:8^ 15,16,15,16
+$C:8^ 15,17,15,16
 @P
 TR:6.O2
 J:9
@@ -1785,13 +1769,13 @@ $E
 
 INITIAL_STEP Init_state :
 	{ CODE:ST }(* *********************************************************************************************** *)
-(* Disabilito programma ciclico *)	
+(* Disabilito programma ciclico *)
 INIT_END := FALSE;
 CYCLE_STOP := FALSE;
 ENABLE_CYCLIC_PRG := FALSE;
 
 (* *********************************************************************************************** *)
-(* Imposto modalita' di controllo Torque -0- *)	
+(* Imposto modalita' di controllo Torque -0- *)
 sysControlMode := 0;
 
 
@@ -1801,8 +1785,8 @@ readRealPar();
 DriveRatCur:= readRealPar.val ;
 InputConv.KArms:=DriveRatCur/(8192.0*65536.0);
 
-(* Leggo fondo scala riferimenti di velocita' *) 
-(*Function Block embedded che richiama con ipa il valore max del fondoscala di velocita' *)
+(* Leggo fondo scala riferimenti di velocita' *)
+(*Function Block embedded che richiama con ipa il valore max del fondoscala di velocita'ï¿½*)
 readIntPar.ipa := 680;
 readIntPar();
 FullScaleSpeed := TO_REAL(readIntPar.val);
@@ -1823,9 +1807,9 @@ RatedTorque := RatCur*RatKTrq;
 KNm2Cnt := TO_REAL(TrqToCount(1.0 / RatedTorque * 100.0));
 InputConv.KCnt2Nm := 1.0 / KNm2Cnt;
 
-(*  Aggiorno i riferimenti di velocità  *)
+(*  Aggiorno i riferimenti di velocitï¿½  *)
 res:= sysDBWriteIntegerPar(650,640);  (* 640 -> Dig Speed ref 1 *)
-res:= sysDBWriteIntegerPar(652,642);  (* 642 -> Dig Speed ref 2 *)	
+res:= sysDBWriteIntegerPar(652,642);  (* 642 -> Dig Speed ref 2 *)
 sysSpdRef1 := 0;
 sysSpdRef2 := 0;
 sysTrqFFwd := 0;
@@ -1849,7 +1833,7 @@ AutotuningManager.phi_m_p 	:=90.0;
 AutotuningManager.MinWc	:= 	pMinWc;
 AutotuningManager.MaxWc	:=	pMaxWc;
 
-res:= sysDBWriteIntegerPar(680,TO_INT(FLOOR(pMaxSpeed)));  (* 642 -> Dig Speed ref 2 *)	
+res:= sysDBWriteIntegerPar(680,TO_INT(FLOOR(pMaxSpeed)));  (* 642 -> Dig Speed ref 2 *)
 
 
 AutotuningManager.Ts	:=0.001;
@@ -1866,7 +1850,7 @@ State_internal := 0;
 (* *********************************************************************************************** *)
 (* *********************************************************************************************** *)
 
-(* Abilito programma ciclico *)	
+(* Abilito programma ciclico *)
 
 (*StartCND := (pStartAuto) AND (sysEnableStatus) AND (sysStartStatus);*)
 
@@ -1893,13 +1877,13 @@ motor_sim();
 motor_sim.fbInit:=FALSE;
 
 
-(* Disabilito programma ciclico *)	
+(* Disabilito programma ciclico *)
 INIT_END := FALSE;
 CYCLE_STOP := FALSE;
 ENABLE_CYCLIC_PRG := FALSE;
 
 (* *********************************************************************************************** *)
-(* Imposto modalita' di controllo Torque -0- *)	
+(* Imposto modalita' di controllo Torque -0- *)
 sysControlMode := 0;
 
 
@@ -1909,7 +1893,7 @@ readRealPar();
 DriveRatCur:= readRealPar.val ;
 InputConv.KArms:=DriveRatCur/(8192.0*65536.0);
 
-(* Leggo fondo scala riferimenti di velocita' *) 
+(* Leggo fondo scala riferimenti di velocita' *)
 (*Function Block embedded che richiama con ipa il valore max del fondoscala di velocita'?*)
 readIntPar.ipa := 680;
 readIntPar();
@@ -1933,7 +1917,7 @@ InputConv.KCnt2Nm := 1.0 / KNm2Cnt;
 
 (*  Aggiorno i riferimenti di velocit?  *)
 res:= sysDBWriteIntegerPar(650,640);  (* 640 -> Dig Speed ref 1 *)
-res:= sysDBWriteIntegerPar(652,642);  (* 642 -> Dig Speed ref 2 *)	
+res:= sysDBWriteIntegerPar(652,642);  (* 642 -> Dig Speed ref 2 *)
 sysSpdRef1 := 0;
 sysSpdRef2 := 0;
 sysTrqFFwd := 0;
@@ -1957,9 +1941,8 @@ AutotuningManager.phi_m_p 	:=90.0;
 AutotuningManager.MinWc	:= 	pMinWc;
 AutotuningManager.MaxWc	:=	pMaxWc;
 
-res:= sysDBWriteIntegerPar(680,TO_INT(FLOOR(pMaxSpeed)));  (* 642 -> Dig Speed ref 2 *)	
+res:= sysDBWriteIntegerPar(680,TO_INT(FLOOR(pMaxSpeed)));  (* 642 -> Dig Speed ref 2 *)
 
-AutotuningManager.Time_identification:=10.0;
 AutotuningManager.Ts	:=0.001;
 
 AutotuningManager();
@@ -1974,7 +1957,7 @@ State_internal := 0;
 (* *********************************************************************************************** *)
 (* *********************************************************************************************** *)
 
-(* Abilito programma ciclico *)	
+(* Abilito programma ciclico *)
 
 (*StartCND := (pStartAuto) AND (sysEnableStatus) AND (sysStartStatus);*)
 
@@ -2022,6 +2005,7 @@ c_idx
 
 
 
+
 END_STEP
 
 STEP Cycle_state :
@@ -2040,40 +2024,41 @@ IF AutotuningManager.UPDATE_PARAMETERS THEN
 	sysControlMode := 1; (* SWITCH TO VELOCITY CONTROL *)
 	res := sysDBWriteRealPar(2236,AutotuningManager.Kp_v*PI*2.0/60.0); (* Kp *)
 	res := sysDBWriteRealPar(2238,AutotuningManager.Ti_v*1000.0);	   (* Ti *)
-	
+
 	res := sysDBWriteRealPar(3100,AutotuningManager.Jm); (* Compensazione di Inerzia *)
 	res := sysDBWriteIntegerPar(3102,2);				 (* Filtro Compensazione di Inerzia 2ms *)
-	
+
 	IF(SEND_MESSAGE) THEN
-	
+
 		sysMsgPlc1	:='UPDATE PARAMETER';   	    		    	(* application Program Name	*)
 		TempUI := TO_UINT(vEstBandwidth);
-		
+
 		res		:= sysKpdWriteMsg(1,TempUI,1);
 		TimeMsg := 1000;
 		SEND_MESSAGE := FALSE;
-	
+
 	END_IF;
-	
+
 	IF NOT(AutotuningManager.TUNE_LOW_VEL) THEN
 		res:=sysDBWriteIntegerPar(2200,AutotuningManager.Kp_high_vel_perc); (* Gain Scheduling - Kp Low Speed *)
-		res:=sysDBWriteIntegerPar(2202,AutotuningManager.Ti_high_vel_perc); (* Gain Scheduling - Ti Low Speed *)		
+		res:=sysDBWriteIntegerPar(2202,AutotuningManager.Ti_high_vel_perc); (* Gain Scheduling - Ti Low Speed *)
 		res := sysDBWriteRealPar(2218,pLow_Vel_Thr);							       (* Gain Scheduling - Thresh 5% *)
 		res := sysDBWriteRealPar(2220,2.0);								   (* Gain Scheduling - Band   2% *)
 	END_IF;
 
-	
-	AutotuningManager.PARAMETERS_UPDATED:=TRUE;
+	IF (TimeMsg<100 AND AutotuningManager.UPDATE_PARAMETERS) THEN
+		AutotuningManager.PARAMETERS_UPDATED:=TRUE;
+	END_IF;
 
 ELSE
 
 	(* AutotuningManager.PARAMETERS_UPDATED:=FALSE;*)
-	
-	IF(TimeMsg = 0) THEN 
+
+	IF(TimeMsg = 0) THEN
 		SEND_MESSAGE := TRUE;
 	END_IF;
-	
-	
+
+
 END_IF;
 
 
@@ -2095,12 +2080,13 @@ END_IF;
 
 
 
+
 END_STEP
 
 STEP Stop_state :
 	{ CODE:ST }
 v_Torque := 0.0;
-State_internal:=3;
+State_internal:=4;
 
 IF ((state_machine_idx>10) AND (pStartAuto)) THEN
 	CYCLE_STOP 	:= TRUE;
@@ -2125,16 +2111,20 @@ END_IF;
 
 
 
+
 END_STEP
 
 STEP CL_control :
 	{ CODE:ST }
 
 state_machine_idx:=0;
-State_internal := 2;
+IF (State_internal = 1) THEN
+	State_internal := 2;
+END_IF;
 
 
-	
+
+
 
 
 
@@ -2190,7 +2180,7 @@ InputConv.sysPos 	:= 	sysPos;
 InputConv.sysIq 	:= 	sysIq;
 InputConv.sysTrqRef := 	sysTrqRef;
 InputConv.sysRev 	:= 	sysRev;
-InputConv.PosDINT	:=	sysSpeedPosPulsesPerRev; 
+InputConv.PosDINT	:=	sysSpeedPosPulsesPerRev;
 InputConv._sysTrqNoFilt := 	sysTrqRefNoFilt;
 InputConv();
 Torque_bis := v_Torque;
@@ -2201,7 +2191,7 @@ StartCND := (pStartAuto) AND (sysEnableStatus) AND (sysStartStatus);
 
 CASE State_internal OF
 	1:  (* AUTOTUNING *)
-		
+
 		AutotuningManager.ENABLE   := TRUE;
 		AutotuningManager.Speed    := v_Speed;
 		AutotuningManager.Position := v_Position;
@@ -2209,19 +2199,26 @@ CASE State_internal OF
 		AutotuningManager();
 		v_Torque := AutotuningManager.Torque;
 		VEL_SP_:=AutotuningManager.Vel_SP;
-		
-	2:	(* CL CONTROL *)
-		
+
+	2:	(* go to zero *)
+		VEL_SP_:=-v_Position;
+		IF (ABS(v_Position)<0.1) THEN
+			State_internal:=3;
+		END_IF;
+		v_Torque	:= 0.0;	(* PIDvel.u + AutotuningManager.staticFriction * TANH(10.0*PIDpos.u);*)
+
+	3:	(* CL CONTROL *)
+
 		VEL_SP_:=VEL_TESTING;
 		v_Torque	:= 0.0;	(* PIDvel.u + AutotuningManager.staticFriction * TANH(10.0*PIDpos.u);*)
-	
+
 	3:	(* STOP STATE *)
-		
+
 		VEL_SP_:=0.0;
 		v_Torque	:= 0.0;	(* PIDvel.u + AutotuningManager.staticFriction * TANH(10.0*PIDpos.u);*)
-		
+
 END_CASE;
-	
+
 (* Saturazioni di coppia *)
 IF v_Torque > MaxTorque THEN
 	v_Torque := MaxTorque;
@@ -2229,16 +2226,17 @@ ELSIF v_Torque < -MaxTorque THEN
 	v_Torque := -MaxTorque;
 END_IF;
 
-    
+
 (*--- Coppia di riferimento al Drive--------*)
- sysTrqFFwd := TO_DINT((v_Torque) * KNm2Cnt); 
- sysSpdRef1 := TO_DINT(VEL_SP_*60/2.0/PI * 1073741824.0 / FullScaleSpeed);    
+ sysTrqFFwd := TO_DINT((v_Torque) * KNm2Cnt);
+ sysSpdRef1 := TO_DINT(VEL_SP_*60/2.0/PI * 1073741824.0 / FullScaleSpeed);
 
 vStateMachine := (AutotuningManager.state);
 
 IF(TimeMsg > 0) THEN
 	TimeMsg := TimeMsg - 1;
 END_IF;
+
 
 
 
@@ -2283,18 +2281,18 @@ PROGRAM Boot
 	{ CODE:ST }(* togliere *)
 
 	uiVer  := 1;
-	uiRel  := 1; 
-	uiSVer := 1;  
-	uiCode := 37; 
+	uiRel  := 1;
+	uiSVer := 1;
+	uiCode := 37;
 
 	(*	Versione applicazione verso il sistema  *)
 	sysFwApplVerRel := SHL( uiVer, 8 ) + uiRel;
 	sysFwApplSubVer := uiSVer;
 	sysFwApplTyp 	:= uiCode;
-	
-	res:= sysDBWriteRealPar(24,1.0);  (* Torque Fbk Filter *)	
 
-	
+	res:= sysDBWriteRealPar(24,1.0);  (* Torque Fbk Filter *)
+
+
 
 
 

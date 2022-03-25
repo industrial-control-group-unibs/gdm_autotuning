@@ -16,32 +16,32 @@ PROGRAM state_machine WITH Background;
 	(****************************)
 
 	VAR_GLOBAL
-	InputConv : InputConversionADV200;
-	AutotuningManager : fb_AutotuningManager;
-	Speed_ref : REAL;
-	RatKTrq : REAL;
-	RatedTorque : REAL;
-	RatCur : REAL;
-	Parameters_value : REAL;
-	MotorInertia : REAL;
-	MaxTorque : REAL;
-	MaxSpeed : REAL;
-	MaxPosition : REAL;
-	KNm2Cnt : REAL;
-	FullScaleSpeed : REAL;
-	DriveRatCur : REAL;
-	state_of_the_machine : INT;
-	Parameters_counter : INT;
-	TEST : BOOL;
-	Parameters_update : BOOL;
-	ENABLE_CYCLIC_PRG : BOOL; { DE:"cyclic_prg enable variable" }
-	State_internal : INT;
-	res : DINT;
-	SPEED_REF_IPA : DINT;
-	StartCND : BOOL;
-	ABORT_PROCEDURE : BOOL;
-	TimeMsg : UDINT;
-	Torque_bis : REAL;
+	InputConv : InputConversionADV200; 
+	AutotuningManager : fb_AutotuningManager; 
+	Speed_ref : REAL; 
+	RatKTrq : REAL; 
+	RatedTorque : REAL; 
+	RatCur : REAL; 
+	Parameters_value : REAL; 
+	MotorInertia : REAL; 
+	MaxTorque : REAL; 
+	MaxSpeed : REAL; 
+	MaxPosition : REAL; 
+	KNm2Cnt : REAL; 
+	FullScaleSpeed : REAL; 
+	DriveRatCur : REAL; 
+	state_of_the_machine : INT; 
+	Parameters_counter : INT; 
+	TEST : BOOL; 
+	Parameters_update : BOOL; 
+	ENABLE_CYCLIC_PRG : BOOL; { DE:"cyclic_prg enable variable" } 
+	State_internal : INT; 
+	res : DINT; 
+	SPEED_REF_IPA : DINT; 
+	StartCND : BOOL; 
+	ABORT_PROCEDURE : BOOL; 
+	TimeMsg : UDINT; 
+	Torque_bis : REAL; 
 	END_VAR
 
 	(*********************)
@@ -51,8 +51,8 @@ PROGRAM state_machine WITH Background;
 	(*********************)
 
 	VAR_GLOBAL CONSTANT
-	PI : REAL := 3.1415926535; { DE:"pi greco" }
-	RPM2RAD : REAL := 0.104719755119; { DE:"RPM 2 RAD" }
+	PI : REAL := 3.1415926535; { DE:"pi greco" } 
+	RPM2RAD : REAL := 0.104719755119; { DE:"RPM 2 RAD" } 
 	END_VAR
 
 	(*********************)
@@ -64,7 +64,7 @@ PROGRAM state_machine WITH Background;
 FUNCTION sign : REAL
 
 	VAR_INPUT
-	x : REAL;
+	x : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF x > 0.0 THEN
@@ -86,32 +86,32 @@ END_FUNCTION
 FUNCTION_BLOCK InputConversionADV200
 
 	VAR_INPUT
-	Krpm : REAL; { DE:"Costante di conversione [rpm/count]" }
-	Krad_s : REAL; { DE:"Costante di conversione [rad/s/count]" }
-	KArms : REAL; { DE:"Costante di conversione Corrente [Arms/count]" }
-	KCnt2Nm : REAL; { DE:"Conversione da count a Nm [cnt/Nm]" }
-	sysPos : DINT; { DE:"Posizione letta dall'azionamento " }
-	sysSpd : DINT; { DE:"Velocità letta dall'azionamento " }
-	sysIq : DINT; { DE:"Corrente letta dall'azionamento" }
-	sysTrqRef : DINT; { DE:"Coppia letta dall'azionamento" }
-	PosDINT : DINT; { DE:"Posizione letta dall'azionamento in funzione della velocità" }
-	offset : REAL; { DE:"Offset di Posizione [rad]" }
-	sysRev : DINT; { DE:"Numero di rivoluzioni dell'encoder" }
-	_sysTrqNoFilt : DINT;
+	Krpm : REAL; { DE:"Costante di conversione [rpm/count]" } 
+	Krad_s : REAL; { DE:"Costante di conversione [rad/s/count]" } 
+	KArms : REAL; { DE:"Costante di conversione Corrente [Arms/count]" } 
+	KCnt2Nm : REAL; { DE:"Conversione da count a Nm [cnt/Nm]" } 
+	sysPos : DINT; { DE:"Posizione letta dall'azionamento " } 
+	sysSpd : DINT; { DE:"Velocità letta dall'azionamento " } 
+	sysIq : DINT; { DE:"Corrente letta dall'azionamento" } 
+	sysTrqRef : DINT; { DE:"Coppia letta dall'azionamento" } 
+	PosDINT : DINT; { DE:"Posizione letta dall'azionamento in funzione della velocità" } 
+	offset : REAL; { DE:"Offset di Posizione [rad]" } 
+	sysRev : DINT; { DE:"Numero di rivoluzioni dell'encoder" } 
+	_sysTrqNoFilt : DINT; 
 	END_VAR
 
 	VAR_OUTPUT
-	pos : REAL; { DE:"Posizione angolare del motore [rad]" }
-	vel_rpm : REAL; { DE:"Velocità del motore [rpm]" }
-	vel : REAL; { DE:"Velocità angolare del motore [rad/s]" }
-	trq : REAL; { DE:"Coppia erogata dal motore [N*m]" }
-	curr : REAL; { DE:"Corrente di coppia del motore [Arms]" }
+	pos : REAL; { DE:"Posizione angolare del motore [rad]" } 
+	vel_rpm : REAL; { DE:"Velocità del motore [rpm]" } 
+	vel : REAL; { DE:"Velocità angolare del motore [rad/s]" } 
+	trq : REAL; { DE:"Coppia erogata dal motore [N*m]" } 
+	curr : REAL; { DE:"Corrente di coppia del motore [Arms]" } 
 	END_VAR
 
 	VAR_EXTERNAL
-	v_Position : REAL;
-	v_Speed : REAL;
-	v_Torque : REAL;
+	v_Position : REAL; 
+	v_Speed : REAL; 
+	v_Torque : REAL; 
 	END_VAR
 
 	{ CODE:ST }	(*Function Block utile alla lettura dei parametri in Ingresso provenienti dal motore*)
@@ -142,20 +142,20 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_NoiseLevelID
 
 	VAR_INPUT
-	fbInit : BOOL;
-	timeID : REAL;
-	signal : REAL;
-	ENABLE : BOOL;
-	Ts : REAL;
+	fbInit : BOOL; 
+	timeID : REAL; 
+	signal : REAL; 
+	ENABLE : BOOL; 
+	Ts : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	noiseLevel : REAL;
-	END : BOOL;
+	noiseLevel : REAL; 
+	END : BOOL; 
 	END_VAR
 
 	VAR
-	time : REAL;
+	time : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -183,13 +183,13 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_NoiseLevelID_Trj
 
 	VAR_INPUT
-	fbInit : BOOL;
-	ENABLE : BOOL;
-	reference : REAL;
+	fbInit : BOOL; 
+	ENABLE : BOOL; 
+	reference : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	TrqRef : REAL;
+	TrqRef : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -209,88 +209,85 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_AutotuningManager
 
 	VAR_INPUT
-	fbInit : BOOL;
-	ENABLE : BOOL;
-	Speed : REAL;
-	Position : REAL;
-	maxTrq : REAL;
-	maxVel : REAL;
-	maxPos : REAL;
-	Ts : REAL;
-	Time_identification : REAL;
-	phi_m_v : REAL;
-	phi_m_p : REAL;
-	PARAMETERS_UPDATED : BOOL;
-	Torque_ref : REAL;
-	minPos : REAL;
-	minVel : REAL;
-	MaxWc : REAL;
-	MinWc : REAL;
-	low_vel_thr : REAL;
+	fbInit : BOOL; 
+	ENABLE : BOOL; 
+	Speed : REAL; 
+	Position : REAL; 
+	maxTrq : REAL; 
+	maxVel : REAL; 
+	maxPos : REAL; 
+	Ts : REAL; 
+	phi_m_v : REAL; 
+	phi_m_p : REAL; 
+	PARAMETERS_UPDATED : BOOL; 
+	Torque_ref : REAL; 
+	minPos : REAL; 
+	minVel : REAL; 
+	MaxWc : REAL; 
+	MinWc : REAL; 
+	low_vel_thr : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	END : BOOL;
-	Torque : REAL;
-	staticFriction : REAL;
-	state : USINT;
-	noiseLevel : REAL;
-	Kp_v : REAL;
-	Kp_p : REAL;
-	Ti_v : REAL;
-	Ti_p : REAL;
-	Vel_SP : REAL;
-	UPDATE_PARAMETERS : BOOL;
-	Jm : REAL;
-	TUNE_LOW_VEL : BOOL;
-	Kp_high_vel_perc : INT;
-	Ti_high_vel_perc : INT;
+	END : BOOL; 
+	Torque : REAL; 
+	staticFriction : REAL; 
+	state : USINT; 
+	noiseLevel : REAL; 
+	Kp_v : REAL; 
+	Kp_p : REAL; 
+	Ti_v : REAL; 
+	Ti_p : REAL; 
+	Vel_SP : REAL; 
+	UPDATE_PARAMETERS : BOOL; 
+	Jm : REAL; 
+	TUNE_LOW_VEL : BOOL; 
+	Kp_high_vel_perc : INT; 
+	Ti_high_vel_perc : INT; 
 	END_VAR
 
 	VAR_EXTERNAL
-	pOscillationTollerance : REAL;
-	vCalcKpSp : REAL;
-	vCalcTiSp : REAL;
-	vEstBandwidth : REAL;
-	vEstDynFrict : REAL;
-	vEstInertia : REAL;
-	vEstStatFrict : REAL;
+	pOscillationTollerance : REAL; 
+	vCalcKpSp : REAL; 
+	vCalcTiSp : REAL; 
+	vEstBandwidth : REAL; 
+	vEstDynFrict : REAL; 
+	vEstInertia : REAL; 
+	vEstStatFrict : REAL; 
 	END_VAR
 
 	VAR
-	aux : REAL;
-	Bm : REAL;
-	estimation_trials : INT;
-	fb_RLS : RLS_senzaKf;
-	fb_Tune_PID : Tune_PID;
-	fb_VARIANCE : VARIANCE;
-	FLAG_LIMITS : BOOL;
-	friction_trial : REAL;
-	NO_OF_TRIAL : UINT := 10;
-	NoiseLevelID : fb_NoiseLevelID;
-	NoiseLevelID_Trj : fb_NoiseLevelID_Trj;
-	OL_trj_generator : fb_InertiaEstim_trj;
-	Pos_SP : REAL;
-	PosPreTial : REAL;
-	RAND : fb_Random;
-	rise_time : REAL;
-	state_before_error : USINT;
-	StaticFrictionID : fb_StaticFrictionID_OL;
-	StaticFrictionID_Trj : fb_StaticFrictionID_OL_Trj;
-	Time : REAL;
-	Time_HIGH_VEL : REAL;
-	tmpF : REAL;
-	TrialTime : REAL;
-	TUNED : BOOL;
-	VARIANCE_THRESHOLD : REAL;
-	Wc_act : REAL;
-	Wc_counter : UINT;
-	Wc_high : REAL;
-	Wc_high_speed : REAL;
-	Wc_low : REAL;
-	Wc_low_speed : REAL;
-	Wc_pos : REAL;
-	Wc_Step : REAL;
+	aux : REAL; 
+	Bm : REAL; 
+	estimation_trials : INT; 
+	fb_RLS : RLS_senzaKf; 
+	fb_Tune_PID : Tune_PID; 
+	fb_VARIANCE : VARIANCE; 
+	FLAG_LIMITS : BOOL; 
+	friction_trial : REAL; 
+	NoiseLevelID : fb_NoiseLevelID; 
+	NoiseLevelID_Trj : fb_NoiseLevelID_Trj; 
+	OL_trj_generator : fb_InertiaEstim_trj; 
+	Pos_SP : REAL; 
+	PosPreTial : REAL; 
+	RAND : fb_Random; 
+	rise_time : REAL; 
+	state_before_error : USINT; 
+	StaticFrictionID : fb_StaticFrictionID_OL; 
+	StaticFrictionID_Trj : fb_StaticFrictionID_OL_Trj; 
+	Time : REAL; 
+	Time_HIGH_VEL : REAL; 
+	tmpF : REAL; 
+	TrialTime : REAL; 
+	TUNED : BOOL; 
+	VARIANCE_THRESHOLD : REAL; 
+	Wc_act : REAL; 
+	Wc_counter : UINT; 
+	Wc_high : REAL; 
+	Wc_high_speed : REAL; 
+	Wc_low : REAL; 
+	Wc_low_speed : REAL; 
+	Wc_pos : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -330,7 +327,6 @@ FUNCTION_BLOCK fb_AutotuningManager
 	StaticFrictionID.ENABLE := FALSE;
 	StaticFrictionID.Threshold := 5.0;
 
-	Time_identification:=7.0;
 
 	(* Inertia Identification *)
 
@@ -344,7 +340,7 @@ FUNCTION_BLOCK fb_AutotuningManager
 	OL_trj_generator.fbInit:=FALSE;
 
 
-	fb_RLS.Ts	:=	0.001;
+	fb_RLS.Ts	:=	Ts;
 	fb_RLS.S 	:= 	30.0;
 	fb_RLS.Time_max:=10.0;
 	fb_RLS.ssMethodType:=0;
@@ -358,14 +354,14 @@ FUNCTION_BLOCK fb_AutotuningManager
 	(* Tuning *)
 	TUNED:=FALSE;
 	VARIANCE_THRESHOLD:=maxTrq*pOscillationTollerance; (*pOscillationTollerance: da tarare, coppia filtrata o meno?*)
-	Vel_SP:=00.0; (* mettere a zero? *)
+	Vel_SP:=0.0; (* mettere a zero? *)
 	TrialTime:=4.0; (*parametro*)
+	MaxWc:=MIN(MaxWc,2.0/Ts*phi_m_v);
+	
 	Wc_high:=MaxWc;
 	Wc_low:=MinWc;
 	Wc_act:= MinWc;
-	NO_OF_TRIAL := 10; (*parametro*)
-	Wc_Step := MIN((Wc_high - Wc_low) / (TO_REAL(NO_OF_TRIAL)),10.0);
-
+	
 	TUNE_LOW_VEL:=TRUE;
 	FLAG_LIMITS:=FALSE;
 	estimation_trials:=0;
@@ -584,7 +580,7 @@ ELSE
 					END_IF;
 				END_IF;
 			2:	(* Inertia identification *)
-				IF Time>Time_identification THEN
+				IF fb_RLS.END THEN
 					state:=3;
 					OL_trj_generator.STOP:=TRUE;
 					Time:=0.0;
@@ -660,7 +656,7 @@ ELSE
 						state	:=	9; *)
 				END_IF;
 				IF (Time>=TrialTime) THEN (* unable to reach the setpoint velocity, increase band*)
-					Wc_act := Wc_act + Wc_Step;
+					Wc_act := MIN(MaxWc,Wc_act*1.1);
 				 	IF (Wc_act >= MaxWc) THEN
 				 		Wc_act:=MinWc;
 				 		TUNED := FALSE;
@@ -682,11 +678,6 @@ ELSE
 					state:=8;
 				END_IF;
 				tmpF := Vel_SP * 0.95;
-				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-						(*Wc_act:=Wc_act*0.75;
-						TUNED:=TRUE;
-						state	:=	9;*)
-				END_IF;
 			8:	(*computing variance*)
 				IF ((Time>5.0*rise_time) OR (Time>0.7*TrialTime)) THEN
 					Time:=0.0;
@@ -694,7 +685,7 @@ ELSE
 							Wc_act:=Wc_act*0.75;
 							TUNED:=TRUE;
 							state	:=	9;
-					ELSE (* Varianza ? contenuta nei limiti aumento la banda *)
+					ELSE (* Varianza � contenuta nei limiti aumento la banda *)
 					 	IF (Wc_act >= MaxWc) THEN
 					 		Wc_act:=MaxWc;
 					 		TUNED := TRUE;
@@ -761,14 +752,9 @@ ELSE
 					fb_VARIANCE.ssMethodType:=1;
 					state:=12;
 				END_IF;
-				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-					(*Wc_act:=Wc_act*0.75;
-					TUNED:=TRUE;
-					state	:=	14;	*)
-				END_IF;
 				IF (Time>=Time_HIGH_VEL) THEN (* unable to reach the setpoint velocity, increase band*)
-					Wc_act := Wc_act + Wc_Step;
-				 	IF (Wc_act >= MaxWc) THEN
+					Wc_act := MIN(MaxWc,Wc_act*1.1);
+					IF (Wc_act >= MaxWc) THEN
 				 		Wc_act:=MaxWc;
 				 		TUNED := FALSE;
 				 		state := 91;
@@ -782,11 +768,6 @@ ELSE
 					state:=13;
 				END_IF;
 				tmpF := Vel_SP * 0.95;
-				IF ( ((tmpF>0) AND (Speed>1.3*Vel_SP)) OR ((tmpF<0) AND (Speed<1.3*Vel_SP)))  THEN
-					(*Wc_act:=Wc_act*0.75;
-					TUNED:=TRUE;
-					state	:=	14;*)
-				END_IF;
 			13: (*computing variance*)
 				IF ((Time>5.0*rise_time) OR (Time>Time_HIGH_VEL)) THEN
 					Time:=0.0;
@@ -851,27 +832,28 @@ vEstBandwidth := Wc_low_speed;
 
 
 
+
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK fb_StaticFrictionID_OL
 
 	VAR_INPUT
-	fbInit : BOOL;
-	input : REAL;
-	output : REAL;
-	ENABLE : BOOL;
-	Threshold : REAL;
-	noiseLevel : REAL;
+	fbInit : BOOL; 
+	input : REAL; 
+	output : REAL; 
+	ENABLE : BOOL; 
+	Threshold : REAL; 
+	noiseLevel : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	staticFriction : REAL;
-	END : BOOL;
+	staticFriction : REAL; 
+	END : BOOL; 
 	END_VAR
 
 	VAR
-	time : REAL;
-	cnt : UINT;
+	time : REAL; 
+	cnt : UINT; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -908,21 +890,21 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_StaticFrictionID_OL_Trj
 
 	VAR_INPUT
-	fbInit : BOOL;
-	maxTrq : REAL;
-	TrqResolution : REAL;
-	ENABLE : BOOL;
-	minPos : REAL;
-	maxPos : REAL;
-	Position : REAL;
+	fbInit : BOOL; 
+	maxTrq : REAL; 
+	TrqResolution : REAL; 
+	ENABLE : BOOL; 
+	minPos : REAL; 
+	maxPos : REAL; 
+	Position : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	TrqRef : REAL;
+	TrqRef : REAL; 
 	END_VAR
 
 	VAR
-	direction : REAL;
+	direction : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -951,18 +933,18 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_Random
 
 	VAR_INPUT
-	fb_Init : BOOL;
+	fb_Init : BOOL; 
 	END_VAR
 
 	VAR_OUTPUT
-	rnd : REAL;
+	rnd : REAL; 
 	END_VAR
 
 	VAR
-	rnd_int : DINT;
-	a : DINT;
-	b : DINT;
-	m : DINT;
+	rnd_int : DINT; 
+	a : DINT; 
+	b : DINT; 
+	m : DINT; 
 	END_VAR
 
 	{ CODE:ST }IF fb_Init THEN
@@ -980,25 +962,25 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK RLS_conKf
 
 	VAR_INPUT
-	S : REAL; { DE:"Parametro tuning per la convergenza" }
-	y : REAL;
-	vel : REAL; { DE:"velocit�" }
-	Ts : REAL;
+	S : REAL; { DE:"Parametro tuning per la convergenza" } 
+	y : REAL; 
+	vel : REAL; { DE:"velocit�" } 
+	Ts : REAL; 
 	END_VAR
 
 	VAR
-	PARAM : ARRAY[ 0..2 ] OF REAL; { DE:"Parametri (Jm, Bm, Kf)" }
-	innovation : REAL;
-	Q : ARRAY[ 0..8 ] OF REAL;
-	acc : REAL; { DE:"accelerazione" }
-	vel_sign : REAL; { DE:"segno velocit�" }
-	ssMethodType : SINT;
-	i : SINT;
-	vel_prec : REAL;
-	Q_old : ARRAY[ 0..8 ] OF REAL;
-	Jm : REAL; { DE:"Inerzia" }
-	Bm : REAL; { DE:"Attrito viscoso" }
-	Kf : REAL; { DE:"Attrito statico" }
+	PARAM : ARRAY[ 0..2 ] OF REAL; { DE:"Parametri (Jm, Bm, Kf)" } 
+	innovation : REAL; 
+	Q : ARRAY[ 0..8 ] OF REAL; 
+	acc : REAL; { DE:"accelerazione" } 
+	vel_sign : REAL; { DE:"segno velocit�" } 
+	ssMethodType : SINT; 
+	i : SINT; 
+	vel_prec : REAL; 
+	Q_old : ARRAY[ 0..8 ] OF REAL; 
+	Jm : REAL; { DE:"Inerzia" } 
+	Bm : REAL; { DE:"Attrito viscoso" } 
+	Kf : REAL; { DE:"Attrito statico" } 
 	END_VAR
 
 	{ CODE:ST }CASE ssMethodType OF
@@ -1084,30 +1066,30 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK RLS_senzaKf
 
 	VAR_INPUT
-	S : REAL; { DE:"Parametro tuning per la convergenza" }
-	y : REAL;
-	vel : REAL; { DE:"velocit�" }
-	Ts : REAL;
-	Time_max : REAL;
-	ssMethodType : SINT;
+	S : REAL; { DE:"Parametro tuning per la convergenza" } 
+	y : REAL; 
+	vel : REAL; { DE:"velocit�" } 
+	Ts : REAL; 
+	Time_max : REAL; 
+	ssMethodType : SINT; 
 	END_VAR
 
 	VAR_OUTPUT
-	Jm : REAL; { DE:"Inerzia" }
-	Bm : REAL; { DE:"Attrito viscoso" }
-	END : BOOL;
+	Jm : REAL; { DE:"Inerzia" } 
+	Bm : REAL; { DE:"Attrito viscoso" } 
+	END : BOOL; 
 	END_VAR
 
 	VAR
-	vel_sign : REAL;
-	vel_prec : REAL;
-	innovation : REAL;
-	i : SINT;
-	acc : REAL; { DE:"accelerazione" }
-	Time : REAL;
-	Q_old : ARRAY[ 0..3 ] OF REAL;
-	Q : ARRAY[ 0..3 ] OF REAL;
-	PARAM : ARRAY[ 0..1 ] OF REAL; { DE:"Parametri (Jm, Bm)" }
+	vel_sign : REAL; 
+	vel_prec : REAL; 
+	innovation : REAL; 
+	i : SINT; 
+	acc : REAL; { DE:"accelerazione" } 
+	Time : REAL; 
+	Q_old : ARRAY[ 0..3 ] OF REAL; 
+	Q : ARRAY[ 0..3 ] OF REAL; 
+	PARAM : ARRAY[ 0..1 ] OF REAL; { DE:"Parametri (Jm, Bm)" } 
 	END_VAR
 
 	{ CODE:ST }CASE ssMethodType OF
@@ -1200,33 +1182,33 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK Tune_PID
 
 	VAR_INPUT
-	phi_m_v : REAL;
-	phi_m_p : REAL;
-	Wc_pos : REAL;
-	Wc_vel : REAL; { DE:"Omega c velocit�" }
-	Jm : REAL; { DE:"Inerzia" }
-	Bm : REAL; { DE:"Attrito statico" }
-	TUNE : SINT;
+	phi_m_v : REAL; 
+	phi_m_p : REAL; 
+	Wc_pos : REAL; 
+	Wc_vel : REAL; { DE:"Omega c velocit�" } 
+	Jm : REAL; { DE:"Inerzia" } 
+	Bm : REAL; { DE:"Attrito statico" } 
+	TUNE : SINT; 
 	END_VAR
 
 	VAR_OUTPUT
-	ti_v : REAL;
-	kp_v : REAL;
-	ti_p : REAL;
-	kp_p : REAL;
-	td_p : REAL;
-	td_v : REAL;
+	ti_v : REAL; 
+	kp_v : REAL; 
+	ti_p : REAL; 
+	kp_p : REAL; 
+	td_p : REAL; 
+	td_v : REAL; 
 	END_VAR
 
 	VAR
-	ssMethodType : SINT;
-	kk : REAL;
-	beta : REAL;
-	K : REAL;
-	P : REAL;
-	A : REAL;
-	B : REAL;
-	ONLY_kpv : BOOL;
+	ssMethodType : SINT; 
+	kk : REAL; 
+	beta : REAL; 
+	K : REAL; 
+	P : REAL; 
+	A : REAL; 
+	B : REAL; 
+	ONLY_kpv : BOOL; 
 	END_VAR
 
 	{ CODE:ST }
@@ -1287,19 +1269,19 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK VARIANCE
 
 	VAR_INPUT
-	INPUT : REAL;
-	ssMethodType : SINT;
+	INPUT : REAL; 
+	ssMethodType : SINT; 
 	END_VAR
 
 	VAR_OUTPUT
-	SIGMA : REAL;
+	SIGMA : REAL; 
 	END_VAR
 
 	VAR
-	SUM_X : REAL;
-	SUM_X_sqr : REAL;
-	N : REAL;
-	SIGMA_SQRD : REAL;
+	SUM_X : REAL; 
+	SUM_X_sqr : REAL; 
+	N : REAL; 
+	SIGMA_SQRD : REAL; 
 	END_VAR
 
 	{ CODE:ST }CASE ssMethodType OF
@@ -1339,30 +1321,30 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK OL_trj_Marco
 
 	VAR_INPUT
-	vel : REAL;
-	pos : REAL;
-	fbInit : BOOL;
-	maxTRQ : REAL;
-	maxVEL : REAL;
-	maxPOS : REAL;
-	minPOS : REAL;
-	minVEL : REAL;
-	minTRQ : REAL;
-	STOP : BOOL;
-	staticFriction : REAL;
+	vel : REAL; 
+	pos : REAL; 
+	fbInit : BOOL; 
+	maxTRQ : REAL; 
+	maxVEL : REAL; 
+	maxPOS : REAL; 
+	minPOS : REAL; 
+	minVEL : REAL; 
+	minTRQ : REAL; 
+	STOP : BOOL; 
+	staticFriction : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	u : REAL;
-	STOPPED : BOOL;
+	u : REAL; 
+	STOPPED : BOOL; 
 	END_VAR
 
 	VAR
-	u_old : REAL;
-	state_prec : SINT;
-	state : SINT;
-	rand : fb_Random;
-	STOPPING : BOOL;
+	u_old : REAL; 
+	state_prec : SINT; 
+	state : SINT; 
+	rand : fb_Random; 
+	STOPPING : BOOL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -1440,33 +1422,33 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_InertiaEstim_trj
 
 	VAR_INPUT
-	vel : REAL;
-	pos : REAL;
-	fbInit : BOOL;
-	maxTRQ : REAL;
-	maxVEL : REAL;
-	maxPOS : REAL;
-	minPOS : REAL;
-	minVEL : REAL;
-	STOP : BOOL;
-	staticFriction : REAL;
+	vel : REAL; 
+	pos : REAL; 
+	fbInit : BOOL; 
+	maxTRQ : REAL; 
+	maxVEL : REAL; 
+	maxPOS : REAL; 
+	minPOS : REAL; 
+	minVEL : REAL; 
+	STOP : BOOL; 
+	staticFriction : REAL; 
 	END_VAR
 
 	VAR_OUTPUT
-	torque : REAL;
-	STOPPED : BOOL;
+	torque : REAL; 
+	STOPPED : BOOL; 
 	END_VAR
 
 	VAR
-	torque_internal : REAL;
-	state : SINT;
-	rand : fb_Random;
-	STOPPING : BOOL;
-	pos_threshold : REAL;
-	neg_threshold : REAL;
-	vel_percentage : REAL;
-	pos_mean : REAL;
-	hysteresis : REAL;
+	torque_internal : REAL; 
+	state : SINT; 
+	rand : fb_Random; 
+	STOPPING : BOOL; 
+	pos_threshold : REAL; 
+	neg_threshold : REAL; 
+	vel_percentage : REAL; 
+	pos_mean : REAL; 
+	hysteresis : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -1575,25 +1557,25 @@ END_FUNCTION_BLOCK
 FUNCTION_BLOCK fb_motor_sim
 
 	VAR_INPUT
-	fbInit : BOOL;
-	I : REAL; { DE:"inertia" }
-	Bm : REAL; { DE:"viscous friction" }
-	Fc : REAL; { DE:"static friction" }
-	st : REAL; { DE:"discretization period" }
-	torque : REAL; { DE:"torque [Nm]" }
+	fbInit : BOOL; 
+	I : REAL; { DE:"inertia" } 
+	Bm : REAL; { DE:"viscous friction" } 
+	Fc : REAL; { DE:"static friction" } 
+	st : REAL; { DE:"discretization period" } 
+	torque : REAL; { DE:"torque [Nm]" } 
 	END_VAR
 
 	VAR_OUTPUT
-	position : REAL; { DE:"position [rad]" }
-	velocity : REAL; { DE:"velocity [rad/s]" }
+	position : REAL; { DE:"position [rad]" } 
+	velocity : REAL; { DE:"velocity [rad/s]" } 
 	END_VAR
 
 	VAR
-	position_internal : REAL;
-	velocity_internal : REAL;
-	sum_torques : REAL;
-	inv_inertia_st : REAL;
-	sum_torques_old : REAL;
+	position_internal : REAL; 
+	velocity_internal : REAL; 
+	sum_torques : REAL; 
+	inv_inertia_st : REAL; 
+	sum_torques_old : REAL; 
 	END_VAR
 
 	{ CODE:ST }IF fbInit THEN
@@ -1657,22 +1639,22 @@ END_FUNCTION_BLOCK
 PROGRAM state_machine
 
 	VAR
-	INIT_END : BOOL; { DE:"Transition result" }
-	readRealPar : sysDBReadRealPar;
-	readIntPar : sysDBReadIntegerPar;
-	idx : UINT;
-	r_idx : USINT;
-	c_idx : USINT;
-	AUTOTUNING_STOP : BOOL; { DE:"Transition result" }
-	CYCLE_STOP : BOOL;
-	CL_control_STOP : BOOL; { DE:"Transition result" }
-	STOP_PROC : BOOL; { DE:"Transition result" }
-	Res : INT;
-	TempUI : UINT;
-	SEND_MESSAGE : BOOL;
-	PAUSE : UDINT;
-	motor_sim : fb_motor_sim;
-	state_machine_idx : UINT;
+	INIT_END : BOOL; { DE:"Transition result" } 
+	readRealPar : sysDBReadRealPar; 
+	readIntPar : sysDBReadIntegerPar; 
+	idx : UINT; 
+	r_idx : USINT; 
+	c_idx : USINT; 
+	AUTOTUNING_STOP : BOOL; { DE:"Transition result" } 
+	CYCLE_STOP : BOOL; 
+	CL_control_STOP : BOOL; { DE:"Transition result" } 
+	STOP_PROC : BOOL; { DE:"Transition result" } 
+	Res : INT; 
+	TempUI : UINT; 
+	SEND_MESSAGE : BOOL; 
+	PAUSE : UDINT; 
+	motor_sim : fb_motor_sim; 
+	state_machine_idx : UINT; 
 	END_VAR
 
 	{ CODE:SFC }$N:1^ 200,35
@@ -1701,29 +1683,29 @@ O1 C:6
 $E
  $TR:4^ 5,5,0
 @PCD
-I0 INIT_END C:0 5
+I0 INIT_END C:0 5 
 @P
 O1 C:1 5
 $E
 
 $TR:5^ 5,30,0
 @PCD
-I0 CYCLE_STOP C:2 5
+I0 CYCLE_STOP C:2 5 
 @P
 O1 C:3 5
 $E
 
 $TR:6^ 5,14,1
 @PCD
-O1 AUTOTUNING_STOP C:5 5
-O2 ABORT_PROCEDURE C:8 15
+O1 AUTOTUNING_STOP C:5 5 
+O2 ABORT_PROCEDURE C:8 15 
 @P
 I0 C:4 5
 $E
 
 $TR:7^ 5,21,0
 @PCD
-I0 CL_control_STOP C:6 5
+I0 CL_control_STOP C:6 5 
 @P
 O1 C:7 5
 $E
@@ -1961,7 +1943,6 @@ AutotuningManager.MaxWc	:=	pMaxWc;
 
 res:= sysDBWriteIntegerPar(680,TO_INT(FLOOR(pMaxSpeed)));  (* 642 -> Dig Speed ref 2 *)
 
-AutotuningManager.Time_identification:=10.0;
 AutotuningManager.Ts	:=0.001;
 
 AutotuningManager();
@@ -2015,6 +1996,7 @@ AutotuningManager.Wc_high_speed
 CL_control_STOP
 c_idx
 *)
+
 
 
 
@@ -2177,19 +2159,19 @@ END_PROGRAM
 PROGRAM cyclic_prg
 
 	VAR
-	AUTOTUNING : BOOL;
-	Load : LOAD;
-	time : REAL;
-	TAU : REAL;
-	timeAT : REAL;
-	pos : REAL;
-	vel : REAL;
-	rnd : fb_Random;
-	NOISE : REAL;
-	aux00 : REAL;
-	Position_SP : REAL;
-	VEL_SP_ : REAL;
-	VEL_TESTING : REAL;
+	AUTOTUNING : BOOL; 
+	Load : LOAD; 
+	time : REAL; 
+	TAU : REAL; 
+	timeAT : REAL; 
+	pos : REAL; 
+	vel : REAL; 
+	rnd : fb_Random; 
+	NOISE : REAL; 
+	aux00 : REAL; 
+	Position_SP : REAL; 
+	VEL_SP_ : REAL; 
+	VEL_TESTING : REAL; 
 	END_VAR
 
 	{ CODE:ST }(* Convert input from drive to SI units *)
@@ -2289,11 +2271,11 @@ END_PROGRAM
 PROGRAM Boot
 
 	VAR
-	uiVer : INT;
-	uiRel : INT;
-	uiSVer : INT;
-	uiCode : INT;
-	res : INT;
+	uiVer : INT; 
+	uiRel : INT; 
+	uiSVer : INT; 
+	uiCode : INT; 
+	res : INT; 
 	END_VAR
 
 	{ CODE:ST }(* togliere *)
@@ -2317,3 +2299,4 @@ PROGRAM Boot
 
 
 END_PROGRAM
+

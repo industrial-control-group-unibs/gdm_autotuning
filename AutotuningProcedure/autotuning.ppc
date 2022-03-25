@@ -12,7 +12,7 @@ PAR	11008	1	"StartAuto"	6	1	6	0	0	""	"Start Autotuning"	""	""	1.79769313486e+308
 PAR	11010	1	"MinWc"	5	10	5	0	0	""	"Min Wc"	""	""	0	1000	2	"%MD1.20"	"Min Wc"	""	
 PAR	11012	1	"MaxWc"	5	3000	5	0	0	""	"Max Wc"	""	""	0	3140	2	"%MD1.24"	"Max Wc"	""	
 PAR	11014	1	"Low_Vel_Thr"	5	5	5	0	0	""	"Low Vel Thr"	""	""	0	100	2	"%MD1.28"	"Low vel threshold"	""	
-PAR	11016	1	"OscillationTollerance"	5	0.3	5	0	0	""	"Oscillation Tollerance"	""	""	0	1000	2	"%MD1.32"	"Oscill Tollerance"	""	
+PAR	11016	1	"OscillationTollerance"	5	0.1	5	0	0	""	"Oscillation Tollerance"	""	""	0	0.5	2	"%MD1.32"	"Oscill Tollerance"	""	
 ;
 ;	Variables record
 ;

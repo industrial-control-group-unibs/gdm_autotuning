@@ -19,5 +19,5 @@ Ti=Ti_gdm/1000.0;
 
 C=Kp*(1+1/Ti/s);
 
-margin(C*P)
+margin(c2d(C*P,125e-3))
 clear Motor

@@ -1,17 +1,19 @@
 clear all;clc;
+J=0.00157635;
 Jm=0.0010;
-Jc=0.0005;
+Jc=J-Jm;
 k=1000;
 h=0.05;
 hm=.0015;
-model=ElasticSystemModel(Jm,Jc,k,h,hm);
-sys=minreal(model(3,1));
+
 s=tf('s');
 model=1/((Jm+Jc)*s+hm);
+sys=model;
 %%
 %bode(model,sys)
-st=1e-3;
+st=125e-6;
 wc=400;
+wc=-1.29235e6
 Bm=hm;
 J=Jm+Jc;
 phi=deg2rad(75);

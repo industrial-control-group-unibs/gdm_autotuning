@@ -14609,17 +14609,17 @@ A0015434  00260FDF		jeq d15, #0, #0x0026 ; JUMP 0xA0015480
 #1632		
 #1633							(* THEN *)
 #1634		
-#1635								(* Wc_act:=Wc_act*0.9; *)
+#1635								(* Wc_act:=Wc_act*0.8; *)
 #1636								LD		Wc_act	{L:396}
 (*) UNDEF
 A0015438  802A40BB		mov.u d8, #0x2A4
 A001543C  F600C801		addsc.a a15, a12, d8, #0
 A0015440  0000FF19		ld.w d15, [a15]
 
-#1637								MUL		0.9	{L:396}
+#1637								MUL		0.8	{L:396}
 (*) REAL
-A0015444  866660BB		mov.u d8, #0x6666 ; COSTREAL 0.900000
-A0015448  83F6689B		addih d8, d8, #0x3F66
+A0015444  8CCCD0BB		mov.u d8, #0xCCCD ; COSTREAL 0.800000
+A0015448  83F4C89B		addih d8, d8, #0x3F4C
 A001544C  F0418F4B		mul.f d15, d15, d8
 
 #1638								ST		Wc_act	{L:396}
@@ -16246,17 +16246,17 @@ A0015F1C  00260FDF		jeq d15, #0, #0x0026 ; JUMP 0xA0015F68
 #2109		
 #2110							(* THEN *)
 #2111		
-#2112								(* Wc_act:=Wc_act*0.9; *)
+#2112								(* Wc_act:=Wc_act*0.8; *)
 #2113								LD		Wc_act	{L:486}
 (*) UNDEF
 A0015F20  802A40BB		mov.u d8, #0x2A4
 A0015F24  F600C801		addsc.a a15, a12, d8, #0
 A0015F28  0000FF19		ld.w d15, [a15]
 
-#2114								MUL		0.9	{L:486}
+#2114								MUL		0.8	{L:486}
 (*) REAL
-A0015F2C  866660BB		mov.u d8, #0x6666 ; COSTREAL 0.900000
-A0015F30  83F6689B		addih d8, d8, #0x3F66
+A0015F2C  8CCCD0BB		mov.u d8, #0xCCCD ; COSTREAL 0.800000
+A0015F30  83F4C89B		addih d8, d8, #0x3F4C
 A0015F34  F0418F4B		mul.f d15, d15, d8
 
 #2115								ST		Wc_act	{L:486}
@@ -18450,7 +18450,7 @@ A0016AB4  305CCFA5		st.w #0x304DC, d15 ; ADR 0xC00004DC
 #14			(* InputConv.sysTrqRef := 	sysTrqRef; *)
 #15			LD		sysTrqRef	{L:5}
 (*) UNDEF
-A0016AB8  3350DF85		ld.w d15, #0x374D0 ; ADR 0xD00034D0
+A0016AB8  237CDF85		ld.w d15, #0x374BC ; ADR 0xD00034BC
 
 #16			ST		InputConv.sysTrqRef	{L:5}
 (*) DINT
@@ -18566,12 +18566,12 @@ A0016B3C  D180CF85		ld.w d15, #0x31B40 ; ADR 0xC0001B40
 
 #53			AND		sysEnableStatus	{L:14}
 (*) BOOL
-A0016B40  03E0D885		ld.w d8, #0x37C20 ; ADR 0xD0003C20
+A0016B40  03CCD885		ld.w d8, #0x37C0C ; ADR 0xD0003C0C
 A0016B44  F0808F0F		and d15, d15, d8
 
 #54			AND		sysStartStatus	{L:14}
 (*) BOOL
-A0016B48  03E4D885		ld.w d8, #0x37C24 ; ADR 0xD0003C24
+A0016B48  03D0D885		ld.w d8, #0x37C10 ; ADR 0xD0003C10
 A0016B4C  F0808F0F		and d15, d15, d8
 
 #55			ST		StartCND	{L:14}
@@ -18995,7 +18995,7 @@ A0016D2C  F1010F4B		ftoi d15, d15
 
 #206			ST		sysSpdRef1	{L:56}
 (*) DINT
-A0016D30  43C4DFA5		st.w #0x37D04, d15 ; ADR 0xD0003D04
+A0016D30  33F0DFA5		st.w #0x37CF0, d15 ; ADR 0xD0003CF0
 
 #207		
 #208			(* vStateMachine := (AutotuningManager.state); *)
@@ -19515,7 +19515,7 @@ A0017018  F000003B		mov d15, #0
 
 #119			ST		sysSpdRef1	{L:43}
 (*) USINT
-A001701C  43C4DFA5		st.w #0x37D04, d15 ; ADR 0xD0003D04
+A001701C  33F0DFA5		st.w #0x37CF0, d15 ; ADR 0xD0003CF0
 
 #120		
 #121			(* sysSpdRef2 := 0; *)
@@ -19525,7 +19525,7 @@ A0017020  F000003B		mov d15, #0
 
 #123			ST		sysSpdRef2	{L:44}
 (*) USINT
-A0017024  43C8DFA5		st.w #0x37D08, d15 ; ADR 0xD0003D08
+A0017024  33F4DFA5		st.w #0x37CF4, d15 ; ADR 0xD0003CF4
 
 #124		
 #125			(* sysTrqFFwd := 0; *)
@@ -20349,7 +20349,7 @@ A001743C  F000003B		mov d15, #0
 
 #396			ST		sysSpdRef1	{L:151}
 (*) USINT
-A0017440  43C4DFA5		st.w #0x37D04, d15 ; ADR 0xD0003D04
+A0017440  33F0DFA5		st.w #0x37CF0, d15 ; ADR 0xD0003CF0
 
 #397		
 #398			(* sysSpdRef2 := 0; *)
@@ -20359,7 +20359,7 @@ A0017444  F000003B		mov d15, #0
 
 #400			ST		sysSpdRef2	{L:152}
 (*) USINT
-A0017448  43C8DFA5		st.w #0x37D08, d15 ; ADR 0xD0003D08
+A0017448  33F4DFA5		st.w #0x37CF4, d15 ; ADR 0xD0003CF4
 
 #401		
 #402			(* sysTrqFFwd := 0; *)
@@ -22010,13 +22010,13 @@ ADDRESS MAP
                D0002B2C (4) sysTrqFFwd
 --FREE--       D0002B30 (392)
                D0002CB8 (4) sysSpeedPosPulsesPerRev
---FREE--       D0002CBC (2068)
-               D00034D0 (4) sysTrqRef
---FREE--       D00034D4 (1868)
-               D0003C20 (4) sysEnableStatus
-               D0003C24 (4) sysStartStatus
---FREE--       D0003C28 (220)
-               D0003D04 (4) sysSpdRef1
-               D0003D08 (4) sysSpdRef2
+--FREE--       D0002CBC (2048)
+               D00034BC (4) sysTrqRef
+--FREE--       D00034C0 (1868)
+               D0003C0C (4) sysEnableStatus
+               D0003C10 (4) sysStartStatus
+--FREE--       D0003C14 (220)
+               D0003CF0 (4) sysSpdRef1
+               D0003CF4 (4) sysSpdRef2
 
 

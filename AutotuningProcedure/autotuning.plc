@@ -686,7 +686,7 @@ ELSE
 				IF ((Time>5.0*rise_time) OR (Time>0.7*TrialTime)) THEN
 					Time:=0.0;
 					IF (fb_VARIANCE.SIGMA>VARIANCE_THRESHOLD) THEN
-							Wc_act:=Wc_act*0.9;
+							Wc_act:=Wc_act*0.8;
 							TUNED:=TRUE;
 							state	:=	9;
 					ELSE (* Varianza è contenuta nei limiti aumento la banda *)
@@ -776,7 +776,7 @@ ELSE
 				IF ((Time>5.0*rise_time) OR (Time>Time_HIGH_VEL)) THEN
 					Time:=0.0;
 					IF (fb_VARIANCE.SIGMA>VARIANCE_THRESHOLD) THEN
-							Wc_act:=Wc_act*0.9;
+							Wc_act:=Wc_act*0.8;
 							TUNED:=TRUE;
 							state	:=	14;
 					ELSE (* Varianza ? contenuta nei limiti aumento la banda *)
@@ -818,6 +818,7 @@ vEstDynFrict := Bm;
 vCalcKpSp := Kp_v * RPM2RAD;
 vCalcTiSp := Ti_v * 1000.0;
 vEstBandwidth := Wc_low_speed;
+
 
 
 

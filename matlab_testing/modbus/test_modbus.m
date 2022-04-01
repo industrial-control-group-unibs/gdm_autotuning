@@ -1,5 +1,5 @@
 clear all;clc;close all
-Motor = OpenDriveConnection(38400,'3'); 
+Motor = OpenDriveConnection(38400,'6'); 
 %Load = OpenDriveConnection(38400,'4');
 % MaxPos=4;
 % MaxVel=2000;
@@ -50,6 +50,7 @@ while true
         subplot(3,1,3)
         stem(Wc);
         ylabel('Wc')
+        drawnow
     elseif sm==0
         save_it=true;
     end
